@@ -71,9 +71,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 								<ul class="nav navbar-nav">
-									<li class="active"><a href="index.html" class="act">Agendamentos</a></li>
-									<li class="active"><a href="#products" class="act">Estoque</a></li>
-									<li class="active"><a href="#services" class="act">Serviços</a></li>
+									<li class="active"><a href="#schedule" class="act">Agendamentos</a></li>
+									<li class="active"><a href="#orders" class="act">Pedidos</a></li>
+									<li class="active"><a href="#pets" class="act">Seus Pets</a></li>
 									<li class="active"><a href="#users" class="act">Usuários</a></li>
 									<li class="active"><a href="#profile" class="act">Seu Perfil</a></li>
 								</ul>
@@ -130,7 +130,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Serviços</h3>
-						<h3><span class="label label-default">Agendar Serviço</span></h3>
+						<h3><a href=""><span class="label label-default">Agendar Serviço</span></a></h3>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -176,7 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!-- //agendamentos -->
 		<!-- PEDIDOS -->
-		<a name="schedule"></a>
+		<a name="orders"></a>
 		<div class="breadcrumbs">
 			<div class="container">
 				<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
@@ -222,6 +222,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 		<!-- //pedidos -->
+		<!-- PETS -->
+		<a name="pets"></a>
+		<div class="new-collections">
+			<div class="container">
+				<h3>Seus Pets</h3>
+				<a href=""><h2><span class="label label-default">Cadastrar Novo</span></h2></a>
+				<div class="new-collections-grids">
+					<div class="col-md-3 new-collections-grid">
+						<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
+								<div class="new-collections-grid1-image-pos">
+									<a href="single.html">Detalhes</a>
+								</div>
+							</div>
+							<h4><a href="single.html">Kabosu</a></h4>
+							<p>Shiba Inu</p>
+						</div>
+					</div>
+					<div class="col-md-3 new-collections-grid">
+						<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="single.html" class="product-image"><img src="img/borkdrive.png" alt=" " class="img-responsive" /></a>
+								<div class="new-collections-grid1-image-pos">
+									<a href="single.html">Detalhes</a>
+								</div>
+							</div>
+							<h4><a href="single.html">Toby</a></h4>
+							<p>Bulldog</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pets -->
 		<!-- footer -->
 		<a name="contact"></a>
 		<div class="footer">
@@ -248,6 +283,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- //footer -->
 	</body>
 	<script type="text/javascript">
-		document.getElementById("user").innerHTML = sessionStorage.currentUser;
+	document.getElementById("user").innerHTML = sessionStorage.currentUser;
 	</script>
 	</html>
