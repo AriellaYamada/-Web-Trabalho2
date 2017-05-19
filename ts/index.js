@@ -1,9 +1,12 @@
+///<reference path="Server.ts"/>
+var server = new Server();
 function authenticate() {
-    var username = document.getElementById("login_user").value;
-    var password = document.getElementById("pass_user").value;
+    let username = document.getElementById("login_user").value;
+    let password = document.getElementById("pass_user").value;
     if (username == "admin") {
         if (password == "admin") {
-            sessionStorage.currentUser = "admin";
+            server.loginUser("admin");
+            //sessionStorage.PetStopCurrentUser = "admin";
             window.location.href = "area_adm.html";
         }
         else {
@@ -12,11 +15,13 @@ function authenticate() {
         }
     }
     else {
-        sessionStorage.currentUser = username;
+        //sessionStorage.PetStopCurrentUser = username
+        server.loginUser(username);
         window.location.href = "area_usuario.html";
     }
 }
 $(document).ready(function () {
+    $(window).unload(() => saveServerState(server));
     $("#login_button").click(authenticate);
     $("#pass_user").keypress(function (e) {
         if (e.keyCode == 13)
