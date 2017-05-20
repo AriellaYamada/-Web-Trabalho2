@@ -14,7 +14,6 @@ function authenticate() : void
 	{
 		if (password == "admin")
 		{
-			server.loginUser("admin")
 			window.location.href = "area_adm.html";
 		}
 		else
@@ -25,14 +24,13 @@ function authenticate() : void
 	}
 	else
 	{
-		server.loginUser(username)
 		window.location.href = "area_usuario.html"
 	}
 }
 
 $(document).ready(function()
 {
-	$(window).unload( () => saveServerState(server))	// para salvar o estado do servidor mock ao sair da página
+	$(window).unload( () => server.saveState())			// para salvar o estado do servidor mock ao sair da página
 	$("#login_button").click(authenticate);				// associando a função acima ao botão de login
 	$("#pass_user").keypress(function(e)				// para o "enter" funcionar para fazer login
 	{

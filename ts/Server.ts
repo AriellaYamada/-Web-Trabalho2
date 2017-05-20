@@ -1,64 +1,64 @@
 class Pet
 {
-	_name: string
-	_id: string
-	_race: string
-	_age: number
-
-	constructor(name: string, id: string, race: string, age: number)
-	{
-		this._name = name
-		this._id = id
-		this._race = race
-		this._age = age
-	}
-}
-
-class User
-{
 	name: string
 	id: string
-	address: string
+	race: string
+	age: number
 	picSrc: string
-	tel: string
-	email: string
-	pets : Pet[]
-	isAdmin: boolean
 
-	constructor(id: string, name?: string, address?: string, picSrc?: string, tel?: string, email?: string, isAdmin?: boolean)
+	constructor(name: string, race: string, id: string, age: number, picSrc: string)
 	{
 		this.name = name
 		this.id = id
-		this.address = address
+		this.race = race
+		this.age = age
 		this.picSrc = picSrc
-		this.tel = tel
-		this.email = email
-		this.pets = []
-		this.isAdmin = isAdmin
 	}
+}
+
+class ServerData
+{
+	clientId: string
+	clientName: string
+	clientAddress: string
+	clientPicSrc: string
+	clientTel: string
+	clientEmail: string
+	clientPets: Pet[]
 }
 
 class Server
 {
-	users: User[]
+	//users: User[]
+	data: ServerData
+
 	constructor()
 	{
-		if (localStorage.PetStopServer)		// se tiver um server salvo no localStorage, carrega seus usuários
-			this.users = JSON.parse(localStorage.PetStopServer).users
-		else
-			this.users = []
+		if (localStorage.PetStopServerData)			// se tiver um server salvo no localStorage, carrega seus dados
+		{
+			//console.log("Carregando server salvo")
+			this.data = JSON.parse(localStorage.PetStopServerData)
+		}
+		else	// inicializará server com alguns dados (usuários, pets) de exemplo
+		{
+			//console.log("Inicializando novo server")
+			this.data = new ServerData()
+			this.data.clientId = "usuario1"
+			this.data.clientName = "Rodrigo Weigert"
+			this.data.clientAddress = "Rua Tiradentes, 123"
+			this.data.clientPicSrc = "img/profilepic.jpg"
+			this.data.clientTel = "(17) 1234-5678"
+			this.data.clientEmail = "rodrigo.weigert@usp.br"
+			this.data.clientPets = []
+
+			this.data.clientPets.push(new Pet("Kabosu", "Shiba Inu", "kabosu", 1, "img/doge.jpg"))
+			this.data.clientPets.push(new Pet("Toby", "Bulldog", "tobias", 2, "img/borkdrive.png"))
+		}
 	}
 
-	loginUser(username: string) : void
+	saveState() : void
 	{
-		sessionStorage.PetStopCurrentUser = username
-		let usr: User = this.users.find(u => u.id == username)
-		if (!usr)		// se instância do usuário atual não existir, cria-a
-			this.users.push(new User(username))
+		console.log("Saving server state...")
+		localStorage.PetStopServerData = JSON.stringify(this.data)
 	}
-}
-
-function saveServerState(server: Server) : void		// salva o estado do servidor no localStorage
-{
-	localStorage.PetStopServer = JSON.stringify(server)
 }

@@ -1,38 +1,36 @@
 class Pet {
-    constructor(name, id, race, age) {
-        this._name = name;
-        this._id = id;
-        this._race = race;
-        this._age = age;
-    }
-}
-class User {
-    constructor(id, name, address, picSrc, tel, email, isAdmin) {
+    constructor(name, race, id, age, picSrc) {
         this.name = name;
         this.id = id;
-        this.address = address;
+        this.race = race;
+        this.age = age;
         this.picSrc = picSrc;
-        this.tel = tel;
-        this.email = email;
-        this.pets = [];
-        this.isAdmin = isAdmin;
     }
+}
+class ServerData {
 }
 class Server {
     constructor() {
-        if (localStorage.PetStopServer)
-            this.users = JSON.parse(localStorage.PetStopServer).users;
-        else
-            this.users = [];
+        if (localStorage.PetStopServerData) {
+            console.log("Carregando server salvo");
+            this.data = JSON.parse(localStorage.PetStopServerData);
+        }
+        else {
+            console.log("Inicializando novo server");
+            this.data = new ServerData();
+            this.data.clientId = "usuario1";
+            this.data.clientName = "Rodrigo Weigert";
+            this.data.clientAddress = "Rua Tiradentes, 123";
+            this.data.clientPicSrc = "img/profilepic.jpg";
+            this.data.clientTel = "(17) 1234-5678";
+            this.data.clientEmail = "rodrigo.weigert@usp.br";
+            this.data.clientPets = [];
+            this.data.clientPets.push(new Pet("Kabosu", "Shiba Inu", "kabosu", 1, "img/doge.jpg"));
+            this.data.clientPets.push(new Pet("Toby", "Bulldog", "tobias", 2, "img/borkdrive.png"));
+        }
     }
-    loginUser(username) {
-        sessionStorage.PetStopCurrentUser = username;
-        let usr = this.users.find(u => u.id == username);
-        if (!usr)
-            this.users.push(new User(username));
+    saveState() {
+        console.log("Saving server state...");
+        localStorage.PetStopServerData = JSON.stringify(this.data);
     }
-}
-function saveServerState(server) {
-    console.log("Saving server state...");
-    localStorage.PetStopServer = JSON.stringify(server);
 }
