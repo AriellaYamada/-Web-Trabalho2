@@ -12,11 +12,11 @@ class ServerData {
 class Server {
     constructor() {
         if (localStorage.PetStopServerData) {
-            console.log("Carregando server salvo");
+            //console.log("Carregando server salvo")
             this.data = JSON.parse(localStorage.PetStopServerData);
         }
         else {
-            console.log("Inicializando novo server");
+            //console.log("Inicializando novo server")
             this.data = new ServerData();
             this.data.clientId = "usuario1";
             this.data.clientName = "Rodrigo Weigert";
