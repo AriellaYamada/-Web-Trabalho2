@@ -175,7 +175,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 								<div class="modal-footer">
 									<h3><button type='submit' class="label label-primary" value='Agendar'/>Agendar</button></h3>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
 								</div>
 							</div>
 						</div>
@@ -265,10 +265,40 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- //pedidos -->
 		<!-- PETS -->
 		<a name="pets"></a>
-		<div class="new-collections">
+		<div class="typo">
 			<div class="container">
 				<h3>Seus Pets</h3>
-				<a href=""><h2><span class="label label-default">Cadastrar Novo</span></h2></a>
+				<h2><button class="label label-default" data-toggle="modal" data-target="#petReg">Cadastrar Novo</button></h2>
+				<!-- Modal -->
+				<div class="modal fade" id="petReg" role="dialog" tabindex="-1">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="bars">Cadastro de Pet</h3>
+							</div>
+							<div class="modal-body">
+								<form>
+									<h4>Nome:</h4>
+									<input type='text' name='name'></input>
+									<h4>ID:</h4>
+									<input type='text' name='id'></input>
+									<h4>Raça:</h4>
+									<input type='text' name='breed'></input>
+									<h4>Foto:</h4>
+									<button class="label label-default" type='button'>Carregar Foto</button>
+									<h4>Idade:<br/></h4>
+									<input type='text' name='age'></input></br>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+								<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="new-collections-grids">
 					<div class="col-md-3 new-collections-grid">
 						<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
@@ -309,14 +339,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div class="new-collections-grid1-image">
 									<a href="single.html" class="product-image"><img src="img/profilepic.jpg" alt=" " class="img-responsive" /></a>
 								</div>
-								<h4><a href="single.html">Alterar imagem</a></h4>
+								<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
 						</div>
 						<div class="col-md-9 new-collections-grid">
 							<h4>Rodrigo Weigert
-								<br><b>Nome de usuário:</b> rodz <a href="">(alterar senha)</a>
-								<br><b>Endereço:</b> Rua Tiradentes, 123 <a href="">(alterar senha)</a>
-								<br><b>Telefone:</b> (17) 12345678 <a href="">(alterar senha)</a>
-								<br><b>E-mail:</b> rodrigo.weigert@usp.br <a href="">(alterar senha)</a>
+								<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
+								<br><b>Endereço:</b> Rua Tiradentes, 123 <button class="label label-warning" href="">(alterar senha)</button>
+								<br><b>Telefone:</b> (17) 12345678 <button class="label label-warning" href="">(alterar senha)</button>
+								<br><b>E-mail:</b> rodrigo.weigert@usp.br <button class="label label-warning" href="">(alterar senha)</button>
 							</h4>
 
 						</div>
