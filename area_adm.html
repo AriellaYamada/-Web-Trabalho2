@@ -31,7 +31,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<!-- animation-effect -->
-	<link href="css/animate.min.css" rel="stylesheet">
 	<script src="js/wow.min.js"></script>
 	<script>
 	new WOW().init();
@@ -117,20 +116,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- //header -->
 		<!-- AGENDAMENTOS -->
 		<a name="schedule"></a>
-		<div class="breadcrumbs">
-			<div class="container">
-				<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-					<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
-					<li class="active">Agendamentos</li>
-				</ol>
-			</div>
-		</div>
 		<div class="typo">
 			<div class="container">
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-						<h3 class="bars">Serviços</h3>
-						<h3><span class="label label-default">Agendar Serviço</span></h3>
+						<h3 class="bars">Próximos Agendamentos</h3>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -169,82 +159,317 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</tr>
 							</tbody>
 						</table>
-						<a href="">Ver histórico de agendamentos</a>
+						<h4><button class="label label-success" data-toggle="modal" data-target="#newserviceReg">Criar Novo Serviço</button></h4>
+						<!-- Modal -->
+						<div class="modal fade" id="newserviceReg" role="dialog" tabindex="-1">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 class="bars">Cadastro de Pet</h3>
+									</div>
+									<div class="modal-body">
+										<form>
+											<h4>Nome:</h4>
+											<input type='text' name='name'></input>
+											<h4>ID:</h4>
+											<input type='text' name='id'></input>
+											<h4>Foto:</h4>
+											<button class="label label-default" type='button'>Carregar Foto</button>
+											<h4>Descrição:</h4>
+											<input type="text" name='description'></input>
+											<h4>Preço:<br/></h4>
+											<input type='text' name='price' placeholder="R$"></input></br>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- //agendamentos -->
-		<!-- PEDIDOS -->
-		<a name="schedule"></a>
-		<div class="breadcrumbs">
-			<div class="container">
-				<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-					<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
-					<li class="active">Pedidos</li>
-				</ol>
-			</div>
-		</div>
+		<!-- ESTOQUE -->
+		<a name="products"></a>
 		<div class="typo">
 			<div class="container">
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-						<h3 class="bars">Pedidos</h3>
+						<h3 class="bars">Situação do Estoque</h3>
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>Número do Pedido</th>
-									<th>Produtos</th>
-									<th>Data</th>
+									<th>ID</th>
+									<th>Produto</th>
+									<th>Descrição</th>
 									<th>Preço</th>
-									<th>Status</th>
+									<th>Embalagem</th>
+									<th>Qtd. Estoque</th>
+									<th>Qtd. Vendida</th>
+									<th>Atualizar Qtd.</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>8937503</td>
-									<td>1x Porta-ração Petlove para armazenar até 15Kg - Laranja</td>
-									<td>01/04/2017</td>
-									<td>R$69,90</td>
-									<td>Entregue</td>
-								</tr>
-								<tr>
-									<td>8938042</td>
-									<td>2x Ração Rayal Canin Mini Adult<br>1x Brinquedo osso borracha com cravo - Vermelho</td>
-									<td>12/04/2017</td>
-									<td>R$80,88</td>
-									<td>Pendente</td>
-								</tr>
-							</tbody>
-						</table>
+									<td>1234</td>
+									<td>Ração para Cães</td>
+									<td>Ração Pedigree para caẽs filhotes</td>
+									<td>R$5,90</td>
+									<td>1Kg</td>
+									<td>100 unidades</td>
+									<td>45 unidadades</td>
+									<td><input type="number" name="name" placeholder="Nova Quantidade"></td>
+									<td><a href="">Detalhes<a></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="regButtons">
+								<h4><button class="label label-success" data-toggle="modal" data-target="#productReg">Cadastrar Novo Produto</button></h4>
+								<h4><button class="label label-warning">Atualizar Qtds.</button></h4>
+							</div>
+							<!-- Modal -->
+							<div class="modal fade" id="productReg" role="dialog" tabindex="-1">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="bars">Cadastro de Produto</h3>
+										</div>
+										<div class="modal-body">
+											<form>
+												<h4>Nome:</h4>
+												<input type='text' name='name'></input>
+												<h4>ID:</h4>
+												<input type='text' name='id'></input>
+												<h4>Foto:</h4>
+												<button class="label label-default" type='button'>Carregar Foto</button>
+												<h4>Descrição: </h4>
+												<input type="text" name="description"></input>
+												<h4>Preço: <br/></h4>
+												<input type='text' name='price' placeholder="R$"></input></br>
+												<h4>Quantidade em estoque:</h4>
+												<input type="number" name="quantity"></input>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- //modal -->
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- //pedidos -->
-		<!-- footer -->
-		<a name="contact"></a>
-		<div class="footer">
-			<div class="container">
-				<div class="footer-grids">
-					<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-						<h3>Contato</h3>
-						<ul>
-							<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-							<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-							<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-						</ul>
+			<!-- //estoque -->
+			<!-- SERVICOS -->
+			<a name="services"></a>
+			<div class="typo">
+				<div class="container">
+					<div class="typo-grids">
+						<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+							<h3 class="bars">Serviços</h3>
+							<input class="search" type="text" placeholder="Buscar serviços"></input>
+							<h4> por: </h4>
+							<select>
+								<option value='name'>Nome</option>
+								<option value='id'>ID</option>
+								<option value='description'>Descrição</option>
+								<option value='price'>Preço</option>
+							</select>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nome</th>
+										<th>Descrição</th>
+										<th>Preço</th>
+										<th>Detalhes</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1234</td>
+										<td>Reforço V10</td>
+										<td>Vacinação</td>
+										<td>R$99,90</td>
+										<td><a href="">Detalhes<a></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="regButtons">
+									<h4><button class="label label-success" data-toggle="modal" data-target="#serviceReg">Cadastrar Novo</button></h4>
+								</div>
+								<!-- Modal -->
+								<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
+									<div class="modal-dialog">
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<h3 class="bars">Cadastro de Serviço</h3>
+											</div>
+											<div class="modal-body">
+												<form>
+													<h4>Nome:</h4>
+													<input type='text' name='name'></input>
+													<h4>ID:</h4>
+													<input type='text' name='id'></input>
+													<h4>Foto:</h4>
+													<button class="label label-default" type='button'>Carregar Foto</button>
+													<h4>Descrição: </h4>
+													<input type="text" name="description"></input>
+													<h4>Preço: <br/></h4>
+													<input type='text' name='price' placeholder="R$"></input></br>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+												<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- //modal -->
+							</div>
+						</div>
 					</div>
+				</div>
+				<!-- //servicos -->
+				<!-- USUARIOS -->
+				<a name="users"></a>
+				<div class="typo">
+					<div class="container">
+						<div class="typo-grids">
+							<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+								<h3 class="bars">Usuários Cadastrados</h3>
+								<input class="search" type="text" placeholder="Buscar usuários"></input>
+								<h4> por: </h4>
+								<select>
+									<option value='name'>Nome</option>
+									<option value='id'>ID</option>
+									<option value='description'>Descrição</option>
+									<option value='price'>Preço</option>
+								</select>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Usuário</th>
+											<th>Nome</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>rodz</td>
+											<td>Rodrigo Weigert</td>
+											<td><a href="">Detalhes<a></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="regButtons">
+										<h4><button class="label label-success" data-toggle="modal" data-target="#userReg">Cadastrar Novo Usuário</button></h4>
+									</div>
+									<!-- Modal -->
+									<div class="modal fade" id="userReg" role="dialog" tabindex="-1">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<h3 class="bars">Cadastro de Usuário</h3>
+												</div>
+												<div class="modal-body">
+													<form>
+														<h4>Nome:</h4>
+														<input type='text' name='name'></input>
+														<h4>Usuário (ID):</h4>
+														<input type='text' name='id'></input>
+														<h4>Foto:</h4>
+														<button class="label label-default" type='button'>Carregar Foto</button>
+														<h4>Telefone: </h4>
+														<input type="text" name="telephone"></input>
+														<h4>E-mail: <br/></h4>
+														<input type='text' name='email'></input></br>
+														<h4>Tipo de Usuário:</h4>
+														<input type='radio' name='usertype' value='client' checked>Cliente</input>
+														<input type='radio' name='usertype' value='admin'>Administrador</input>
+														<br/>
+														<!-- esse campo irá sumir quando o tipo de usuário selecionado for administrador -->
+														<h4>Endereço (se cliente):</h4>
+														<input type='text' class='addressField' name='address'></input>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+													<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- //modal -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- //usuarios -->
+					<!-- PERFIL -->
+					<a name="profile"></a>
+					<div class="typo">
+						<div class="container">
+							<div class="typo-grids">
+								<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+									<h3 class="bars">Seu Perfil</h3>
+									<div class="col-md-3 new-collections-grid">
+										<div class="new-collections-grid1-image">
+											<a href="single.html" class="product-image"><img src="img/profilepic.jpg" alt=" " class="img-responsive" /></a>
+										</div>
+										<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
+									</div>
+									<div class="col-md-9 new-collections-grid">
+										<h4>Rodrigo Weigert
+											<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
+											<br><b>Endereço:</b> Rua Tiradentes, 123 <button class="label label-warning" href="">(alterar senha)</button>
+											<br><b>Telefone:</b> (17) 12345678 <button class="label label-warning" href="">(alterar senha)</button>
+											<br><b>E-mail:</b> rodrigo.weigert@usp.br <button class="label label-warning" href="">(alterar senha)</button>
+										</h4>
 
-					<div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-						<h2><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h2>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-						<p>&copy 2016 Pet Stop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+					<!-- perfil -->
+					<!-- footer -->
+					<a name="contact"></a>
+					<div class="footer">
+						<div class="container">
+							<div class="footer-grids">
+								<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
+									<h3>Contato</h3>
+									<ul>
+										<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+										<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+										<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+									</ul>
+								</div>
+
+								<div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
+									<h2><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h2>
+								</div>
+								<div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
+									<p>&copy 2016 Pet Stop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<!-- //footer -->
-	</body>
-	</html>
+					<!-- //footer -->
+				</body>
+				</html>

@@ -29,6 +29,9 @@ form, h4 {
 .modal-footer h3, button {
 	display: inline;
 }
+.regButtons h4, button{
+	display: inline;
+}
 .CardFlag {
 	height: 30px;
 }
@@ -374,7 +377,7 @@ a.simpleCart_empty {
 }
 /*-- //banner --*/
 /*-- banner-bottom --*/
-.banner-bottom,.new-collections,.checkout,.collections-bottom,.timer,.register,.products,.typo,.mail,.single,.login,.single-related-products{
+.banner-bottom,.new-collections,.checkout,.collections-bottom,.timer,.register,.products,.mail,.single,.login,.single-related-products{
 	padding:5em 0;
 }
 .banner-bottom-grid-left{
@@ -2446,7 +2449,7 @@ td.invert-image a img {
 	.banner {
 		min-height: 555px;
 	}
-	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .typo, .mail, .single, .login, .single-related-products {
+	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .mail, .single, .login, .single-related-products {
 		padding: 4em 0;
 	}
 	.grid figure {
@@ -2689,7 +2692,7 @@ td.invert-image a img {
 	.new-collections h3, h3.title, .mail h3, .single-related-products h3, .login h3, .register h3 {
 		font-size: 2em;
 	}
-	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .typo, .mail, .single, .login, .single-related-products {
+	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .mail, .single, .login, .single-related-products {
 		padding: 3em 0;
 	}
 	.new-collections-grid,.products-right-grids-bottom-grid {
@@ -3196,7 +3199,7 @@ td.invert-image a img {
 	.new-collections h3:after, .single-related-products h3:after {
 		right: 2%;
 	}
-	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .typo, .mail, .single, .login, .single-related-products {
+	.banner-bottom, .new-collections, .checkout, .collections-bottom, .timer, .register, .products, .mail, .single, .login, .single-related-products {
 		padding: 2em 0;
 	}
 	.new-collections-grid, .products-right-grids-bottom-grid {
