@@ -34,3 +34,4 @@ class Server {
         localStorage.PetStopServerData = JSON.stringify(this.data);
     }
 }
+//# sourceMappingURL=Server.js.map

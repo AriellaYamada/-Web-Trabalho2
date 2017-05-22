@@ -19,9 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- js -->
-	<script src="js/bootstrap.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="lib/jquery.min.js"></script>
 	<!-- //js -->
 	<!-- cart -->
 	<script src="js/simpleCart.min.js"> </script>
@@ -42,11 +40,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href='lib/fullcalendar.min.css' rel='stylesheet' />
 	<link href='lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 	<script src='lib/moment.min.js'></script>
-	<script src='lib/jquery.min.js'></script>
 	<script src='lib/fullcalendar.min.js'></script>
 	<script src='lib/gcal.min.js'></script>
-	<script src='js/script.js'></script>
 	<!-- FIM calendario -->
+	<script src="ts/Server.js"></script>
+	<script src="ts/area_usuario.js"></script>
 </head>
 
 <body>
@@ -341,6 +339,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 								<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
 						</div>
+						<!--
 						<div class="col-md-9 new-collections-grid">
 							<h4>Rodrigo Weigert
 								<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
@@ -350,6 +349,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</h4>
 
 						</div>
+						-->
+			
+						<div class="col-md-9 new-collections-grid">
+							<h4><span class="clientData" id="clientName"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>Nome de usuário: </b><span class="clientData" id="clientId"></span> <button class="label label-warning">(alterar senha)</button>
+								<br/><b>Endereço: </b><span class="clientData" id="clientAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>Telefone: </b><span class="clientData" id="clientTel"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>E-mail: </b><span class="clientData" id="clientEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
+
+							</h4>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -381,6 +392,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- //footer -->
 	</body>
 	<script type="text/javascript">
-	document.getElementById("user").innerHTML = sessionStorage.currentUser;
+		document.getElementById("user").innerHTML = server.data.clientId
 	</script>
 	</html>

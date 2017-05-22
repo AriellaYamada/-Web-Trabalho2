@@ -17,7 +17,7 @@ function refreshUserData() : void
 
 $(document).ready(function()
 {
-	$(window).unload( () => server.saveState())			// para salvar o estado do servidor mock ao sair da página
+	$(window).on("unload", () => server.saveState())			// para salvar o estado do servidor mock ao sair da página
 	refreshUserData()
 	$(".editInfo").css("cursor", "pointer")				// cursor de link
 	$(".editInfo").click(function()
