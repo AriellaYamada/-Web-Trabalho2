@@ -1,13 +1,11 @@
 
 $(document).ready(function(){
 
-
 	/* ---- Countdown timer ---- */
 
 	$('#counter').countdown({
 		timestamp : (new Date()).getTime() + 11*24*60*60*1000
 	});
-
 
 	/* ---- Animations ---- */
 
@@ -32,7 +30,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-
+	
 	// for detecting if the browser is Safari
 	var browser = navigator.userAgent.toLowerCase();
 
@@ -57,7 +55,6 @@ $(document).ready(function(){
 });
 
 $(document).ready(function() {
-
 	$('#calendar').fullCalendar({
 
 		header: {

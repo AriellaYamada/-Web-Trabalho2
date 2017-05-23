@@ -5,9 +5,14 @@ function refreshUserData() {
         let field_name = $(this).attr("id");
         $(this).html(server.data[field_name]);
     });
+    $("#clientPic").attr("src", server.data.clientPic);
 }
 $(document).ready(function () {
-    $(window).unload(() => server.saveState()); // para salvar o estado do servidor mock ao sair da página
+    $("#user").html(server.data.clientId); // nome de usuário na saudação
+    $("#clientPicUploader").on("change", function () {
+        inputImageToBase64(this.files[0], result => { server.data.clientPic = result; refreshUserData(); });
+    });
+    $(window).on("unload", () => server.saveState()); // para salvar o estado do servidor mock ao sair da página
     refreshUserData();
     $(".editInfo").css("cursor", "pointer"); // cursor de link
     $(".editInfo").click(function () {
@@ -32,3 +37,4 @@ $(document).ready(function () {
         updateInputField.focus();
     });
 });
+//# sourceMappingURL=area_usuario.js.map

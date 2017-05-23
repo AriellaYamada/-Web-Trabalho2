@@ -3,7 +3,6 @@
 // Script com a lógica específica da página index.html
 
 declare var $: any;
-var server: Server = new Server()
 
 // Pseudo login
 function authenticate() : void
@@ -30,7 +29,6 @@ function authenticate() : void
 
 $(document).ready(function()
 {
-	$(window).unload( () => server.saveState())			// para salvar o estado do servidor mock ao sair da página
 	$("#login_button").click(authenticate);				// associando a função acima ao botão de login
 	$("#pass_user").keypress(function(e)				// para o "enter" funcionar para fazer login
 	{

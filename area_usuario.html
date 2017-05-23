@@ -16,22 +16,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 	function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- js -->
-	<script src="js/bootstrap.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<!-- //js -->
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- //jQuery -->
 	<!-- cart -->
 	<script src="js/simpleCart.min.js"> </script>
 	<!-- cart -->
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- for bootstrap working -->
-	<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<!-- //for bootstrap working -->
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-	<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<!-- animation-effect -->
 	<script src="js/wow.min.js"></script>
 	<script>
@@ -42,11 +38,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href='lib/fullcalendar.min.css' rel='stylesheet' />
 	<link href='lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 	<script src='lib/moment.min.js'></script>
-	<script src='lib/jquery.min.js'></script>
 	<script src='lib/fullcalendar.min.js'></script>
 	<script src='lib/gcal.min.js'></script>
-	<script src='js/script.js'></script>
+	<!-- <script src="js/script.js"></script> -->
 	<!-- FIM calendario -->
+	<script src="ts/Server.js"></script>
+	<script src="ts/area_usuario.js"></script>
 </head>
 
 <body>
@@ -337,19 +334,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<h3 class="bars">Seu Perfil</h3>
 						<div class="col-md-3 new-collections-grid">
 								<div class="new-collections-grid1-image">
-									<a href="single.html" class="product-image"><img src="img/profilepic.jpg" alt=" " class="img-responsive" /></a>
+									<a class="product-image"><img id="clientPic" class="img-responsive" /></a>
 								</div>
-								<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
+								<h4><input type="file" id="clientPicUploader" accept="image/*"></input></h4>
 						</div>
 						<div class="col-md-9 new-collections-grid">
-							<h4>Rodrigo Weigert
-								<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>Endereço:</b> Rua Tiradentes, 123 <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>Telefone:</b> (17) 12345678 <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>E-mail:</b> rodrigo.weigert@usp.br <button class="label label-warning" href="">(alterar senha)</button>
-							</h4>
+							<h4><span class="clientData" id="clientName"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>Nome de usuário: </b><span class="clientData" id="clientId"></span> <button class="label label-warning">(alterar senha)</button>
+								<br/><b>Endereço: </b><span class="clientData" id="clientAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>Telefone: </b><span class="clientData" id="clientTel"></span> <button class="editInfo label label-warning">(alterar)</button>
+								<br/><b>E-mail: </b><span class="clientData" id="clientEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
 
+							</h4>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -380,7 +378,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!-- //footer -->
 	</body>
-	<script type="text/javascript">
-	document.getElementById("user").innerHTML = sessionStorage.currentUser;
-	</script>
-	</html>
+</html>
