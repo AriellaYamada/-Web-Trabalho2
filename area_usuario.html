@@ -334,22 +334,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<h3 class="bars">Seu Perfil</h3>
 						<div class="col-md-3 new-collections-grid">
 								<div class="new-collections-grid1-image">
-									<a href="single.html" class="product-image"><img src="img/profilepic.jpg" alt=" " class="img-responsive" /></a>
+									<a class="product-image"><img id="clientPic" class="img-responsive" /></a>
 								</div>
-								<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
+								<h4><input type="file" id="clientPicUploader" accept="image/*"></input></h4>
 						</div>
-						<!--
-						<div class="col-md-9 new-collections-grid">
-							<h4>Rodrigo Weigert
-								<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>Endereço:</b> Rua Tiradentes, 123 <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>Telefone:</b> (17) 12345678 <button class="label label-warning" href="">(alterar senha)</button>
-								<br><b>E-mail:</b> rodrigo.weigert@usp.br <button class="label label-warning" href="">(alterar senha)</button>
-							</h4>
-
-						</div>
-						-->
-			
 						<div class="col-md-9 new-collections-grid">
 							<h4><span class="clientData" id="clientName"></span> <button class="editInfo label label-warning">(alterar)</button>
 								<br/><b>Nome de usuário: </b><span class="clientData" id="clientId"></span> <button class="label label-warning">(alterar senha)</button>
@@ -390,7 +378,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!-- //footer -->
 	</body>
-	<script type="text/javascript">
-		document.getElementById("user").innerHTML = server.data.clientId
-	</script>
-	</html>
+</html>
