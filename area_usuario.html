@@ -273,54 +273,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h3 class="bars">Cadastro de Pet</h3>
+								<div class="collapse alert alert-danger" id="invalid_age">
+									<strong>Erro!</strong> Idade inválida.
+								</div>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form id="petForm" method="post">
 									<h4>Nome:</h4>
-									<input type='text' name='name'></input>
+									<input type="text" name="name" required></input>
 									<h4>ID:</h4>
-									<input type='text' name='id'></input>
+									<input type="text" name="id" required></input>
 									<h4>Raça:</h4>
-									<input type='text' name='breed'></input>
+									<input type="text" name="breed" required></input>
 									<h4>Foto:</h4>
-									<button class="label label-default" type='button'>Carregar Foto</button>
+									<input type="file" name="pic" required></input>
 									<h4>Idade:<br/></h4>
-									<input type='text' name='age'></input></br>
+									<input type="text" name="age" required></input></br>
+									<div class="modal-footer">
+										<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+									</div>
 								</form>
-							</div>
-							<div class="modal-footer">
-								<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-								<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- //modal -->
-				<div class="new-collections-grids">
-					<div class="col-md-3 new-collections-grid">
-						<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
-								<div class="new-collections-grid1-image-pos">
-									<a href="single.html">Detalhes</a>
-								</div>
-							</div>
-							<h4><a href="single.html">Kabosu</a></h4>
-							<p>Shiba Inu</p>
-						</div>
-					</div>
-					<div class="col-md-3 new-collections-grid">
-						<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="img/borkdrive.png" alt=" " class="img-responsive" /></a>
-								<div class="new-collections-grid1-image-pos">
-									<a href="single.html">Detalhes</a>
-								</div>
-							</div>
-							<h4><a href="single.html">Toby</a></h4>
-							<p>Bulldog</p>
-						</div>
-					</div>
+				<div class="new-collections-grids" id="petContainer">
 				</div>
 			</div>
 		</div>
