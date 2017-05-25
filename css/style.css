@@ -29,6 +29,9 @@ form, h4 {
 .modal-footer h3, button {
 	display: inline;
 }
+.regButtons {
+  display: inline-block;
+}
 .regButtons h4, button{
 	display: inline;
 }

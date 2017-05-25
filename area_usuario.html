@@ -129,53 +129,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Serviços</h3>
-					<h4><button type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
-					<!-- Modal -->
-					<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<h3 class="bars">Agendamento de Serviço</h3>
-								</div>
-								<div class="modal-body">
-									<h4><form method='post'>
-										<h4>Pet:</h4>
-										<select>
-											<option>Kabosu</option>
-											<option>Toby</option>
-										</select>
-										<h4>Serviço:</h4>
-										<select>
-											<option>Banho</option>
-											<option>Banho e Tosa</option>
-											<option>Banho e Tosa Higiênica</option>
-											<option>Vacinação</option>
-											<option>Consulta Veterinária</option>
-										</select>
-										<h4>Preço: R$ ... </h4>
-										<br/>
-										<h4>Número do Cartão de Crédito: </h4>
-										<input type='text' name='CreditCard'></input>
-										<h4>Código de Segurança:</h4>
-										<input class='CSC' type='text' name='CSC'></input>
-										<h4>Validade:</h4>
-										<input class='expdate' type='text' placeholder='mm/aa'></input>
-
-										<h4>Bandeira:</h4>
-										<input type='radio' name='CardFlag'></input> <img class='CardFlag' src='img/visa.png' alt='Visa'></img>
-										<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/mastercard.png' alt='MasterCard'></img>
-										<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/amex.png' alt='American Express'></img>
-										<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/elo.png' alt='Elo'></img>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<h3><button type='submit' class="label label-primary" value='Agendar'/>Agendar</button></h3>
-									<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-								</div>
-							</div>
-						</div>
-					</div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -214,7 +167,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</tr>
 							</tbody>
 						</table>
-						<a href="">Ver histórico de agendamentos</a>
+						<div class="regButtons">
+							<h4><button type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
+							<!-- Modal -->
+							<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="bars">Agendamento de Serviço</h3>
+										</div>
+										<div class="modal-body">
+											<h4><form method='post'>
+												<h4>Pet:</h4>
+												<select>
+													<option>Kabosu</option>
+													<option>Toby</option>
+												</select>
+												<h4>Serviço:</h4>
+												<select>
+													<option>Banho</option>
+													<option>Banho e Tosa</option>
+													<option>Banho e Tosa Higiênica</option>
+													<option>Vacinação</option>
+													<option>Consulta Veterinária</option>
+												</select>
+												<h4>Preço: R$ ... </h4>
+												<br/>
+												<h4>Número do Cartão de Crédito: </h4>
+												<input type='text' name='CreditCard'></input>
+												<h4>Código de Segurança:</h4>
+												<input class='CSC' type='text' name='CSC'></input>
+												<h4>Validade:</h4>
+												<input class='expdate' type='text' placeholder='mm/aa'></input>
+
+												<h4>Bandeira:</h4>
+												<input type='radio' name='CardFlag'></input> <img class='CardFlag' src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name='CardFlag'></input><img class='CardFlag' src='img/elo.png' alt='Elo'></img>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<h3><button type='submit' class="label label-primary" value='Agendar'/>Agendar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- fim modal -->
+							<h4><button class="label label-warning">Ver histórico de agendamentos</button></h4>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -264,42 +267,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="typo">
 			<div class="container">
 				<h2>Seus Pets</h2>
-				<h3><button class="label label-success" data-toggle="modal" data-target="#petReg">Cadastrar Novo</button></h3>
-				<!-- Modal -->
-				<div class="modal fade" id="petReg" role="dialog" tabindex="-1">
-					<div class="modal-dialog">
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h3 class="bars">Cadastro de Pet</h3>
-								<div class="collapse alert alert-danger" id="invalid_age">
-									<strong>Erro!</strong> Idade inválida.
-								</div>
-							</div>
-							<div class="modal-body">
-								<form id="petForm" method="post">
-									<h4>Nome:</h4>
-									<input type="text" name="name" required></input>
-									<h4>ID:</h4>
-									<input type="text" name="id" required></input>
-									<h4>Raça:</h4>
-									<input type="text" name="breed" required></input>
-									<h4>Foto:</h4>
-									<input type="file" name="pic" required></input>
-									<h4>Idade:<br/></h4>
-									<input type="text" name="age" required></input></br>
-									<div class="modal-footer">
-										<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+				<div class="new-collections-grids" id="petContainer">
+				</div>
+				<div class="regButtons">
+					<h4><button class="label label-success" data-toggle="modal" data-target="#petReg">Cadastrar Novo</button></h4>
+					<!-- Modal -->
+					<div class="modal fade" id="petReg" role="dialog" tabindex="-1">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h3 class="bars">Cadastro de Pet</h3>
+									<div class="collapse alert alert-danger" id="invalid_age">
+										<strong>Erro!</strong> Idade inválida.
 									</div>
-								</form>
+								</div>
+								<div class="modal-body">
+									<form id="petForm" method="post">
+										<h4>Nome:</h4>
+										<input type="text" name="name" required></input>
+										<h4>ID:</h4>
+										<input type="text" name="id" required></input>
+										<h4>Raça:</h4>
+										<input type="text" name="breed" required></input>
+										<h4>Foto:</h4>
+										<input type="file" name="pic" required></input>
+										<h4>Idade:<br/></h4>
+										<input type="text" name="age" required></input></br>
+										<div class="modal-footer">
+											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- //modal -->
-				<div class="new-collections-grids" id="petContainer">
+					<!-- fim modal -->
 				</div>
 			</div>
 		</div>
@@ -312,21 +317,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Seu Perfil</h3>
 						<div class="col-md-3 new-collections-grid">
-								<div class="new-collections-grid1-image">
-									<a class="product-image"><img id="clientPic" class="img-responsive" /></a>
-								</div>
-								<h4><input type="file" id="clientPicUploader" accept="image/*"></input></h4>
+							<div class="new-collections-grid1-image">
+								<a class="product-image"><img id="clientPic" class="img-responsive" /></a>
+							</div>
+							<h5><input type="file" id="clientPicUploader" accept="image/*"></input></h5>
 						</div>
 						<div class="col-md-9 new-collections-grid">
-							<h4><span class="clientData" id="clientName"></span> <button class="editInfo label label-warning">(alterar)</button>
+							<h5><span class="clientData" id="clientName"></span> <button class="editInfo label label-warning">(alterar)</button>
 								<br/><b>Nome de usuário: </b><span class="clientData" id="clientId"></span> <button class="label label-warning">(alterar senha)</button>
 								<br/><b>Endereço: </b><span class="clientData" id="clientAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
 								<br/><b>Telefone: </b><span class="clientData" id="clientTel"></span> <button class="editInfo label label-warning">(alterar)</button>
 								<br/><b>E-mail: </b><span class="clientData" id="clientEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
-
-							</h4>
+							</h5>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
@@ -357,4 +361,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!-- //footer -->
 	</body>
-</html>
+	</html>
