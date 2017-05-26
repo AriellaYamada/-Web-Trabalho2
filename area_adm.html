@@ -16,7 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 	function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">	
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -157,7 +157,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</tr>
 							</tbody>
 						</table>
-						<h4><button class="label label-success" data-toggle="modal" data-target="#newserviceReg">Criar Novo Serviço</button></h4>
+						<div class="regButtons">
+							<h4><button class="label label-success" data-toggle="modal" data-target="#newserviceReg">Criar Novo Serviço</button></h4>
+						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="newserviceReg" role="dialog" tabindex="-1">
 							<div class="modal-dialog">
@@ -275,14 +277,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="typo-grids">
 						<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 							<h3 class="bars">Serviços</h3>
-							<input class="search" type="text" placeholder="Buscar serviços"></input>
-							<h4> por: </h4>
-							<select>
-								<option value='name'>Nome</option>
-								<option value='id'>ID</option>
-								<option value='description'>Descrição</option>
-								<option value='price'>Preço</option>
-							</select>
+							<div class="searchContent">
+								<input class="search" type="text" placeholder="Buscar serviços"></input>
+								<h4> por: </h4>
+								<select>
+									<option value='name'>Nome</option>
+									<option value='id'>ID</option>
+									<option value='description'>Descrição</option>
+									<option value='price'>Preço</option>
+								</select>
+							</div>
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -348,14 +352,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="typo-grids">
 							<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 								<h3 class="bars">Usuários Cadastrados</h3>
-								<input class="search" type="text" placeholder="Buscar usuários"></input>
-								<h4> por: </h4>
-								<select>
-									<option value='name'>Nome</option>
-									<option value='id'>ID</option>
-									<option value='description'>Descrição</option>
-									<option value='price'>Preço</option>
-								</select>
+								<div class="searchContent">
+									<input class="search" type="text" placeholder="Buscar usuários"></input>
+									<h4> por: </h4>
+									<select>
+										<option value='name'>Nome</option>
+										<option value='id'>ID</option>
+										<option value='description'>Descrição</option>
+										<option value='price'>Preço</option>
+									</select>
+								</div>
 								<table class="table table-hover">
 									<thead>
 										<tr>
