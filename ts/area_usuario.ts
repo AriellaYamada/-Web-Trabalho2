@@ -121,10 +121,16 @@ $(document).ready(function()
 			$(this).remove()
 			editButton.show()
 		})
-		updateInputField.keypress(function(e)
+		updateInputField.keydown(function(e)
 		{
-			if (e.keyCode == 13)
+			if (e.keyCode == 13)	// enter
 				$(this).blur()
+			if (e.keyCode == 27)	// esc
+			{
+				field.show()
+				$(this).remove()
+				editButton.show()
+			}
 		})
 		field.after(updateInputField)
 		updateInputField.focus()

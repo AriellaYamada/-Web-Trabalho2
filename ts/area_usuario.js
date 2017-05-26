@@ -90,9 +90,14 @@ $(document).ready(function () {
             $(this).remove();
             editButton.show();
         });
-        updateInputField.keypress(function (e) {
+        updateInputField.keydown(function (e) {
             if (e.keyCode == 13)
                 $(this).blur();
+            if (e.keyCode == 27) {
+                field.show();
+                $(this).remove();
+                editButton.show();
+            }
         });
         field.after(updateInputField);
         updateInputField.focus();
