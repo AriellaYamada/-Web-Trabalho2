@@ -1,19 +1,16 @@
 ///<reference path="Server.ts"/>
+var server = new Server();
 // Pseudo login
 function authenticate() {
     let username = document.getElementById("login_user").value;
     let password = document.getElementById("pass_user").value;
-    if (username == "admin") {
-        if (password == "admin") {
-            window.location.href = "area_adm.html";
-        }
-        else {
-            $("#login_failed").show();
-            $("html, body").animate({ scrollTop: 0 }, "fast");
-        }
+    if (server.login(username, password)) {
+        localStorage.PetStopCurrentUser = username;
+        window.location.href = "area_usuario.html";
     }
     else {
-        window.location.href = "area_usuario.html";
+        $("#login_failed").show();
+        $("html, body").animate({ scrollTop: 0 }, "fast");
     }
 }
 $(document).ready(function () {

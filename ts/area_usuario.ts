@@ -4,23 +4,26 @@
 
 declare var $: any;
 var server: Server = new Server()
+var currentUser: string = localStorage.PetStopCurrentUser
 
 function refreshUserData() : void
 {
 	$(".clientData").each(function()
 	{
 		let field_name: string = $(this).attr("id")
-		$(this).html(server.data[field_name])
+		$(this).html(server.users[currentUser][field_name])
 	})
-	$("#clientPic").attr("src", server.data.clientPic)
+	$("#userPic").attr("src", server.users[currentUser].userPic)
 }
 
 function refreshUserPets() : void
 {
 	$("#petContainer").empty()
-	for (let i = 0; i < server.data.clientPets.length; i++)
+	let nopets: boolean = true
+	let petId: string
+	for (petId in server.users[currentUser].pets)
 	{
-		let pet: Pet = server.data.clientPets[i]
+		let pet: Pet = server.users[currentUser].pets[petId]
 		/*
 		<div class="col-md-3 new-collections-grid">
 			<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
@@ -34,6 +37,8 @@ function refreshUserPets() : void
 				<p>Shiba Inu</p>
 			</div>
 		*/
+		nopets = false
+
 		let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
 		let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>")
 		let d3 = $("<div class='new-collections-grid1-image'></div>")
@@ -55,7 +60,7 @@ function refreshUserPets() : void
 
 		$("#petContainer").append(d1)
 	}
-	if (server.data.clientPets.length == 0)
+	if (nopets)
 		$("#petContainer").html("Sem pets cadastrados.")
 }
 
@@ -63,7 +68,7 @@ function refreshUserPets() : void
 $(document).ready(function()
 {
 	// Nome de usuário na saudação:
-	$("#user").html(server.data.clientId)
+	$("#user").html(currentUser)
 
 	// Preenchendo pets e dados do usuário:
 	refreshUserPets()
@@ -72,7 +77,7 @@ $(document).ready(function()
 	// Para quando o cliente altera sua foto:
 	$("#clientPicUploader").on("change", function()
 	{
-		inputImageToBase64(this.files[0], result => {server.data.clientPic = result; refreshUserData()})
+		inputImageToBase64(this.files[0], result => {server.users[currentUser].userPic = result; refreshUserData()})
 	})
 
 	// Para salvar o estado do servidor mock ao sair da página:
@@ -95,7 +100,7 @@ $(document).ready(function()
 		$("#invalid_age").hide()
 		inputImageToBase64($("#petForm input[name=pic]")[0].files[0], pic => 
 		{
-			server.addClientPet(name, breed, id, age, pic)
+			server.addPet(currentUser, name, breed, id, age, pic)
 		})
 		return true
 	})
@@ -115,7 +120,7 @@ $(document).ready(function()
 		updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
 		updateInputField.blur(function()
 		{
-			server.data[field.attr("id")] = $(this).val()			// o id de field tem o mesmo nome que o atributo correspondente no servidor
+			server.users[currentUser][field.attr("id")] = $(this).val()			// o id de field tem o mesmo nome que o atributo correspondente no servidor
 			refreshUserData()
 			field.show()
 			$(this).remove()

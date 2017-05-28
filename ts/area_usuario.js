@@ -1,16 +1,19 @@
 ///<reference path="Server.ts"/>
 var server = new Server();
+var currentUser = localStorage.PetStopCurrentUser;
 function refreshUserData() {
     $(".clientData").each(function () {
         let field_name = $(this).attr("id");
-        $(this).html(server.data[field_name]);
+        $(this).html(server.users[currentUser][field_name]);
     });
-    $("#clientPic").attr("src", server.data.clientPic);
+    $("#userPic").attr("src", server.users[currentUser].userPic);
 }
 function refreshUserPets() {
     $("#petContainer").empty();
-    for (let i = 0; i < server.data.clientPets.length; i++) {
-        let pet = server.data.clientPets[i];
+    let nopets = true;
+    let petId;
+    for (petId in server.users[currentUser].pets) {
+        let pet = server.users[currentUser].pets[petId];
         /*
         <div class="col-md-3 new-collections-grid">
             <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
@@ -24,6 +27,7 @@ function refreshUserPets() {
                 <p>Shiba Inu</p>
             </div>
         */
+        nopets = false;
         let d1 = $("<div class='col-md-3 new-collections-grid'></div>");
         let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>");
         let d3 = $("<div class='new-collections-grid1-image'></div>");
@@ -43,18 +47,18 @@ function refreshUserPets() {
         d3.append(p);
         $("#petContainer").append(d1);
     }
-    if (server.data.clientPets.length == 0)
+    if (nopets)
         $("#petContainer").html("Sem pets cadastrados.");
 }
 $(document).ready(function () {
     // Nome de usuário na saudação:
-    $("#user").html(server.data.clientId);
+    $("#user").html(currentUser);
     // Preenchendo pets e dados do usuário:
     refreshUserPets();
     refreshUserData();
     // Para quando o cliente altera sua foto:
     $("#clientPicUploader").on("change", function () {
-        inputImageToBase64(this.files[0], result => { server.data.clientPic = result; refreshUserData(); });
+        inputImageToBase64(this.files[0], result => { server.users[currentUser].userPic = result; refreshUserData(); });
     });
     // Para salvar o estado do servidor mock ao sair da página:
     $(window).on("unload", () => server.saveState());
@@ -70,7 +74,7 @@ $(document).ready(function () {
         }
         $("#invalid_age").hide();
         inputImageToBase64($("#petForm input[name=pic]")[0].files[0], pic => {
-            server.addClientPet(name, breed, id, age, pic);
+            server.addPet(currentUser, name, breed, id, age, pic);
         });
         return true;
     });
@@ -84,7 +88,7 @@ $(document).ready(function () {
         let updateInputField = $("<input type=\"text\"></input>"); // cria novo elemento input	
         updateInputField.val(field.html()); // inicializa o valor do element input com o valor do dado atual
         updateInputField.blur(function () {
-            server.data[field.attr("id")] = $(this).val(); // o id de field tem o mesmo nome que o atributo correspondente no servidor
+            server.users[currentUser][field.attr("id")] = $(this).val(); // o id de field tem o mesmo nome que o atributo correspondente no servidor
             refreshUserData();
             field.show();
             $(this).remove();
