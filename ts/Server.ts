@@ -99,6 +99,13 @@ class Server
 		return true
 	}
 
+	isAdmin(usr: string) : boolean
+	{
+		if (!this.users[usr])
+			return false
+		return this.users[usr].adm
+	}
+
 	addPet(user:string, name: string, breed: string, id: string, age: number, pic: string) : void
 	{
 		if (!this.users[user]) return				// usuário não existe

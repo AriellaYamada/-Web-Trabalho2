@@ -6,7 +6,10 @@ function authenticate() {
     let password = document.getElementById("pass_user").value;
     if (server.login(username, password)) {
         localStorage.PetStopCurrentUser = username;
-        window.location.href = "area_usuario.html";
+        if (server.isAdmin(username))
+            window.location.href = "area_adm.html";
+        else
+            window.location.href = "area_usuario.html";
     }
     else {
         $("#login_failed").show();

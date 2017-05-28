@@ -58,6 +58,11 @@ class Server {
             return false; // senha incorreta
         return true;
     }
+    isAdmin(usr) {
+        if (!this.users[usr])
+            return false;
+        return this.users[usr].adm;
+    }
     addPet(user, name, breed, id, age, pic) {
         if (!this.users[user])
             return; // usuário não existe

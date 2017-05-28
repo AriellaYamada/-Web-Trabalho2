@@ -14,7 +14,10 @@ function authenticate() : void
 	if (server.login(username, password))
 	{	
 		localStorage.PetStopCurrentUser = username
-		window.location.href = "area_usuario.html"
+		if (server.isAdmin(username))
+			window.location.href = "area_adm.html"
+		else
+			window.location.href = "area_usuario.html"
 	}
 	else
 	{

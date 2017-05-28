@@ -33,6 +33,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script>
 	new WOW().init();
 	</script>
+	<script src="ts/Server.js"></script>
+	<script src="ts/area_adm.js"></script>
+
 	<!-- //animation-effect -->
 </head>
 
@@ -43,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="header-grid">
 				<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
 					<ul>
-						<li>Olá, Usuário</li>
+						<li>Olá, <span id="greetName"></span></li>
 						<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
 							<a href="index.html">Logout</a></li>
 						</ul>
@@ -426,30 +429,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<!-- //usuarios -->
 					<!-- PERFIL -->
 					<a name="profile"></a>
-					<div class="typo">
-						<div class="container">
-							<div class="typo-grids">
-								<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-									<h3 class="bars">Seu Perfil</h3>
-									<div class="col-md-3 new-collections-grid">
-										<div class="new-collections-grid1-image">
-											<a href="single.html" class="product-image"><img src="img/profilepic.jpg" alt=" " class="img-responsive" /></a>
-										</div>
-										<h4><button class="label label-warning" href="single.html">Alterar imagem</button></h4>
-									</div>
-									<div class="col-md-9 new-collections-grid">
-										<h4>Rodrigo Weigert
-											<br><b>Nome de usuário:</b> rodz <button class="label label-warning" href="">(alterar senha)</button>
-											<br><b>Endereço:</b> Rua Tiradentes, 123 <button class="label label-warning" href="">(alterar senha)</button>
-											<br><b>Telefone:</b> (17) 12345678 <button class="label label-warning" href="">(alterar senha)</button>
-											<br><b>E-mail:</b> rodrigo.weigert@usp.br <button class="label label-warning" href="">(alterar senha)</button>
-										</h4>
+							<div class="typo">
+								<div class="container">
+									<div class="typo-grids">
+										<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+											<h3 class="bars">Seu Perfil</h3>
+											<div class="col-md-3 new-collections-grid">
+												<div class="new-collections-grid1-image">
+													<a class="product-image"><img id="userPic" class="img-responsive" /></a>
+												</div>
+												<h5><input type="file" id="clientPicUploader" accept="image/*"></input></h5>
+											</div>
+											<div class="col-md-9 new-collections-grid">
+												<h5><span class="clientData" id="userName"></span> <button class="editInfo label label-warning">(alterar)</button>
+													<br/><b>Nome de usuário: </b><span class="clientData" id="userId"></span> <button class="label label-warning">(alterar senha)</button>
+													<br/><b>Endereço: </b><span class="clientData" id="userAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
+													<br/><b>Telefone: </b><span class="clientData" id="userTel"></span> <button class="editInfo label label-warning">(alterar)</button>
+													<br/><b>E-mail: </b><span class="clientData" id="userEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
+												</h5>
+											</div>
 
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
 					<!-- perfil -->
 					<!-- footer -->
 					<a name="contact"></a>
