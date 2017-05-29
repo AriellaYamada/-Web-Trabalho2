@@ -31,6 +31,25 @@ $(document).ready(function () {
         $("#newUserForm input[name=address]").val("");
         $("#newUserForm #addressDiv").toggle();
     });
+    $("#newUserForm").on("submit", function (ev) {
+        let name = $("#newUserForm input[name=name]").val();
+        let id = $("#newUserForm input[name=id]").val();
+        let pass = $("#newUserForm input[name=password]").val();
+        let tel = $("#newUserForm input[name=telephone]").val();
+        let email = $("#newUserForm input[name=email]").val();
+        let permissions = $("#newUserForm input[name=usertype]").val();
+        let address = $("#newUserForm input[name=address]").val();
+        let result;
+        result = server.addUser(name, id, address, null, tel, email, pass, permissions);
+        if (result != "ok") {
+            $("#newUserError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
+        inputImageToBase64($("#newUserForm input[name=pic]")[0].files[0], pic => {
+            server.users[id].userPic = pic;
+        });
+        return true;
+    });
     // Para fazer alterações dos dados cadastrais do usuário:
     $(".editInfo").css("cursor", "pointer"); // cursor de link
     $(".editInfo").click(function () {

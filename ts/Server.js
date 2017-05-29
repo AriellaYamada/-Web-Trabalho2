@@ -65,10 +65,22 @@ class Server {
     }
     addPet(user, name, breed, id, age, pic) {
         if (!this.users[user])
-            return; // usuário não existe
-        if (this.users[user].pets[id])
-            return; // pet com o id fornecido já existe
+            return "Usuário não existe.";
+        for (let u in this.users) {
+            if (this.users[u].pets[id])
+                return "Já existe um pet com o ID escolhido.";
+        }
         this.users[user].pets[id] = new Pet(name, breed, id, age, pic);
+        return "ok";
+    }
+    addUser(name, id, address, pic, tel, email, password, perm) {
+        if (this.users[id])
+            return "O ID fornecido já está sendo utilizado.";
+        let isAdm = false;
+        if (perm == "admin")
+            isAdm = true;
+        this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm);
+        return "ok";
     }
 }
 //# sourceMappingURL=Server.js.map

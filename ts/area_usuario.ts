@@ -84,23 +84,30 @@ $(document).ready(function()
 	$(window).on("unload", () => server.saveState())
 
 	// Cadastro de novo Pet:
-	$("#petForm").on("submit", function (ev)
+	$("#newPetForm").on("submit", function (ev)
 	{
-		let age: number = +$("#petForm input[name=age]").val()
-		let name: string = $("#petForm input[name=name]").val()
-		let id: string = $("#petForm input[name=id]").val()
-		let breed: string = $("#petForm input[name=breed]").val()
+		let age: number = +$("#newPetForm input[name=age]").val()
+		let name: string = $("#newPetForm input[name=name]").val()
+		let id: string = $("#newPetForm input[name=id]").val()
+		let breed: string = $("#newPetForm input[name=breed]").val()
 
 		if (isNaN(age) || age < 0)
 		{
-			$("#invalid_age").show()
+			$("#newPetError").html("<strong>Erro:</strong> Idade inválida.").show().delay(5000).fadeOut()
 			return false
 		}
 
-		$("#invalid_age").hide()
-		inputImageToBase64($("#petForm input[name=pic]")[0].files[0], pic => 
+		let result: string
+		result = server.addPet(currentUser, name, breed, id, age, null)
+		if (result != "ok")
 		{
-			server.addPet(currentUser, name, breed, id, age, pic)
+			$("#newPetError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut()
+			return false
+		}
+
+		inputImageToBase64($("#newPetForm input[name=pic]")[0].files[0], pic => 
+		{
+			server.users[currentUser].pets[id].pic = pic
 		})
 		return true
 	})

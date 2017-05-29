@@ -106,13 +106,28 @@ class Server
 		return this.users[usr].adm
 	}
 
-	addPet(user:string, name: string, breed: string, id: string, age: number, pic: string) : void
+	addPet(user:string, name: string, breed: string, id: string, age: number, pic: string) : string
 	{
-		if (!this.users[user]) return				// usuário não existe
-		if (this.users[user].pets[id]) return		// pet com o id fornecido já existe
+		if (!this.users[user]) return "Usuário não existe."
+		for (let u in this.users)
+		{
+			if (this.users[u].pets[id])
+				return "Já existe um pet com o ID escolhido."
+		}
 
 		this.users[user].pets[id] = new Pet(name, breed, id, age, pic)
+		return "ok"
 	}
 
+	addUser(name:string, id: string, address: string, pic: string, tel: string, email: string, password: string, perm: string)
+	{
+		if (this.users[id]) return "O ID fornecido já está sendo utilizado."
+		let isAdm: boolean = false
+		if (perm == "admin")
+			isAdm = true
+
+		this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm)
+		return "ok"
+	}
 
 }

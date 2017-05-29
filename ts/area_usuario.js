@@ -63,18 +63,23 @@ $(document).ready(function () {
     // Para salvar o estado do servidor mock ao sair da página:
     $(window).on("unload", () => server.saveState());
     // Cadastro de novo Pet:
-    $("#petForm").on("submit", function (ev) {
-        let age = +$("#petForm input[name=age]").val();
-        let name = $("#petForm input[name=name]").val();
-        let id = $("#petForm input[name=id]").val();
-        let breed = $("#petForm input[name=breed]").val();
+    $("#newPetForm").on("submit", function (ev) {
+        let age = +$("#newPetForm input[name=age]").val();
+        let name = $("#newPetForm input[name=name]").val();
+        let id = $("#newPetForm input[name=id]").val();
+        let breed = $("#newPetForm input[name=breed]").val();
         if (isNaN(age) || age < 0) {
-            $("#invalid_age").show();
+            $("#newPetError").html("<strong>Erro:</strong> Idade inválida.").show().delay(5000).fadeOut();
             return false;
         }
-        $("#invalid_age").hide();
-        inputImageToBase64($("#petForm input[name=pic]")[0].files[0], pic => {
-            server.addPet(currentUser, name, breed, id, age, pic);
+        let result;
+        result = server.addPet(currentUser, name, breed, id, age, null);
+        if (result != "ok") {
+            $("#newPetError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
+        inputImageToBase64($("#newPetForm input[name=pic]")[0].files[0], pic => {
+            server.users[currentUser].pets[id].pic = pic;
         });
         return true;
     });

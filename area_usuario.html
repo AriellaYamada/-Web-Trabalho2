@@ -280,12 +280,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h3 class="bars">Cadastro de Pet</h3>
-								<div class="collapse alert alert-danger" id="invalid_age">
-									<strong>Erro!</strong> Idade inválida.
+								<div class="collapse alert alert-danger" id="newPetError">
 								</div>
 							</div>
 							<div class="modal-body">
-								<form id="petForm" method="post">
+								<form id="newPetForm" method="post">
 									<h4>Nome:</h4>
 									<input type="text" name="name" required></input>
 									<h4>ID:</h4>
@@ -297,7 +296,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<h4>Idade:<br/></h4>
 									<input type="text" name="age" required></input></br>
 									<div class="modal-footer">
-										<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+										<h3><button type="submit" class="label label-primary" value="Salvar"/>Cadastrar</button></h3>
 										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
 									</div>
 								</form>
