@@ -8,17 +8,29 @@ function refreshUserData() {
     });
     $("#userPic").attr("src", server.users[currentUser].userPic);
 }
+function refreshUserList() {
+    $("#userList").empty();
+    for (let user in server.users)
+        $("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"));
+}
 $(document).ready(function () {
     // Nome de usuário na saudação:
-    $("#greetName").html(currentUser);
-    // Preenchendo pets e dados do usuário:
+    $("#greetName").html(server.users[currentUser].userName);
+    // Preenchendo dados do usuário:
     refreshUserData();
-    // Para quando o cliente altera sua foto:
+    // Lista de usuários
+    refreshUserList();
+    // Para quando o administrador altera sua foto:
     $("#clientPicUploader").on("change", function () {
         inputImageToBase64(this.files[0], result => { server.users[currentUser].userPic = result; refreshUserData(); });
     });
     // Para salvar o estado do servidor mock ao sair da página:
     $(window).on("unload", () => server.saveState());
+    // Form de novo usuário
+    $("#newUserForm input[name=usertype]").on("change", function () {
+        $("#newUserForm input[name=address]").val("");
+        $("#newUserForm #addressDiv").toggle();
+    });
     // Para fazer alterações dos dados cadastrais do usuário:
     $(".editInfo").css("cursor", "pointer"); // cursor de link
     $(".editInfo").click(function () {

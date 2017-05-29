@@ -368,19 +368,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th>#</th>
 											<th>Usuário</th>
 											<th>Nome</th>
+											<th></th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>rodz</td>
-											<td>Rodrigo Weigert</td>
-											<td><a href="">Detalhes<a></td>
-											</tr>
-										</tbody>
+									<tbody id="userList">
+									</tbody>
 									</table>
 									<div class="regButtons">
 										<h4><button class="label label-success" data-toggle="modal" data-target="#userReg">Cadastrar Novo Usuário</button></h4>
@@ -394,29 +388,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 													<h3 class="bars">Cadastro de Usuário</h3>
 												</div>
 												<div class="modal-body">
-													<form>
+													<form id="newUserForm" method="post">
 														<h4>Nome:</h4>
-														<input type='text' name='name'></input>
+														<input type="text" name="name" required></input>
 														<h4>Usuário (ID):</h4>
-														<input type='text' name='id'></input>
+														<input type="text" name="id" required></input>
 														<h4>Foto:</h4>
-														<button class="label label-default" type='button'>Carregar Foto</button>
+														<input type="file" required>Carregar Foto</input>
 														<h4>Telefone: </h4>
-														<input type="text" name="telephone"></input>
+														<input type="text" name="telephone" required></input>
 														<h4>E-mail: <br/></h4>
-														<input type='text' name='email'></input></br>
+														<input type="text" name="email" required></input></br>
 														<h4>Tipo de Usuário:</h4>
-														<input type='radio' name='usertype' value='client' checked>Cliente</input>
-														<input type='radio' name='usertype' value='admin'>Administrador</input>
+														<input type="radio" name="usertype" value="client" checked required>Cliente</input>
+														<input type="radio" name="usertype" value="admin" required>Administrador</input>
 														<br/>
 														<!-- esse campo irá sumir quando o tipo de usuário selecionado for administrador -->
-														<h4>Endereço (se cliente):</h4>
-														<input type='text' class='addressField' name='address'></input>
+														<div id="addressDiv">
+															<h4>Endereço:</h4>
+															<input type="text" class="addressField" name="address"></input>
+														</div>
+														<div class="modal-footer">
+															<h3><button type="submit" class="label label-primary" value="Salvar"/>Cadastrar</button></h3>
+															<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+														</div>
 													</form>
-												</div>
-												<div class="modal-footer">
-													<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-													<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
 												</div>
 											</div>
 										</div>

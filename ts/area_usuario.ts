@@ -68,7 +68,7 @@ function refreshUserPets() : void
 $(document).ready(function()
 {
 	// Nome de usuário na saudação:
-	$("#greetName").html(currentUser)
+	$("#greetName").html(server.users[currentUser].userName)
 
 	// Preenchendo pets e dados do usuário:
 	refreshUserPets()
