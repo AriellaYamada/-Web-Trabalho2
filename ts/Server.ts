@@ -53,7 +53,7 @@ class User
 	}
 }
 
-class Product
+/*class Product
 {
 	name: string
 	id: string
@@ -69,7 +69,7 @@ class Product
 		this.description = description
 		this.price = price
 	}
-}
+}*/
 
 class Server
 {

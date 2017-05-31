@@ -34,13 +34,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- animation-effect -->
 <link href="css/animate.min.css" rel="stylesheet">
 <script src="js/wow.min.js"></script>
+<script src="ts/loja.js"></script>
 <script>
  new WOW().init();
 </script>
 <!-- //animation-effect -->
 </head>
 
-<body>
+<body onload="changePage(1)">
 
 <!-- header -->
 	<div class="header">
@@ -133,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</ol>
 		</div>
 	</div>
-<!---728x90--->
+<!---728x90-->
 	<div class="products">
 		<div class="container">
 			<div class="col-md-4 products-left">
@@ -251,18 +252,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="clearfix"> </div>
 								</div>
 								<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
-									<p> <span class="item_price">R$89,90</span><a class="item_add" href="#">add to cart </a></p>
+									<p> <span class="item_price">R$89,90</span><a class="item_add" href="#">CARRINHO+ </a></p>
 								</div>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-					</div>
-				</div>
-				<div class="men-position animated wow slideInUp" data-wow-delay=".5s">
-					<a href="single.html"><img src="images/27.jpg" alt=" " class="img-responsive" /></a>
-					<div class="men-position-pos">
-						<h4>Summer collection</h4>
-						<h5><span>55%</span> Flat Discount</h5>
 					</div>
 				</div>
 			</div>
@@ -277,34 +271,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<option value="null">Sort by price</option>
 							</select>
 						</div>
-						<div class="sorting-left">
-							<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-								<option value="null">Item on page 9</option>
-								<option value="null">Item on page 18</option>
-								<option value="null">Item on page 32</option>
-								<option value="null">All</option>
-							</select>
-						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="products-right-grids-position animated wow slideInRight" data-wow-delay=".5s">
-						<img src="images/18.jpg" alt=" " class="img-responsive" />
-						<div class="products-right-grids-position1">
-							<h4>2016 New Collection</h4>
-							<p>Temporibus autem quibusdam et aut officiis debitis aut rerum
-								necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae
-								non recusandae.</p>
-						</div>
-					</div>
-<!---728x90--->
+<!---728x90-->
 				</div>
 				<div class="products-right-grids-bottom">
 					<div class="col-md-4 products-right-grids-bottom-grid">
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/19.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image" class="image">
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product1" id="product1image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -327,17 +304,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Formal Shirt</a></h4>
-							<p>Vel illum qui dolorem.</p>
-							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$325</i> <span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
+							<h4><a href="single.html" class="product1" id="product1name"></a></h4>
+							<p class="product1" id="product1desc"></p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart" class="price">
+								<p> <span class="item_price" class="product1" id="product1price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/21.jpg" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product2" id="product2image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -360,17 +337,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Casual Shoes</a></h4>
-							<p>Vel illum qui dolorem.</p>
+							<h4><a href="single.html" class="product2" id="product2name"></a></h4>
+							<p class="product2" id="product2desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$325</i> <span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
+								<p> <span class="item_price" class="product2" id="product2price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/24.jpg" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product3" id="product3image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -393,120 +370,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Blazer</a></h4>
-							<p>Vel illum qui dolorem.</p>
+							<h4><a href="single.html" class="product3" id="product3name"></a></h4>
+							<p class="product3" id="product3desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$585</i> <span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 products-right-grids-bottom-grid">
-						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/7.jpg" alt=" " class="img-responsive"></a>
-								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
-								</div>
-								<div class="new-collections-grid1-right products-right-grids-pos-right">
-									<div class="rating">
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="clearfix"> </div>
-									</div>
-								</div>
-							</div>
-							<h4><a href="single.html">Formal Shirt</a></h4>
-							<p>Vel illum qui dolorem.</p>
-							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$280</i> <span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
-							</div>
-						</div>
-						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/22.jpg" alt=" " class="img-responsive"></a>
-								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
-								</div>
-								<div class="new-collections-grid1-right products-right-grids-pos-right">
-									<div class="rating">
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="clearfix"> </div>
-									</div>
-								</div>
-							</div>
-							<h4><a href="single.html">Casual Shoes</a></h4>
-							<p>Vel illum qui dolorem.</p>
-							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$500</i> <span class="item_price">$480</span><a class="item_add" href="#">add to cart </a></p>
-							</div>
-						</div>
-						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
-							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/25.jpg" alt=" " class="img-responsive"></a>
-								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
-								</div>
-								<div class="new-collections-grid1-right products-right-grids-pos-right">
-									<div class="rating">
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/2.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="rating-left">
-											<img src="images/1.png" alt=" " class="img-responsive">
-										</div>
-										<div class="clearfix"> </div>
-									</div>
-								</div>
-							</div>
-							<h4><a href="single.html">Blazer</a></h4>
-							<p>Vel illum qui dolorem.</p>
-							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$585</i> <span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
+								<p> <span class="item_price" class="product3" id="product3price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4 products-right-grids-bottom-grid">
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/20.jpg" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product4" id="product4image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -529,17 +405,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Formal Shirt</a></h4>
-							<p>Vel illum qui dolorem.</p>
+							<h4><a href="single.html" class="product4" id="product4name"></a></h4>
+							<p class="product4" id="product4desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$305</i> <span class="item_price">$280</span><a class="item_add" href="#">add to cart </a></p>
+								<p> <span class="item_price" class="product4" id="product4price"></span><a class="item_add" href="#">CARRINHO+ </a></p>
 							</div>
 						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/23.jpg" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product5" id="product5image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -562,17 +438,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Casual Shoes</a></h4>
-							<p>Vel illum qui dolorem.</p>
+							<h4><a href="single.html" class="product5" id="product5name"></a></h4>
+							<p class="product5" id="product5desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$389</i> <span class="item_price">$299</span><a class="item_add" href="#">add to cart </a></p>
+								<p> <span class="item_price" class="product5" id="product5price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="images/26.jpg" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product6" id="product6image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Quick View</a>
+									<a href="single.html">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -595,16 +471,117 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</div>
 							</div>
-							<h4><a href="single.html">Blazer</a></h4>
-							<p>Vel illum qui dolorem.</p>
+							<h4><a href="single.html" class="product6" id="product6name"></a></h4>
+							<p class="product6" id="product6desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p><i>$585</i> <span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
+								<p> <span class="item_price" class="product6" id="product6price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 products-right-grids-bottom-grid">
+						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product7" id="product7image"></a>
+								<div class="new-collections-grid1-image-pos products-right-grids-pos">
+									<a href="single.html">Detalhes</a>
+								</div>
+								<div class="new-collections-grid1-right products-right-grids-pos-right">
+									<div class="rating">
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</div>
+							<h4><a href="single.html" class="product7" id="product7name"></a></h4>
+							<p class="product7" id="product7desc"></p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+								<p> <span class="item_price" class="product7" id="product7price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+							</div>
+						</div>
+						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product8" id="product8image"></a>
+								<div class="new-collections-grid1-image-pos products-right-grids-pos">
+									<a href="single.html">Detalhes</a>
+								</div>
+								<div class="new-collections-grid1-right products-right-grids-pos-right">
+									<div class="rating">
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</div>
+							<h4><a href="single.html" class="product8" id="product8name"></a></h4>
+							<p class="product8" id="product8desc"></p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+								<p> <span class="item_price" class="product8" id="product8price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+							</div>
+						</div>
+						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+							<div class="new-collections-grid1-image">
+								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product9" id="product9image"></a>
+								<div class="new-collections-grid1-image-pos products-right-grids-pos">
+									<a href="single.html">Detalhes</a>
+								</div>
+								<div class="new-collections-grid1-right products-right-grids-pos-right">
+									<div class="rating">
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/2.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="images/1.png" alt=" " class="img-responsive">
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</div>
+							<h4><a href="single.html" class="product9" id="product9name"></a></h4>
+							<p class="product9" id="product9desc"></p>
+							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+								<p> <span class="item_price" class="product9" id="product9price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-<!---728x90--->
+<!---728x90-->
 				<nav class="numbering animated wow slideInRight" data-wow-delay=".5s">
 				  <ul class="pagination paging">
 					<li>
@@ -612,11 +589,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<li class="active" id="page1"><a href="#">1<span class="sr-only">(current)</span></a></li>
+					<li id="page2"><a href='#' onclick="changePage(2)">2</a></li>
+					<li id="page3"><a href="#" onclick="changePage(3)">3</a></li>
+					<li id="page4"><a href="#" onclick="changePage(4)">4</a></li>
+					<li id="page5"><a href="#" onclick="changePage(5)">5</a></li>
 					<li>
 					  <a href="#" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
