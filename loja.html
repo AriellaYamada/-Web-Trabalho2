@@ -281,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="new-collections-grid1-image" class="image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product1" id="product1image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details1" onClick="modalFunc()">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -310,6 +310,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product1" id="product1price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="details1" role="dialog" tabindex="-1">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 class="bars" id="modal1name">Nome do Produto</h3>
+										<div class="collapse alert alert-danger" id="newPetError">
+										</div>
+									</div>
+									<div class="modal-body">
+										<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product1" id="modal1image"></a>
+										<p class="product1" id="modal1desc"></p>
+										<div class="simpleCart_shelfItem products-right-grid1-add-cart" class="price">
+											<p> <span class="item_price" class="product1" id="modal1price"></span></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- fim modal -->
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product2" id="product2image"></a>
