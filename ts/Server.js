@@ -37,6 +37,18 @@ class Product {
         this.type = type;
     }
 }
+class Schedule {
+    constructor(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {
+        this.day = day;
+        this.hour = hour;
+        this.pet = pet;
+        this.service = service;
+        this.creditCard = creditCard;
+        this.csc = csc;
+        this.expDate = expDate;
+        this.cardFlag = cardFlag;
+    }
+}
 class Server {
     constructor() {
         if (localStorage.PetStopServerData) {
@@ -84,6 +96,7 @@ class Server {
         console.log("Saving server state...");
         localStorage.PetStopServerData = JSON.stringify(this.users);
         localStorage.PetStopProducts = JSON.stringify(this.products);
+        localStorage.PetStopSchedules = JSON.stringify(this.schedules);
     }
     login(usr, pw) {
         if (!this.users[usr])
@@ -114,6 +127,10 @@ class Server {
         if (perm == "admin")
             isAdm = true;
         this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm);
+        return "ok";
+    }
+    addSchedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {
+        this.schedules[this.schedules.length] = new Schedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag);
         return "ok";
     }
 }

@@ -83,6 +83,12 @@ $(document).ready(function()
 	// Para salvar o estado do servidor mock ao sair da página:
 	$(window).on("unload", () => server.saveState())
 
+	//Atualizacao do calendario
+	$("#serviceRegForm").on("click", function ()
+	{
+		let today = new Date().toISOString().split("T")[0]
+		$("#calendar").prop("min", today)
+	})
 	// Cadastro de novo Pet:
 	$("#newPetForm").on("submit", function (ev)
 	{
