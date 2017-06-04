@@ -72,7 +72,7 @@ $(document).ready(function()
 
 	// Preenchendo pets e dados do usuário:
 	refreshUserPets()
-	refreshUserData()	
+	refreshUserData()
 
 	// Para quando o cliente altera sua foto:
 	$("#clientPicUploader").on("change", function()
@@ -105,7 +105,7 @@ $(document).ready(function()
 			return false
 		}
 
-		inputImageToBase64($("#newPetForm input[name=pic]")[0].files[0], pic => 
+		inputImageToBase64($("#newPetForm input[name=pic]")[0].files[0], pic =>
 		{
 			server.users[currentUser].pets[id].pic = pic
 		})
@@ -123,7 +123,7 @@ $(document).ready(function()
 		let field = editButton.prev()								// sibling anterior (contém o dado atual do usuário)
 		field.hide()
 
-		let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input	
+		let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input
 		updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
 		updateInputField.blur(function()
 		{
