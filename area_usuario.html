@@ -168,7 +168,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</tbody>
 						</table>
 						<div class="regButtons">
-							<h4><button type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
+							<h4><button id="serviceRegForm" type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
 							<h4><button class="label label-warning">Ver histórico de agendamentos</button></h4>
 						</div>
 						<!-- Modal -->
@@ -180,19 +180,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<h3 class="bars">Agendamento de Serviço</h3>
 									</div>
 									<div class="modal-body">
-										<h4><form method='post'>
+										<h4><form id="newScheduleForm" method='post'>
 											<h4>Dia:</h4>
-											<input id="calendar" type="date"></input>
+											<input id="calendar" type="date" ></input>
 											<h4>Horário</h4>
 											<select id="time">
+												<option id="slot1">8h00</option>
+												<option id="slot2">9h00</option>
+												<option id="slot3">10h00</option>
+												<option id="slot4">11h00</option>
+												<option id="slot5">12h00</option>
+												<option id="slot6">13h00</option>
+												<option id="slot7">14h00</option>
+												<option id="slot8">15h00</option>
+												<option id="slot9">18h00</option>
 											</select>
 											<h4>Pet:</h4>
-											<select>
+											<select id="pet">
 												<option>Kabosu</option>
 												<option>Toby</option>
 											</select>
 											<h4>Serviço:</h4>
-											<select>
+											<select id="service">
 												<option>Banho</option>
 												<option>Banho e Tosa</option>
 												<option>Banho e Tosa Higiênica</option>
@@ -200,20 +209,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<option>Consulta Veterinária</option>
 											</select>
 											<h4>Preço: R$ ... </h4>
-											<br/>
 											<h4>Número do Cartão de Crédito: </h4>
-											<input type='text' name='CreditCard'></input>
+											<input id="creditCard" type='text'></input>
 											<h4>Código de Segurança:</h4>
-											<input class='CSC' type='text' name='CSC'></input>
+											<input id="csc" class='CSC' type='text' name='CSC'></input>
 											<h4>Validade:</h4>
-											<input class='expdate' type='text' placeholder='mm/aa'></input>
+											<input id="expDate" class='expdate' type='text' placeholder='mm/aa'></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
 
-												<input type='radio'></input> <img src='img/visa.png' alt='Visa'></img>
-												<input type='radio'></input><img src='img/mastercard.png' alt='MasterCard'></img>
-												<input type='radio'></input><img src='img/amex.png' alt='American Express'></img>
-												<input type='radio'></input><img src='img/elo.png' alt='Elo'></img>
+												<input type='radio' id="visa"></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio'id="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' id="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' id="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
 										</form>
 									</div>

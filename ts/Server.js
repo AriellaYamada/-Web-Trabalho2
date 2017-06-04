@@ -43,6 +43,7 @@ class Server {
             //console.log("Carregando server salvo")
             this.users = JSON.parse(localStorage.PetStopServerData);
             this.products = JSON.parse(localStorage.PetStopProducts);
+            this.schedules = JSON.parse(localStorage.PetStopSchedules);
         }
         else {
             //console.log("Inicializando novo server")

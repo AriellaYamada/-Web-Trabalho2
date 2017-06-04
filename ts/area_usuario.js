@@ -62,6 +62,18 @@ $(document).ready(function () {
     });
     // Para salvar o estado do servidor mock ao sair da página:
     $(window).on("unload", () => server.saveState());
+    //Atualizar calendario
+    $("#serviceRegForm").on("click", function () {
+      let today = new Date().toISOString().split("T")[0];
+      $("#calendar").prop("min", today);
+    });
+    //Atualizar horarios disponiveis
+    $('#calendar').on("change", function () {
+      server.schedule
+    });
+    // Agendamento de servico:
+    $("#newScheduleForm").on("submit", function (ev) {
+    });
     // Cadastro de novo Pet:
     $("#newPetForm").on("submit", function (ev) {
         let age = +$("#newPetForm input[name=age]").val();
@@ -90,7 +102,7 @@ $(document).ready(function () {
         editButton.hide();
         let field = editButton.prev(); // sibling anterior (contém o dado atual do usuário)
         field.hide();
-        let updateInputField = $("<input type=\"text\"></input>"); // cria novo elemento input	
+        let updateInputField = $("<input type=\"text\"></input>"); // cria novo elemento input
         updateInputField.val(field.html()); // inicializa o valor do element input com o valor do dado atual
         updateInputField.blur(function () {
             server.users[currentUser][field.attr("id")] = $(this).val(); // o id de field tem o mesmo nome que o atributo correspondente no servidor
