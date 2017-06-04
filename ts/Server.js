@@ -96,7 +96,7 @@ class Server {
         console.log("Saving server state...");
         localStorage.PetStopServerData = JSON.stringify(this.users);
         localStorage.PetStopProducts = JSON.stringify(this.products);
-        localStorage.PetStopSchedules = JSON.stringify(this.schedules);
+        //localStorage.PetStopSchedules = JSON.stringify(this.schedules)
     }
     login(usr, pw) {
         if (!this.users[usr])

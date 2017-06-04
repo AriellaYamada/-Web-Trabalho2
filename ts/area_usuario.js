@@ -16,16 +16,16 @@ function refreshUserPets() {
         let pet = server.users[currentUser].pets[petId];
         /*
         <div class="col-md-3 new-collections-grid">
-            <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-                <div class="new-collections-grid1-image">
-                    <a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
-                    <div class="new-collections-grid1-image-pos">
-                        <a href="single.html">Detalhes</a>
-                    </div>
-                </div>
-                <h4><a href="single.html">Kabosu</a></h4>
-                <p>Shiba Inu</p>
-            </div>
+        <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+        <div class="new-collections-grid1-image">
+        <a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
+        <div class="new-collections-grid1-image-pos">
+        <a href="single.html">Detalhes</a>
+        </div>
+        </div>
+        <h4><a href="single.html">Kabosu</a></h4>
+        <p>Shiba Inu</p>
+        </div>
         */
         nopets = false;
         let d1 = $("<div class='col-md-3 new-collections-grid'></div>");
@@ -66,6 +66,24 @@ $(document).ready(function () {
     $("#serviceRegForm").on("click", function () {
         let today = new Date().toISOString().split("T")[0];
         $("#calendar").prop("min", today);
+    });
+    //Atualizacao dos horarios disponiveis
+    $("#calendar").on("change", function () {
+        let date = this.value;
+        let i;
+        for (i in server.schedules) {
+            if (server.schedules[i].day == date) {
+                let time = server.schedules[i].hour;
+                $("#time option:" + time).prop("disabled", true);
+            }
+        }
+    });
+    //Agendamento de serviceRegForm
+    $("newScheduleForm").on("submit", function (ev) {
+        let day = $("#calendar").value;
+        let time = $("#time option:selected").value;
+        console.log(day);
+        console.log(time);
     });
     // Cadastro de novo Pet:
     $("#newPetForm").on("submit", function (ev) {

@@ -34,14 +34,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	new WOW().init();
 	</script>
 	<!-- //animation-effect -->
-	<!-- Calendario -->
-	<link href='lib/fullcalendar.min.css' rel='stylesheet' />
-	<link href='lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-	<script src='lib/moment.min.js'></script>
-	<script src='lib/fullcalendar.min.js'></script>
-	<script src='lib/gcal.min.js'></script>
-	<!-- <script src="js/script.js"></script> -->
-	<!-- FIM calendario -->
 	<script src="ts/Server.js"></script>
 	<script src="ts/area_usuario.js"></script>
 </head>
@@ -185,15 +177,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<input id="calendar" type="date" ></input>
 											<h4>Horário</h4>
 											<select id="time">
-												<option id="slot1">8h00</option>
-												<option id="slot2">9h00</option>
-												<option id="slot3">10h00</option>
-												<option id="slot4">11h00</option>
-												<option id="slot5">12h00</option>
-												<option id="slot6">13h00</option>
-												<option id="slot7">14h00</option>
-												<option id="slot8">15h00</option>
-												<option id="slot9">18h00</option>
+												<option value="slot1">8h00</option>
+												<option value="slot2">9h00</option>
+												<option value="slot3">10h00</option>
+												<option value="slot4">11h00</option>
+												<option value="slot5">12h00</option>
+												<option value="slot6">13h00</option>
+												<option value="slot7">14h00</option>
+												<option value="slot8">15h00</option>
+												<option value="slot9">18h00</option>
 											</select>
 											<h4>Pet:</h4>
 											<select id="pet">
@@ -223,12 +215,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<input type='radio' id="amex"></input><img src='img/amex.png' alt='American Express'></img>
 												<input type='radio' id="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<h3><button type='submit' class="label label-primary" value='Agendar'/>Agendar</button></h3>
-										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-									</div>
+										</div>
+										<div class="modal-footer">
+											<h3><button type="submit" class="label label-primary" value='Agendar'/>Agendar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

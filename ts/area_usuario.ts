@@ -26,16 +26,16 @@ function refreshUserPets() : void
 		let pet: Pet = server.users[currentUser].pets[petId]
 		/*
 		<div class="col-md-3 new-collections-grid">
-			<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-				<div class="new-collections-grid1-image">
-					<a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
-					<div class="new-collections-grid1-image-pos">
-						<a href="single.html">Detalhes</a>
-					</div>
-				</div>
-				<h4><a href="single.html">Kabosu</a></h4>
-				<p>Shiba Inu</p>
-			</div>
+		<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+		<div class="new-collections-grid1-image">
+		<a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
+		<div class="new-collections-grid1-image-pos">
+		<a href="single.html">Detalhes</a>
+		</div>
+		</div>
+		<h4><a href="single.html">Kabosu</a></h4>
+		<p>Shiba Inu</p>
+		</div>
 		*/
 		nopets = false
 
@@ -61,7 +61,7 @@ function refreshUserPets() : void
 		$("#petContainer").append(d1)
 	}
 	if (nopets)
-		$("#petContainer").html("Sem pets cadastrados.")
+	$("#petContainer").html("Sem pets cadastrados.")
 }
 
 
@@ -88,6 +88,27 @@ $(document).ready(function()
 	{
 		let today = new Date().toISOString().split("T")[0]
 		$("#calendar").prop("min", today)
+	})
+	//Atualizacao dos horarios disponiveis
+	$("#calendar").on("change", function ()
+	{
+		let date = this.value
+		let i
+		for (i in server.schedules) {
+			if(server.schedules[i].day == date) {
+				let time = server.schedules[i].hour
+				$("#time option:" + time).prop("disabled", true)
+			}
+		}
+	})
+	//Agendamento de serviceRegForm
+	$("newScheduleForm").on("submit", function (ev)
+	{
+		let day: string = $("#calendar").value
+		let time: string = $("#time option:selected").value
+
+		console.log(day)
+		console.log(time)
 	})
 	// Cadastro de novo Pet:
 	$("#newPetForm").on("submit", function (ev)
@@ -142,7 +163,7 @@ $(document).ready(function()
 		updateInputField.keydown(function(e)
 		{
 			if (e.keyCode == 13)	// enter
-				$(this).blur()
+			$(this).blur()
 			if (e.keyCode == 27)	// esc
 			{
 				field.show()
