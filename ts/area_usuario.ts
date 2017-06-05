@@ -104,11 +104,19 @@ $(document).ready(function()
 	//Agendamento de serviceRegForm
 	$("newScheduleForm").on("submit", function (ev)
 	{
-		let day: string = $("#calendar").value
-		let time: string = $("#time option:selected").value
+		let day: string = $("#calendar").val()
+		let time: string = $("#time option:selected").val()
+		let pet: string = $("#pet option:selected").val()
+		let service: string = $("#service option:selected").val()
+		let creditCard: string = $("#creditCard").val()
+		let csc: number = $("#csc").val()
+		let expDate: string = $("#expDate").val()
+		let cardFlag: string = $("input[name=flag]:checked").val()
 
-		console.log(day)
-		console.log(time)
+		//FALTA VERIFICAR ERROS
+		let result: string = server.addSchedule(day, time, pet, service, creditCard, csc, expDate, cardFlag)
+
+		return true
 	})
 	// Cadastro de novo Pet:
 	$("#newPetForm").on("submit", function (ev)

@@ -80,10 +80,16 @@ $(document).ready(function () {
     });
     //Agendamento de serviceRegForm
     $("newScheduleForm").on("submit", function (ev) {
-        let day = $("#calendar").value;
-        let time = $("#time option:selected").value;
-        console.log(day);
-        console.log(time);
+        let day = $("#calendar").val();
+        let time = $("#time option:selected").val();
+        let pet = $("#pet option:selected").val();
+        let service = $("#service option:selected").val();
+        let creditCard = $("#creditCard").val();
+        let csc = $("#csc").val();
+        let expDate = $("#expDate").val();
+        let cardFlag = $("input[name=flag]:checked").val();
+        let result = server.addSchedule(day, time, pet, service, creditCard, csc, expDate, cardFlag);
+        return true;
     });
     // Cadastro de novo Pet:
     $("#newPetForm").on("submit", function (ev) {
