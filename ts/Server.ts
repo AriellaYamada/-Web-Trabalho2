@@ -76,15 +76,13 @@ class Service
 {
 	name: string
 	id: number
-	pic: string
 	description: string
 	price: number
 
-	constructor(name: string, id: number, pic: string, description: string, price: number)
+	constructor(name: string, id: number, description: string, price: number)
 	{
 		this.name = name
 		this.id = id
-		this.pic = pic
 		this.description = description
 		this.price = price
 	}
@@ -167,6 +165,9 @@ class Server
 				 description: "Ideal para Raças Pequenas e Minis", price: 3.90, type: "brinquedo"},
 				{name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", id: 9, pic: "images/produto9.jpg",
 				 description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo"}];
+			this.services = [
+				{name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90}
+			];
 		}
 	}
 
@@ -218,9 +219,9 @@ class Server
 		this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm)
 		return "ok"
 	}
-	addService(name: string, id: number, pic: string, description: string, price: number)
+	addService(name: string, id: number, description: string, price: number)
 	{
-		this.services[id] = new Service(name, id, pic, description, price)
+		this.services[id] = new Service(name, id, description, price)
 		return "ok"
 	}
 	addSchedule(day: string, hour: string, pet: string, service: string, creditCard: string, csc: number, expDate: string, cardFlag: string)

@@ -38,10 +38,9 @@ class Product {
     }
 }
 class Service {
-    constructor(name, id, pic, description, price) {
+    constructor(name, id, description, price) {
         this.name = name;
         this.id = id;
-        this.pic = pic;
         this.description = description;
         this.price = price;
     }
@@ -100,6 +99,9 @@ class Server {
                 { name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", id: 9, pic: "images/produto9.jpg",
                     description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo" }
             ];
+            this.services = [
+                { name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90 }
+            ];
         }
     }
     saveState() {
@@ -140,8 +142,8 @@ class Server {
         this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm);
         return "ok";
     }
-    addService(name, id, pic, description, price) {
-        this.services[id] = new Service(name, id, pic, description, price);
+    addService(name, id, description, price) {
+        this.services[id] = new Service(name, id, description, price);
         return "ok";
     }
     addSchedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {

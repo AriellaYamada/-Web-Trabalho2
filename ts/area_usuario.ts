@@ -116,9 +116,11 @@ $(document).ready(function()
 		}
 	})
 	//Atualizar preco do servico
-	$("#service").on("change", function ()
+	$("#service").on("click", function ()
 	{
-		$("#servicePrice").append(server.services[this.value].price.toString())
+		let price = server.services[this.value].price.toString()
+		console.log(price)
+		//$("#servicePrice").append(server.services[this.value].price.toString())
 	})
 	//Agendamento de serviceRegForm
 	$("newScheduleForm").on("submit", function (ev)
