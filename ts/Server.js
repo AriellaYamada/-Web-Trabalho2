@@ -37,6 +37,15 @@ class Product {
         this.type = type;
     }
 }
+class Service {
+    constructor(name, id, pic, description, price) {
+        this.name = name;
+        this.id = id;
+        this.pic = pic;
+        this.description = description;
+        this.price = price;
+    }
+}
 class Schedule {
     constructor(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {
         this.day = day;
@@ -55,6 +64,7 @@ class Server {
             //console.log("Carregando server salvo")
             this.users = JSON.parse(localStorage.PetStopServerData);
             this.products = JSON.parse(localStorage.PetStopProducts);
+            this.services = JSON.parse(localStorage.PetStopServices);
             this.schedules = JSON.parse(localStorage.PetStopSchedules);
         }
         else {
@@ -96,6 +106,7 @@ class Server {
         console.log("Saving server state...");
         localStorage.PetStopServerData = JSON.stringify(this.users);
         localStorage.PetStopProducts = JSON.stringify(this.products);
+        localStorage.PetStopServices = JSON.stringify(this.services);
         localStorage.PetStopSchedules = JSON.stringify(this.schedules);
     }
     login(usr, pw) {
@@ -127,6 +138,10 @@ class Server {
         if (perm == "admin")
             isAdm = true;
         this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm);
+        return "ok";
+    }
+    addService(name, id, pic, description, price) {
+        this.services[id] = new Service(name, id, pic, description, price);
         return "ok";
     }
     addSchedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {

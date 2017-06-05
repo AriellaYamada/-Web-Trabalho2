@@ -83,11 +83,25 @@ $(document).ready(function()
 	// Para salvar o estado do servidor mock ao sair da página:
 	$(window).on("unload", () => server.saveState())
 
-	//Atualizacao do calendario
+	//Atualizacao do calendario, pets e servicos
 	$("#serviceRegForm").on("click", function ()
 	{
 		let today = new Date().toISOString().split("T")[0]
 		$("#calendar").prop("min", today)
+		let petId: string
+		let opPet = $("<select id='pet'></select>")
+		for (petId in server.users[currentUser].pets) {
+			let pet: Pet = server.users[currentUser].pets[petId]
+			opPet.append($("<option value=" + petId + ">" + pet.name + "</option>"))
+		}
+		$("#selectPet").append(opPet)
+		let serviceId
+		let opService = $("<select id='service'></select>")
+		for(serviceId in server.services) {
+			let service: Service = server.services[serviceId]
+			opService.append($("<option value=" + serviceId + ">" + service.name + "</option>"))
+		}
+		$("#selectService").append(opService)
 	})
 	//Atualizacao dos horarios disponiveis
 	$("#calendar").on("change", function ()
@@ -100,6 +114,11 @@ $(document).ready(function()
 				$("#time option:" + time).prop("disabled", true)
 			}
 		}
+	})
+	//Atualizar preco do servico
+	$("#service").on("change", function ()
+	{
+		$("#servicePrice").append(server.services[this.value].price.toString())
 	})
 	//Agendamento de serviceRegForm
 	$("newScheduleForm").on("submit", function (ev)
