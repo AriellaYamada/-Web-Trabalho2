@@ -102,6 +102,7 @@ class Server {
             this.services = [
                 { name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90 }
             ];
+            this.schedules = [];
         }
     }
     saveState() {
