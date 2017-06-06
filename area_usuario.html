@@ -121,6 +121,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Serviços</h3>
+						<div class="collapse alert alert-danger" id="newScheduleError"></div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -174,9 +175,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="modal-body">
 										<h4><form id="newScheduleForm" method='post'>
 											<h4>Dia:</h4>
-											<input id="calendar" type="date" ></input>
+											<input id="calendar" type="date" required></input>
 											<h4>Horário</h4>
-											<select id="time">
+											<select id="time" required>
 												<option value="slot1">8h00</option>
 												<option value="slot2">9h00</option>
 												<option value="slot3">10h00</option>
@@ -194,14 +195,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<h4>Preço:</h4>
 											<span id="servicePrice"></span>
 											<h4>Número do Cartão de Crédito: </h4>
-											<input id="creditCard" type='text'></input>
+											<div class="collapse alert alert-danger" id="creditCardError"></div>
+											<input id="creditCard" type='text'required></input>
 											<h4>Código de Segurança:</h4>
-											<input id="csc" class='CSC' type='text' name='CSC'></input>
+											<div class="collapse alert alert-danger" id="cscError"></div>
+											<input id="csc" class='CSC' type='text' name='CSC' required></input>
 											<h4>Validade:</h4>
-											<input id="expDate" class='expdate' type='text' placeholder='mm/aa'></input>
+											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
-
 												<input type='radio' name="flag" id="visa"></input> <img src='img/visa.png' alt='Visa'></img>
 												<input type='radio' name="flag" id="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
 												<input type='radio' name="flag" id="amex"></input><img src='img/amex.png' alt='American Express'></img>

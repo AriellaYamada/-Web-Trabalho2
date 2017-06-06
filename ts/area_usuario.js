@@ -72,34 +72,50 @@ $(document).ready(function () {
             let pet = server.users[currentUser].pets[petId];
             opPet.append($("<option value=" + petId + ">" + pet.name + "</option>"));
         }
-        $("#selectPet").append(opPet);
+        $("#selectPet").html(opPet);
         let serviceId;
         let opService = $("<select id='service'></select>");
         for (serviceId in server.services) {
             let service = server.services[serviceId];
             opService.append($("<option value=" + serviceId + ">" + service.name + "</option>"));
         }
-        $("#selectService").append(opService);
+        $("#selectService").html(opService);
     });
     //Atualizacao dos horarios disponiveis
     $("#calendar").on("change", function () {
-        let date = this.value;
+        let date = $("#calendar").val();
         let i;
         for (i in server.schedules) {
             if (server.schedules[i].day == date) {
-                let time = server.schedules[i].hour;
-                $("#time option:" + time).prop("disabled", true);
+                let schedule = server.schedules[i];
+                $("#time option[value=" + schedule.hour + "]").hide();
             }
         }
     });
     //Atualizar preco do servico
     $("#service").on("click", function () {
-        let price = server.services[this.value].price.toString();
+        let price = server.services[this.value].price;
         console.log(price);
         //$("#servicePrice").append(server.services[this.value].price.toString())
     });
     //Agendamento de serviceRegForm
     $("newScheduleForm").on("submit", function (ev) {
+        //Validacao de campos
+        if ($("#creditCard").val().length == 16) {
+            let i;
+            let cardNumber = $("#creditCard").val();
+            for (i in cardNumber) {
+                if (isNaN(cardNumber[i]))
+                    $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+            }
+        }
+        else {
+            $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+        }
+        if ($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
+            $("#cscError").htmk("<strong>Digite um número válido</strong>");
+        }
+        //Buscando dados dos campos
         let day = $("#calendar").val();
         let time = $("#time option:selected").val();
         let pet = $("#pet option:selected").val();
@@ -110,6 +126,10 @@ $(document).ready(function () {
         let cardFlag = $("input[name=flag]:checked").val();
         //FALTA VERIFICAR ERROS
         let result = server.addSchedule(day, time, pet, service, creditCard, csc, expDate, cardFlag);
+        if (result != "ok") {
+            $("#newScheduleError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
         return true;
     });
     // Cadastro de novo Pet:

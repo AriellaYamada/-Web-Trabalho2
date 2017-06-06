@@ -100,9 +100,13 @@ class Server {
                     description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo" }
             ];
             this.services = [
-                { name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90 }
+                { name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90 },
+                { name: "Banho e tosa higiênica", id: 5678, description: "Banho e tosa higienica", price: 70.00 },
+                { name: "Banho", id: 9012, description: "Banho", price: 50.00 }
             ];
-            this.schedules = [];
+            this.schedules = [
+                { day: "2017-06-12", hour: "slot3", pet: "toby", service: "1234", creditCard: "1234567890", csc: 123, expDate: "20-10", cardFlag: "visa" }
+            ];
         }
     }
     saveState() {
@@ -148,7 +152,7 @@ class Server {
         return "ok";
     }
     addSchedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag) {
-        this.schedules[this.schedules.length] = new Schedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag);
+        this.schedules[this.schedules.length + 1] = new Schedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag);
         return "ok";
     }
 }

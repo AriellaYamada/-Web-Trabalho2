@@ -166,10 +166,13 @@ class Server
 				{name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", id: 9, pic: "images/produto9.jpg",
 				 description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo"}];
 			this.services = [
-				{name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90}
+				{name: "Reforço V10", id: 1234, description: "Vacinação", price: 99.90},
+				{name: "Banho e tosa higiênica", id: 5678, description: "Banho e tosa higienica", price: 70.00},
+				{name: "Banho", id: 9012, description: "Banho", price: 50.00}
 			];
-
-			this.schedules = []
+			this.schedules = [
+				{day: "2017-06-12", hour: "slot3", pet: "toby", service: "1234", creditCard:"1234567890", csc: 123, expDate: "20-10", cardFlag: "visa"}
+			];
 		}
 	}
 
@@ -221,14 +224,15 @@ class Server
 		this.users[id] = new User(name, id, address, pic, tel, email, password, isAdm)
 		return "ok"
 	}
-	addService(name: string, id: number, description: string, price: number)
+	addService(name: string, id: number, description: string, price: number) : string
 	{
+		if (this.services[id]) return "O ID fornecido já está sendo utilizado."
 		this.services[id] = new Service(name, id, description, price)
 		return "ok"
 	}
-	addSchedule(day: string, hour: string, pet: string, service: string, creditCard: string, csc: number, expDate: string, cardFlag: string)
+	addSchedule(day: string, hour: string, pet: string, service: string, creditCard: string, csc: number, expDate: string, cardFlag: string) : string
 	{
-		this.schedules[this.schedules.length] = new Schedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag)
+		this.schedules[this.schedules.length + 1] = new Schedule(day, hour, pet, service, creditCard, csc, expDate, cardFlag)
 		return "ok"
 	}
 
