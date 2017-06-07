@@ -19,25 +19,25 @@ function changePage(page: number) : void
 			try
 			{
 				$("#product" + i + "image").attr("src", server.products[i-1+p].pic);
+				$("#modal" + i + "image").attr("src", server.products[i-1+p].pic);
 				$("#product" + i + "name").html(server.products[i-1+p].name);
+				$("#modal" + i + "name").html(server.products[i-1+p].name);
 				$("#product" + i + "desc").html(server.products[i-1+p].description);
+				$("#modal" + i + "desc").html(server.products[i-1+p].description);
 				$("#product" + i + "price").html("R$" + server.products[i-1+p].price.toFixed(2).replace(".", ","));
+				$("#modal" + i + "price").html("R$" + server.products[i-1+p].price.toFixed(2).replace(".", ","));
 			}
 			catch (e)
 			{
 				$("#product" + i + "image").attr("src", "");
+				$("#modal1image").attr("src", "");
 				$("#product" + i + "name").html("");
+				$("#modal1name").html("");
 				$("#product" + i + "desc").html("");
+				$("#modal1desc").html("");
 				$("#product" + i + "price").html("");
+				$("#modal1price").html("");
 			}
 		})
 	}
-}
-
-function modalFunc(): void
-{
-	$("#modal1name").html(server.products[0].name);
-	$("#modal1image").attr("src", server.products[0].pic);
-	$("#modal1desc").html(server.products[0].description);
-	$("#modal1prices").html(server.products[0].price);
 }
