@@ -281,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="new-collections-grid1-image" class="image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product1" id="product1image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html" data-toggle="modal" data-target="#details1" onClick="modalFunc()">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details1">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -311,32 +311,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 						<!-- Modal -->
-						<div class="modal fade" id="details1" role="dialog" tabindex="-1">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h3 class="bars" id="modal1name">Nome do Produto</h3>
-										<div class="collapse alert alert-danger" id="newPetError">
-										</div>
-									</div>
-									<div class="modal-body">
-										<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product1" id="modal1image"></a>
-										<p class="product1" id="modal1desc"></p>
-										<div class="simpleCart_shelfItem products-right-grid1-add-cart" class="price">
-											<p> <span class="item_price" class="product1" id="modal1price"></span></p>
-										</div>
-									</div>
-								</div>
-							</div>
+						<div id="details1" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal1name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal1image" style="height:300px">
+						        <p id="modal1desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal1price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+
+						  </div>
 						</div>
-						<!-- fim modal -->
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product2" id="product2image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details2">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -364,12 +364,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
 								<p> <span class="item_price" class="product2" id="product2price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
-						</div>
+							<!-- Modal -->
+							</div>
+							<div id="details2" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								        <h4 class="modal-title" id="modal2name"></h4>
+								      </div>
+								      <div class="modal-body">
+								      	<img src="" alt=" " class="img-responsive" id="modal2image" style="height:300px">
+								        <p id="modal2desc"></p>
+								      </div>
+								      <div class="modal-footer">
+								      	<p id="modal2price" style="float:left"></p>
+								        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+								      </div>
+								    </div>
+
+								  </div>
+								</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product3" id="product3image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details3">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -398,13 +420,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product3" id="product3price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details3" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal3name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal3image" style="height:300px">
+						        <p id="modal3desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal3price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 					</div>
 					<div class="col-md-4 products-right-grids-bottom-grid">
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product4" id="product4image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details4">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -433,11 +475,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product4" id="product4price"></span><a class="item_add" href="#">CARRINHO+ </a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details4" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal4name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal4image" style="height:300px">
+						        <p id="modal4desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal4price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product5" id="product5image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details5">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -466,11 +528,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product5" id="product5price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details5" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal5name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal5image" style="height:300px">
+						        <p id="modal5desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal5price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product6" id="product6image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details6">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -499,13 +581,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product6" id="product6price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details6" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal6name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal6image" style="height:300px">
+						        <p id="modal1desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal6price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 					</div>
 					<div class="col-md-4 products-right-grids-bottom-grid">
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product7" id="product7image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details7">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -534,11 +636,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product7" id="product7price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details7" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal7name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal7image" style="height:300px">
+						        <p id="modal7desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal7price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product8" id="product8image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details8">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -567,11 +689,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p> <span class="item_price" class="product8" id="product8price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
 						</div>
+						<!-- Modal -->
+						<div id="details8" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal8name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal8image" style="height:300px">
+						        <p id="modal8desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal8price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
 								<a href="single.html" class="product-image"><img src="" alt=" " class="img-responsive" class="product9" id="product9image"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="single.html">Detalhes</a>
+									<a href="single.html" data-toggle="modal" data-target="#details9">Detalhes</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
@@ -599,6 +741,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
 								<p> <span class="item_price" class="product9" id="product9price"></span><a class="item_add" href="#">CARRINHO+</a></p>
 							</div>
+						</div>
+						<!-- Modal -->
+						<div id="details9" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title" id="modal9name"></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<img src="" alt=" " class="img-responsive" id="modal9image" style="height:300px">
+						        <p id="modal9desc"></p>
+						      </div>
+						      <div class="modal-footer">
+						      	<p id="modal9price" style="float:left"></p>
+						        <button type="button" class="btn btn-default">Adicionar ao carrinho</button>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					</div>
 					<div class="clearfix"> </div>
