@@ -32,7 +32,8 @@ function refreshSchedules() {
             line.append($("<td>" + schedule.day + " 17h00 </td>"));
         else if (time == "slot11")
             line.append($("<td>" + schedule.day + " 18h00 </td>"));
-        line.append($("<td>" + server.users[schedule.customer].pets[schedule.pet].name + "</td>"));
+        let user = server.users[schedule.customer];
+        line.append($("<td>" + user.pets[schedule.pet].name + "</td>"));
         line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
         lineSchedule.append(line);
     }
@@ -61,9 +62,27 @@ function refreshUserData() {
     $("#userPic").attr("src", server.users[currentUser].userPic);
 }
 function refreshUserList() {
-    $("#userList").empty();
+    let u;
+    let i = 0;
+    let lineUser = $("<tbody></tbody>");
+    for (u in server.users) {
+        let line = $("<tr></tr>");
+        let user = server.users[u];
+        line.append("<td>" + i + "</td>");
+        line.append("<td>" + u + "</td>");
+        line.append("<td>" + user.userName + "</td>");
+        if (server.isAdmin(u))
+            line.append("<td> Sim </td>");
+        else
+            line.append("<td> Não </td>");
+        i++;
+        lineUser.append(line);
+    }
+    $("#tableUsers").append(lineUser);
+    /*$("#userList").empty()
     for (let user in server.users)
-        $("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"));
+    $("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"))
+    */
 }
 $(document).ready(function () {
     // Nome de usuário na saudação:
@@ -126,31 +145,26 @@ $(document).ready(function () {
         $("#servicePrice").html("<h5>R$" + price + "</h5>");
     });
     //Agendamento de serviceRegForm
-    $("newScheduleForm").on("submit", function (ev) {
-        console.log("teste1");
+    $("#newScheduleForm").on("submit", function (ev) {
         //Validacao de campos
         if ($("#creditCard").val().length == 16) {
-            console.log("teste2");
             let i;
             let cardNumber = $("#creditCard").val();
             for (i in cardNumber) {
-                console.log("teste3");
                 if (isNaN(cardNumber[i]))
-                    $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+                    $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
             }
         }
         else {
-            console.log("teste4");
-            $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+            $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
         }
         if ($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
-            $("#cscError").htmk("<strong>Digite um número válido</strong>");
+            $("#cscError").html("<strong>Digite um número válido</strong>");
         }
         //Buscando dados dos campos
-        console.log("teste5");
         let day = $("#calendar").val();
         let time = $("#time option:selected").val();
-        let userId = $("selectCustomer option:selected").val();
+        let userId = $("#selectCustomer option:selected").val();
         let pet = $("#pet option:selected").val();
         let service = $("#service option:selected").val();
         let creditCard = $("#creditCard").val();
@@ -164,6 +178,7 @@ $(document).ready(function () {
         }
         return true;
     });
+    //Cadastro de Servicos
     $("#newServiceForm").on("submit", function (ev) {
         let name = $("#sname").val();
         let description = $("#sdescription").val();
@@ -174,6 +189,7 @@ $(document).ready(function () {
             return false;
         }
     });
+    //Cadastro de Produtos
     $("#newProductForm").on("submit", function (ev) {
         let name = $("#pname").val();
         let description = $("#pdescription").val();

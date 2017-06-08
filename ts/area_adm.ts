@@ -39,7 +39,8 @@ function refreshSchedules() : void
 		else if(time == "slot11")
 		line.append($("<td>" + schedule.day + " 18h00 </td>"))
 
-		line.append($("<td>" + server.users[schedule.customer].pets[schedule.pet].name + "</td>"))
+		let user : User = server.users[schedule.customer]
+		line.append($("<td>" + user.pets[schedule.pet].name + "</td>"))
 		line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11,15)+ "</td>"))
 		lineSchedule.append(line)
 	}
@@ -75,9 +76,27 @@ function refreshUserData() : void
 
 function refreshUserList() : void
 {
-	$("#userList").empty()
+	let u
+	let i : number = 0
+	let lineUser = $("<tbody></tbody>")
+	for (u in server.users) {
+		let line = $("<tr></tr>")
+		let user : User = server.users[u]
+		line.append("<td>" + i + "</td>")
+		line.append("<td>" + u + "</td>")
+		line.append("<td>" + user.userName + "</td>")
+		if (server.isAdmin(u))
+			line.append("<td> Sim </td>")
+		 else
+			line.append("<td> Não </td>")
+		i++
+		lineUser.append(line)
+	}
+	$("#tableUsers").append(lineUser)
+	/*$("#userList").empty()
 	for (let user in server.users)
 	$("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"))
+	*/
 }
 
 $(document).ready(function()
@@ -151,31 +170,26 @@ $(document).ready(function()
 		$("#servicePrice").html("<h5>R$" + price + "</h5>")
 	})
 	//Agendamento de serviceRegForm
-	$("newScheduleForm").on("submit", function (ev)
+	$("#newScheduleForm").on("submit", function (ev)
 	{
-		console.log("teste1")
 		//Validacao de campos
 		if($("#creditCard").val().length == 16) {
-			console.log("teste2")
 			let i
 			let cardNumber =  $("#creditCard").val()
 			for(i in cardNumber) {
-				console.log("teste3")
 				if(isNaN(cardNumber[i]))
-				$("#creditCardError").htmk("<strong>Digite um cartão válido</strong>")
+				$("#creditCardError").html("<strong>Digite um cartão válido</strong>")
 			}
 		} else {
-			console.log("teste4")
-			$("#creditCardError").htmk("<strong>Digite um cartão válido</strong>")
+			$("#creditCardError").html("<strong>Digite um cartão válido</strong>")
 		}
 		if($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
-			$("#cscError").htmk("<strong>Digite um número válido</strong>")
+			$("#cscError").html("<strong>Digite um número válido</strong>")
 		}
 		//Buscando dados dos campos
-		console.log("teste5")
 		let day: string = $("#calendar").val()
 		let time: string = $("#time option:selected").val()
-		let userId: string = $("selectCustomer option:selected").val()
+		let userId: string = $("#selectCustomer option:selected").val()
 		let pet: string = $("#pet option:selected").val()
 		let service: string = $("#service option:selected").val()
 		let creditCard: string = $("#creditCard").val()
@@ -192,7 +206,7 @@ $(document).ready(function()
 		}
 		return true
 	})
-
+	//Cadastro de Servicos
 	$("#newServiceForm").on("submit", function(ev)
 	{
 		let name: string = $("#sname").val()
@@ -205,6 +219,7 @@ $(document).ready(function()
 			return false
 		}
 	})
+	//Cadastro de Produtos
 	$("#newProductForm").on("submit", function (ev)
 	{
 		let name: string = $("#pname").val()
