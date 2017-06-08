@@ -99,28 +99,24 @@ $(document).ready(function () {
         //$("#servicePrice").append(server.services[this.value].price.toString())
     });
     //Agendamento de serviceRegForm
-    $("newScheduleForm").on("submit", function (ev) {
-        console.log("teste1");
+    $("#newScheduleForm").on("submit", function (ev) {
         //Validacao de campos
         if ($("#creditCard").val().length == 16) {
-            console.log("teste2");
             let i;
             let cardNumber = $("#creditCard").val();
             for (i in cardNumber) {
                 console.log("teste3");
                 if (isNaN(cardNumber[i]))
-                    $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+                    $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
             }
         }
         else {
-            console.log("teste4");
-            $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+            $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
         }
         if ($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
-            $("#cscError").htmk("<strong>Digite um número válido</strong>");
+            $("#cscError").html("<strong>Digite um número válido</strong>");
         }
         //Buscando dados dos campos
-        console.log("teste5");
         let day = $("#calendar").val();
         let time = $("#time option:selected").val();
         let pet = $("#pet option:selected").val();
@@ -130,7 +126,7 @@ $(document).ready(function () {
         let expDate = $("#expDate").val();
         let cardFlag = $("input[name=flag]:checked").val();
         //FALTA VERIFICAR ERROS
-        let result = server.addSchedule(day, time, server.users[currentUser], pet, service, creditCard, csc, expDate, cardFlag);
+        let result = server.addSchedule(day, time, currentUser, pet, service, creditCard, csc, expDate, cardFlag);
         if (result != "ok") {
             $("#newScheduleError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
             return false;

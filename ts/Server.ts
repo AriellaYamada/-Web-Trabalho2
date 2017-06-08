@@ -219,17 +219,17 @@ class Server
 	}
 	addService(name: string, description: string, price: number) : string
 	{
-		this.services[this.services.length] = new Service(name, description, price)
+		this.services.push(new Service(name, description, price))
 		return "ok"
 	}
 	addProduct(name: string, pic: string, description: string, price: number, type: string, qtt: number) : string
 	{
-		this.products[this.products.length] = new Product(name, pic, description, price, type, qtt)
+		this.products.push(new Product(name, pic, description, price, type, qtt))
 		return "ok"
 	}
 	addSchedule(day: string, hour: string, customer:string, pet: string, service: string, creditCard: string, csc: number, expDate: string, cardFlag: string) : string
 	{
-		this.schedules[this.schedules.length] = new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag)
+		this.schedules.push(new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag))
 		return "ok"
 	}
 }

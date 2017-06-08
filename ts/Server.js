@@ -143,15 +143,15 @@ class Server {
         return "ok";
     }
     addService(name, description, price) {
-        this.services[this.services.length] = new Service(name, description, price);
+        this.services.push(new Service(name, description, price));
         return "ok";
     }
     addProduct(name, pic, description, price, type, qtt) {
-        this.products[this.products.length] = new Product(name, pic, description, price, type, qtt);
+        this.products.push(new Product(name, pic, description, price, type, qtt));
         return "ok";
     }
     addSchedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag) {
-        this.schedules[this.schedules.length] = new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag);
+        this.schedules.push(new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag));
         return "ok";
     }
 }
