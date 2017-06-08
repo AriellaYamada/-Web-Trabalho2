@@ -1,6 +1,58 @@
 ///<reference path="Server.ts"/>
 var server = new Server();
 var currentUser = localStorage.PetStopCurrentUser;
+function refreshSchedules() {
+    let s;
+    let lineSchedule = $("<tbody></tbody>");
+    for (s in server.schedules) {
+        let line = $("<tr></tr>");
+        let schedule = server.schedules[s];
+        line.append($("<td>" + s + "</td>"));
+        line.append($("<td>" + server.services[schedule.service].name + "</td>"));
+        let time = schedule.hour;
+        if (time == "slot1")
+            line.append($("<td>" + schedule.day + " 8h00 </td>"));
+        else if (time == "slot2")
+            line.append($("<td>" + schedule.day + " 9h00 </td>"));
+        else if (time == "slot3")
+            line.append($("<td>" + schedule.day + " 10h00 </td>"));
+        else if (time == "slot4")
+            line.append($("<td>" + schedule.day + " 11h00 </td>"));
+        else if (time == "slot5")
+            line.append($("<td>" + schedule.day + " 12h00 </td>"));
+        else if (time == "slot6")
+            line.append($("<td>" + schedule.day + " 13h00 </td>"));
+        else if (time == "slot7")
+            line.append($("<td>" + schedule.day + " 14h00 </td>"));
+        else if (time == "slot8")
+            line.append($("<td>" + schedule.day + " 15h00 </td>"));
+        else if (time == "slot9")
+            line.append($("<td>" + schedule.day + " 16h00 </td>"));
+        else if (time == "slot10")
+            line.append($("<td>" + schedule.day + " 17h00 </td>"));
+        else if (time == "slot11")
+            line.append($("<td>" + schedule.day + " 18h00 </td>"));
+        line.append($("<td>" + server.users[schedule.customer].pets[schedule.pet].name + "</td>"));
+        line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
+        lineSchedule.append(line);
+    }
+    $("#tableSchedules").append(lineSchedule);
+}
+function refreshServiceData() {
+    let s;
+    let lineService = $("<tbody></tbody>");
+    for (s in server.services) {
+        let line = $("<tr></tr>");
+        let service = server.services[s];
+        line.append($("<td>" + s + "</td>"));
+        line.append($("<td>" + service.name + "</td>"));
+        line.append($("<td>" + service.description + "</td>"));
+        line.append($("<td> R$" + service.price + "</td>"));
+        //lineService.append($("<td><a href="">Detalhes<a></td>"))
+        lineService.append(line);
+    }
+    $("#tableServices").append(lineService);
+}
 function refreshUserData() {
     $(".clientData").each(function () {
         let field_name = $(this).attr("id");
@@ -20,6 +72,125 @@ $(document).ready(function () {
     refreshUserData();
     // Lista de usuários
     refreshUserList();
+    //Lista de Agendamentos
+    refreshSchedules();
+    //Lista de servicos
+    refreshServiceData();
+    //Atualizacao do calendario, pets e servicos
+    $("#serviceRegForm").on("click", function () {
+        let today = new Date().toISOString().split("T")[0];
+        $("#calendar").prop("min", today);
+        let userId;
+        let opUser = $("<select id='user'></select>");
+        for (userId in server.users) {
+            if (!server.isAdmin(userId)) {
+                let user = server.users[userId];
+                opUser.append($("<option value=" + userId + ">" + user.userName + "</option>"));
+            }
+        }
+        $("#selectCustomer").html(opUser);
+        let serviceId;
+        let opService = $("<select id='service'></select>");
+        for (serviceId in server.services) {
+            let service = server.services[serviceId];
+            opService.append($("<option value=" + serviceId + ">" + service.name + "</option>"));
+        }
+        $("#selectService").html(opService);
+    });
+    //Atualizar pets
+    $("#selectCustomer").on("click", function () {
+        let userId = $("#selectCustomer option:selected").val();
+        let petId;
+        let opPet = $("<select id='pet'></select>");
+        for (petId in server.users[userId].pets) {
+            let pet = server.users[userId].pets[petId];
+            opPet.append($("<option value=" + petId + ">" + pet.name + "</option>"));
+        }
+        $("#selectPet").html(opPet);
+    });
+    //Atualizacao dos horarios disponiveis
+    $("#calendar").on("change", function () {
+        let date = $("#calendar").val();
+        let i;
+        for (i in server.schedules) {
+            if (server.schedules[i].day == date) {
+                let schedule = server.schedules[i];
+                $("#time option[value=" + schedule.hour + "]").hide();
+            }
+        }
+    });
+    //Atualizar preco do servico
+    $("#selectService").on("click", function () {
+        let serviceId = $("#selectService option:selected").val();
+        let price = server.services[serviceId].price;
+        $("#servicePrice").html("<h5>R$" + price + "</h5>");
+    });
+    //Agendamento de serviceRegForm
+    $("newScheduleForm").on("submit", function (ev) {
+        console.log("teste1");
+        //Validacao de campos
+        if ($("#creditCard").val().length == 16) {
+            console.log("teste2");
+            let i;
+            let cardNumber = $("#creditCard").val();
+            for (i in cardNumber) {
+                console.log("teste3");
+                if (isNaN(cardNumber[i]))
+                    $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+            }
+        }
+        else {
+            console.log("teste4");
+            $("#creditCardError").htmk("<strong>Digite um cartão válido</strong>");
+        }
+        if ($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
+            $("#cscError").htmk("<strong>Digite um número válido</strong>");
+        }
+        //Buscando dados dos campos
+        console.log("teste5");
+        let day = $("#calendar").val();
+        let time = $("#time option:selected").val();
+        let userId = $("selectCustomer option:selected").val();
+        let pet = $("#pet option:selected").val();
+        let service = $("#service option:selected").val();
+        let creditCard = $("#creditCard").val();
+        let csc = $("#csc").val();
+        let expDate = $("#expDate").val();
+        let cardFlag = $("input[name=flag]:checked").val();
+        let result = server.addSchedule(day, time, userId, pet, service, creditCard, csc, expDate, cardFlag);
+        if (result != "ok") {
+            $("#newScheduleError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
+        return true;
+    });
+    $("#newServiceForm").on("submit", function (ev) {
+        let name = $("#sname").val();
+        let description = $("#sdescription").val();
+        let price = $("#sprice").val();
+        let result = server.addService(name, description, price);
+        if (result != "ok") {
+            $("#newServiceError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
+    });
+    $("#newProductForm").on("submit", function (ev) {
+        let name = $("#pname").val();
+        let description = $("#pdescription").val();
+        let pprice = $("pprice").val();
+        let pqtt = $("pquantity").val();
+        let ptype = $("ptype").val();
+        let result = server.addProduct(name, null, description, pprice, ptype, pqtt);
+        if (result != "ok") {
+            $("#newProductError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
+            return false;
+        }
+        /*inputImageToBase64($("#newUserForm input[name=pic]")[0].files[0], pic =>
+        {
+        server.users[server].userPic = pic
+    })*/
+        return true;
+    });
     // Para quando o administrador altera sua foto:
     $("#clientPicUploader").on("change", function () {
         inputImageToBase64(this.files[0], result => { server.users[currentUser].userPic = result; refreshUserData(); });
@@ -45,8 +216,8 @@ $(document).ready(function () {
             $("#newUserError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
             return false;
         }
-        inputImageToBase64($("#newUserForm input[name=pic]")[0].files[0], pic => {
-            server.users[id].userPic = pic;
+        inputImageToBase64($("#newProductForm input[name=ppic]")[0].files[0], pic => {
+            server.products[id].pic = pic;
         });
         return true;
     });
@@ -57,7 +228,7 @@ $(document).ready(function () {
         editButton.hide();
         let field = editButton.prev(); // sibling anterior (contém o dado atual do usuário)
         field.hide();
-        let updateInputField = $("<input type=\"text\"></input>"); // cria novo elemento input	
+        let updateInputField = $("<input type=\"text\"></input>"); // cria novo elemento input
         updateInputField.val(field.html()); // inicializa o valor do element input com o valor do dado atual
         updateInputField.blur(function () {
             server.users[currentUser][field.attr("id")] = $(this).val(); // o id de field tem o mesmo nome que o atributo correspondente no servidor

@@ -122,43 +122,113 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Próximos Agendamentos</h3>
-						<table class="table table-hover">
+						<table class="table table-hover" id="tableSchedules">
 							<thead>
 								<tr>
 									<th>#</th>
 									<th>Serviço</th>
 									<th>Data</th>
 									<th>Pet</th>
-									<th>Preço</th>
 									<th>Pagamento</th>
 								</tr>
 							</thead>
-							<tbody>
+						</table>
+						<div class="regButtons">
+							<h4><button id="serviceRegForm" type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
+							<h4><button class="label label-warning">Ver histórico de agendamentos</button></h4>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 class="bars">Agendamento de Serviço</h3>
+									</div>
+									<div class="modal-body">
+										<form id="newScheduleForm">
+											<h4>Dia:</h4>
+											<input id="calendar" type="date" required></input>
+											<h4>Horário</h4>
+											<select id="time" required>
+												<option value="slot1">8h00</option>
+												<option value="slot2">9h00</option>
+												<option value="slot3">10h00</option>
+												<option value="slot4">11h00</option>
+												<option value="slot5">12h00</option>
+												<option value="slot6">13h00</option>
+												<option value="slot7">14h00</option>
+												<option value="slot8">15h00</option>
+												<option value="slot9">16h00</option>
+												<option value="slot10">17h00</option>
+												<option value="slot11">18h00</option>
+											</select>
+											<h4>Cliente:</h4>
+											<span id="selectCustomer"></span>
+											<h4>Pet:</h4>
+											<span id="selectPet"></span>
+											<h4>Serviço:</h4>
+											<span id="selectService"></span>
+											<h4>Preço:</h4>
+											<span id="servicePrice"></span>
+											<h4>Número do Cartão de Crédito: </h4>
+											<div class="collapse alert alert-danger" id="creditCardError"></div>
+											<input id="creditCard" type='text'required></input>
+											<h4>Código de Segurança:</h4>
+											<div class="collapse alert alert-danger" id="cscError"></div>
+											<input id="csc" class='CSC' type='text' name='CSC' required></input>
+											<h4>Validade:</h4>
+											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
+											<div class="CardFlag">
+												<h4>Bandeira:</h4>
+												<input type='radio' name="flag" id="visa" required=""></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name="flag" id="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name="flag" id="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name="flag" id="elo"></input><img src='img/elo.png' alt='Elo'></img>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<h3><button type="submit" class="label label-primary" value="Salvar"/>Agendar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- fim modal -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //estoque -->
+		<!-- SERVICOS -->
+		<a name="services"></a>
+		<div class="typo">
+			<div class="container">
+				<div class="typo-grids">
+					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+						<h3 class="bars">Serviços</h3>
+						<div id="newServiceError" class="collapse alert alert-danger"></div>
+						<div class="searchContent">
+							<input class="search" type="text" placeholder="Buscar serviços"></input>
+							<h4> por: </h4>
+							<select>
+								<option value='name'>Nome</option>
+								<option value='id'>ID</option>
+								<option value='description'>Descrição</option>
+								<option value='price'>Preço</option>
+							</select>
+						</div>
+						<table class="table table-hover" id="tableServices">
+							<thead>
 								<tr>
-									<td>1</td>
-									<td>Reforço V10</td>
-									<td>12/04/2017 10:30</td>
-									<td>Toby</td>
-									<td>R$99,90</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
+									<th>ID</th>
+									<th>Nome</th>
+									<th>Descrição</th>
+									<th>Preço</th>
+									<th>Detalhes</th>
 								</tr>
-								<tr>
-									<td>2</td>
-									<td>Banho e Tosa Higiênica</td>
-									<td>12/04/2017 10:45</td>
-									<td>Toby</td>
-									<td>R$70,00</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Banho</td>
-									<td>12/04/2017 11:00</td>
-									<td>Kabosu</td>
-									<td>R$50,00</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
-								</tr>
-							</tbody>
+							</thead>
 						</table>
 						<div class="regButtons">
 							<h4><button class="label label-success" data-toggle="modal" data-target="#newserviceReg">Criar Novo Serviço</button></h4>
@@ -170,94 +240,95 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h3 class="bars">Cadastro de Pet</h3>
+										<h3 class="bars">Cadastro de Serviços</h3>
 									</div>
 									<div class="modal-body">
-										<form>
+										<form id="newServiceForm">
 											<h4>Nome:</h4>
-											<input type='text' name='name'></input>
-											<h4>ID:</h4>
-											<input type='text' name='id'></input>
-											<h4>Foto:</h4>
-											<button class="label label-default" type='button'>Carregar Foto</button>
+											<input type='text' id='sname'></input>
 											<h4>Descrição:</h4>
-											<input type="text" name='description'></input>
+											<input type="text" id='sdescription'></input>
 											<h4>Preço:<br/></h4>
-											<input type='text' name='price' placeholder="R$"></input></br>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-									</div>
+											<input type='text' id='sprice' placeholder="R$"></input></br>
+										</div>
+										<div class="modal-footer">
+											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
+						<!-- fim modal -->
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- //agendamentos -->
-		<!-- ESTOQUE -->
-		<a name="products"></a>
+		<!-- //servicos -->
+		<!-- USUARIOS -->
+		<a name="users"></a>
 		<div class="typo">
 			<div class="container">
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-						<h3 class="bars">Situação do Estoque</h3>
+						<h3 class="bars">Usuários Cadastrados</h3>
+						<div class="searchContent">
+							<input class="search" type="text" placeholder="Buscar usuários"></input>
+							<h4> por: </h4>
+							<select>
+								<option value='name'>Nome</option>
+								<option value='id'>ID</option>
+								<option value='description'>Descrição</option>
+								<option value='price'>Preço</option>
+							</select>
+						</div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Produto</th>
-									<th>Descrição</th>
-									<th>Preço</th>
-									<th>Embalagem</th>
-									<th>Qtd. Estoque</th>
-									<th>Qtd. Vendida</th>
-									<th>Atualizar Qtd.</th>
+									<th>#</th>
+									<th>Usuário</th>
+									<th>Nome</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>1234</td>
-									<td>Ração para Cães</td>
-									<td>Ração Pedigree para caẽs filhotes</td>
-									<td>R$5,90</td>
-									<td>1Kg</td>
-									<td>100 unidades</td>
-									<td>45 unidadades</td>
-									<td><input type="number" name="name" placeholder="Nova Quantidade"></td>
+									<td>1</td>
+									<td>rodz</td>
+									<td>Rodrigo Weigert</td>
 									<td><a href="">Detalhes<a></td>
 									</tr>
 								</tbody>
 							</table>
 							<div class="regButtons">
-								<h4><button class="label label-success" data-toggle="modal" data-target="#productReg">Cadastrar Novo Produto</button></h4>
-								<h4><button class="label label-warning">Atualizar Qtds.</button></h4>
+								<h4><button class="label label-success" data-toggle="modal" data-target="#userReg">Cadastrar Novo Usuário</button></h4>
 							</div>
 							<!-- Modal -->
-							<div class="modal fade" id="productReg" role="dialog" tabindex="-1">
+							<div class="modal fade" id="userReg" role="dialog" tabindex="-1">
 								<div class="modal-dialog">
 									<!-- Modal content-->
 									<div class="modal-content">
 										<div class="modal-header">
-											<h3 class="bars">Cadastro de Produto</h3>
+											<h3 class="bars">Cadastro de Usuário</h3>
 										</div>
 										<div class="modal-body">
 											<form>
 												<h4>Nome:</h4>
 												<input type='text' name='name'></input>
-												<h4>ID:</h4>
+												<h4>Usuário (ID):</h4>
 												<input type='text' name='id'></input>
 												<h4>Foto:</h4>
 												<button class="label label-default" type='button'>Carregar Foto</button>
-												<h4>Descrição: </h4>
-												<input type="text" name="description"></input>
-												<h4>Preço: <br/></h4>
-												<input type='text' name='price' placeholder="R$"></input></br>
-												<h4>Quantidade em estoque:</h4>
-												<input type="number" name="quantity"></input>
+												<h4>Telefone: </h4>
+												<input type="text" name="telephone"></input>
+												<h4>E-mail: <br/></h4>
+												<input type='text' name='email'></input></br>
+												<h4>Tipo de Usuário:</h4>
+												<input type='radio' name='usertype' value='client' checked>Cliente</input>
+												<input type='radio' name='usertype' value='admin'>Administrador</input>
+												<br/>
+												<!-- esse campo irá sumir quando o tipo de usuário selecionado for administrador -->
+												<h4>Endereço (se cliente):</h4>
+												<input type='text' class='addressField' name='address'></input>
 											</form>
 										</div>
 										<div class="modal-footer">
@@ -272,211 +343,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</div>
 			</div>
-			<!-- //estoque -->
-			<!-- SERVICOS -->
-			<a name="services"></a>
+			<!-- //usuarios -->
+			<!-- PERFIL -->
+			<a name="profile"></a>
 			<div class="typo">
 				<div class="container">
 					<div class="typo-grids">
 						<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-							<h3 class="bars">Serviços</h3>
-							<div class="searchContent">
-								<input class="search" type="text" placeholder="Buscar serviços"></input>
-								<h4> por: </h4>
-								<select>
-									<option value='name'>Nome</option>
-									<option value='id'>ID</option>
-									<option value='description'>Descrição</option>
-									<option value='price'>Preço</option>
-								</select>
-							</div>
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Nome</th>
-										<th>Descrição</th>
-										<th>Preço</th>
-										<th>Detalhes</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1234</td>
-										<td>Reforço V10</td>
-										<td>Vacinação</td>
-										<td>R$99,90</td>
-										<td><a href="">Detalhes<a></td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="regButtons">
-									<h4><button class="label label-success" data-toggle="modal" data-target="#serviceReg">Cadastrar Novo</button></h4>
+							<h3 class="bars">Seu Perfil</h3>
+							<div class="col-md-3 new-collections-grid">
+								<div class="new-collections-grid1-image">
+									<a class="product-image"><img id="userPic" class="img-responsive" /></a>
 								</div>
-								<!-- Modal -->
-								<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
-									<div class="modal-dialog">
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<h3 class="bars">Cadastro de Serviço</h3>
-											</div>
-											<div class="modal-body">
-												<form>
-													<h4>Nome:</h4>
-													<input type='text' name='name'></input>
-													<h4>ID:</h4>
-													<input type='text' name='id'></input>
-													<h4>Foto:</h4>
-													<button class="label label-default" type='button'>Carregar Foto</button>
-													<h4>Descrição: </h4>
-													<input type="text" name="description"></input>
-													<h4>Preço: <br/></h4>
-													<input type='text' name='price' placeholder="R$"></input></br>
-												</form>
-											</div>
-											<div class="modal-footer">
-												<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-												<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- //modal -->
+								<h5><input type="file" id="clientPicUploader" accept="image/*"></input></h5>
 							</div>
+							<div class="col-md-9 new-collections-grid">
+								<h5><span class="clientData" id="userName"></span> <button class="editInfo label label-warning">(alterar)</button>
+									<br/><b>Nome de usuário: </b><span class="clientData" id="userId"></span> <button class="label label-warning">(alterar senha)</button>
+									<br/><b>Endereço: </b><span class="clientData" id="userAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
+									<br/><b>Telefone: </b><span class="clientData" id="userTel"></span> <button class="editInfo label label-warning">(alterar)</button>
+									<br/><b>E-mail: </b><span class="clientData" id="userEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
+								</h5>
+							</div>
+
 						</div>
 					</div>
 				</div>
-				<!-- //servicos -->
-				<!-- USUARIOS -->
-				<a name="users"></a>
-				<div class="typo">
-					<div class="container">
-						<div class="typo-grids">
-							<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-								<h3 class="bars">Usuários Cadastrados</h3>
-								<div class="searchContent">
-									<input class="search" type="text" placeholder="Buscar usuários"></input>
-									<h4> por: </h4>
-									<select>
-										<option value='name'>Nome</option>
-										<option value='id'>ID</option>
-										<option value='description'>Descrição</option>
-										<option value='price'>Preço</option>
-									</select>
-								</div>
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Usuário</th>
-											<th>Nome</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>rodz</td>
-											<td>Rodrigo Weigert</td>
-											<td><a href="">Detalhes<a></td>
-											</tr>
-										</tbody>
-									</table>
-									<div class="regButtons">
-										<h4><button class="label label-success" data-toggle="modal" data-target="#userReg">Cadastrar Novo Usuário</button></h4>
-									</div>
-									<!-- Modal -->
-									<div class="modal fade" id="userReg" role="dialog" tabindex="-1">
-										<div class="modal-dialog">
-											<!-- Modal content-->
-											<div class="modal-content">
-												<div class="modal-header">
-													<h3 class="bars">Cadastro de Usuário</h3>
-												</div>
-												<div class="modal-body">
-													<form>
-														<h4>Nome:</h4>
-														<input type='text' name='name'></input>
-														<h4>Usuário (ID):</h4>
-														<input type='text' name='id'></input>
-														<h4>Foto:</h4>
-														<button class="label label-default" type='button'>Carregar Foto</button>
-														<h4>Telefone: </h4>
-														<input type="text" name="telephone"></input>
-														<h4>E-mail: <br/></h4>
-														<input type='text' name='email'></input></br>
-														<h4>Tipo de Usuário:</h4>
-														<input type='radio' name='usertype' value='client' checked>Cliente</input>
-														<input type='radio' name='usertype' value='admin'>Administrador</input>
-														<br/>
-														<!-- esse campo irá sumir quando o tipo de usuário selecionado for administrador -->
-														<h4>Endereço (se cliente):</h4>
-														<input type='text' class='addressField' name='address'></input>
-													</form>
-												</div>
-												<div class="modal-footer">
-													<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
-													<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- //modal -->
-								</div>
-							</div>
+			</div>
+			<!-- perfil -->
+			<!-- footer -->
+			<a name="contact"></a>
+			<div class="footer">
+				<div class="container">
+					<div class="footer-grids">
+						<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
+							<h3>Contato</h3>
+							<ul>
+								<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+								<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+								<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+							</ul>
+						</div>
+
+						<div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
+							<h2><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h2>
+						</div>
+						<div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
+							<p>&copy 2016 Pet Stop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 						</div>
 					</div>
-					<!-- //usuarios -->
-					<!-- PERFIL -->
-					<a name="profile"></a>
-							<div class="typo">
-								<div class="container">
-									<div class="typo-grids">
-										<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-											<h3 class="bars">Seu Perfil</h3>
-											<div class="col-md-3 new-collections-grid">
-												<div class="new-collections-grid1-image">
-													<a class="product-image"><img id="userPic" class="img-responsive" /></a>
-												</div>
-												<h5><input type="file" id="clientPicUploader" accept="image/*"></input></h5>
-											</div>
-											<div class="col-md-9 new-collections-grid">
-												<h5><span class="clientData" id="userName"></span> <button class="editInfo label label-warning">(alterar)</button>
-													<br/><b>Nome de usuário: </b><span class="clientData" id="userId"></span> <button class="label label-warning">(alterar senha)</button>
-													<br/><b>Endereço: </b><span class="clientData" id="userAddress"></span> <button class="editInfo label label-warning">(alterar)</button>
-													<br/><b>Telefone: </b><span class="clientData" id="userTel"></span> <button class="editInfo label label-warning">(alterar)</button>
-													<br/><b>E-mail: </b><span class="clientData" id="userEmail"></span> <button class="editInfo label label-warning">(alterar)</button>
-												</h5>
-											</div>
-
-										</div>
-									</div>
-								</div>
-							</div>
-					<!-- perfil -->
-					<!-- footer -->
-					<a name="contact"></a>
-					<div class="footer">
-						<div class="container">
-							<div class="footer-grids">
-								<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-									<h3>Contato</h3>
-									<ul>
-										<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-										<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-										<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-									</ul>
-								</div>
-
-								<div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-									<h2><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h2>
-								</div>
-								<div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-									<p>&copy 2016 Pet Stop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- //footer -->
-				</body>
-				</html>
+				</div>
+			</div>
+			<!-- //footer -->
+		</body>
+		</html>
