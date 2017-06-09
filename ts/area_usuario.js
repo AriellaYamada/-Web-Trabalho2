@@ -8,6 +8,44 @@ function refreshUserData() {
     });
     $("#userPic").attr("src", server.users[currentUser].userPic);
 }
+function refreshUserSchedules() {
+    let s;
+    let lineSchedule = $("<tbody></tbody>");
+    for (s in server.schedules) {
+        let line = $("<tr></tr>");
+        let schedule = server.schedules[s];
+        line.append($("<td>" + s + "</td>"));
+        line.append($("<td>" + server.services[schedule.service].name + "</td>"));
+        let time = schedule.hour;
+        if (time == "slot1")
+            line.append($("<td>" + schedule.day + " 8h00 </td>"));
+        else if (time == "slot2")
+            line.append($("<td>" + schedule.day + " 9h00 </td>"));
+        else if (time == "slot3")
+            line.append($("<td>" + schedule.day + " 10h00 </td>"));
+        else if (time == "slot4")
+            line.append($("<td>" + schedule.day + " 11h00 </td>"));
+        else if (time == "slot5")
+            line.append($("<td>" + schedule.day + " 12h00 </td>"));
+        else if (time == "slot6")
+            line.append($("<td>" + schedule.day + " 13h00 </td>"));
+        else if (time == "slot7")
+            line.append($("<td>" + schedule.day + " 14h00 </td>"));
+        else if (time == "slot8")
+            line.append($("<td>" + schedule.day + " 15h00 </td>"));
+        else if (time == "slot9")
+            line.append($("<td>" + schedule.day + " 16h00 </td>"));
+        else if (time == "slot10")
+            line.append($("<td>" + schedule.day + " 17h00 </td>"));
+        else if (time == "slot11")
+            line.append($("<td>" + schedule.day + " 18h00 </td>"));
+        let user = server.users[currentUser];
+        line.append($("<td>" + user.pets[schedule.pet].name + "</td>"));
+        line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
+        lineSchedule.append(line);
+    }
+    $("#tableSchedules").append(lineSchedule);
+}
 function refreshUserPets() {
     $("#petContainer").empty();
     let nopets = true;
@@ -53,6 +91,8 @@ function refreshUserPets() {
 $(document).ready(function () {
     // Nome de usuário na saudação:
     $("#greetName").html(server.users[currentUser].userName);
+    //Preenchendo dados dos agendamentos do usuario
+    refreshUserSchedules();
     // Preenchendo pets e dados do usuário:
     refreshUserPets();
     refreshUserData();
@@ -125,6 +165,7 @@ $(document).ready(function () {
         let csc = $("#csc").val();
         let expDate = $("#expDate").val();
         let cardFlag = $("input[name=flag]:checked").val();
+        console.log(cardFlag);
         //FALTA VERIFICAR ERROS
         let result = server.addSchedule(day, time, currentUser, pet, service, creditCard, csc, expDate, cardFlag);
         if (result != "ok") {

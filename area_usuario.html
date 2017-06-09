@@ -122,43 +122,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Serviços</h3>
 						<div class="collapse alert alert-danger" id="newScheduleError"></div>
-						<table class="table table-hover">
+						<table class="table table-hover" id="tableSchedules">
 							<thead>
 								<tr>
 									<th>#</th>
 									<th>Serviço</th>
 									<th>Data</th>
 									<th>Pet</th>
-									<th>Preço</th>
 									<th>Pagamento</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Reforço V10</td>
-									<td>12/04/2017 10:30</td>
-									<td>Toby</td>
-									<td>R$99,90</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Banho e Tosa Higiênica</td>
-									<td>12/04/2017 10:45</td>
-									<td>Toby</td>
-									<td>R$70,00</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Banho</td>
-									<td>12/04/2017 11:00</td>
-									<td>Kabosu</td>
-									<td>R$50,00</td>
-									<td>09/04/2017 - Visa terminado em 1234</td>
-								</tr>
-							</tbody>
 						</table>
 						<div class="regButtons">
 							<h4><button id="serviceRegForm" type="button" class="label label-success" data-toggle="modal" data-target="#serviceReg">Agendar Serviço</button></h4>
@@ -206,10 +179,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
-												<input type='radio' name="flag" id="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
-												<input type='radio' name="flag" id="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
-												<input type='radio' name="flag" id="amex"></input><img src='img/amex.png' alt='American Express'></img>
-												<input type='radio' name="flag" id="elo"></input><img src='img/elo.png' alt='Elo'></img>
+												<input type='radio' name="flag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name="flag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name="flag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name="flag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
 										</div>
 										<div class="modal-footer">
