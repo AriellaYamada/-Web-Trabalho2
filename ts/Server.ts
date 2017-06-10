@@ -53,6 +53,7 @@ class User
 
 class Product
 {
+	id: number
 	name: string
 	pic: string
 	description: string
@@ -60,8 +61,9 @@ class Product
 	type: string
 	qtt: number
 
-	constructor(name: string, pic: string, description: string, price: number, type: string, qtt: number)
+	constructor(id: number, name: string, pic: string, description: string, price: number, type: string, qtt: number)
 	{
+		this.id = id
 		this.name = name
 		this.pic = pic
 		this.description = description
@@ -145,42 +147,42 @@ class Server
 
 			// Produtos exemplo
 			this.products = [
-				{name: "Ração Premier Golden Special Cães Adultos Frango e Carne", pic: "images/produto1.jpg",
+				{id: 1, name: "Ração Premier Golden Special Cães Adultos Frango e Carne", pic: "images/produto1.jpg",
 				 description: "Ração Premium especial para cães adultos de porte médio", price: 104.90, type: "racao", qtt: 10},
-				{name: "Ração Premier Golden Formula Cães Adultos Frango e Arroz", pic: "images/produto2.jpg",
+				{id: 2, name: "Ração Premier Golden Formula Cães Adultos Frango e Arroz", pic: "images/produto2.jpg",
 				 description: "Ração Premium especial para cães adultos de porte peq.", price: 14.30, type: "racao", qtt: 10},
-				{name: "Ração Premier Pet Formula Cães Adultos Raças Pequenas", pic: "images/produto3.jpg",
+				{id: 3, name: "Ração Premier Pet Formula Cães Adultos Raças Pequenas", pic: "images/produto3.jpg",
 				 description: "Indicada para cães adultos de raça pequena", price: 28.90, type: "racao", qtt: 10},
-				{name: "Ração Premier Golden Formula Cães Filhotes Frango e Arroz", pic: "images/produto4.jpg",
+				{id: 4, name: "Ração Premier Golden Formula Cães Filhotes Frango e Arroz", pic: "images/produto4.jpg",
 				 description: "Alimento premium especial indicada para cães filhotes", price: 15.30, type: "racao", qtt: 10},
-				{name: "Antipulgas e Carrapatos MSD Bravecto para Cães de 4,5 a 10 kg", pic: "images/produto5.jpg",
+				{id: 5, name: "Antipulgas e Carrapatos MSD Bravecto para Cães de 4,5 a 10 kg", pic: "images/produto5.jpg",
 				 description: "Um único comprimido é eficaz por 12 semanas", price: 178.90, type: "remedio", qtt: 10},
-				{name: "Antipulgas e Carrapatos NexGard 28 mg para Cães de 4 a 10 Kg", pic: "images/produto6.jpg",
+				{id: 6, name: "Antipulgas e Carrapatos NexGard 28 mg para Cães de 4 a 10 Kg", pic: "images/produto6.jpg",
 				 description: "Tablete com sabor suave de carne aceito pelos cães", price: 67.35, type: "remedio", qtt: 10},
-				{name: "Antipulgas e Carrapatos Frontline Plus para Cães de 1 a 10 kg", pic: "images/produto7.jpg",
+				{id: 7, name: "Antipulgas e Carrapatos Frontline Plus para Cães de 1 a 10 kg", pic: "images/produto7.jpg",
 				 description: "Embalagem individual, validade: Junho/2017", price: 49.87, type: "remedio", qtt: 10},
-				{name: "Brinquedo Osso Plaque Ataque Borracha com Cravo - Vermelho", pic: "images/produto8.jpg",
+				{id: 8, name: "Brinquedo Osso Plaque Ataque Borracha com Cravo - Vermelho", pic: "images/produto8.jpg",
 				 description: "Ideal para Raças Pequenas e Minis", price: 3.90, type: "brinquedo", qtt: 10},
-				{name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", pic: "images/produto9.jpg",
+				{id: 9, name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", pic: "images/produto9.jpg",
 				 description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo", qtt: 10},
 
-				{name: "Casinha para Cães Plástica Plast Pet Nº1 Rosa (55x44x44cm)", pic: "images/produto10.jpg",
+				{id: 10, name: "Casinha para Cães Plástica Plast Pet Nº1 Rosa (55x44x44cm)", pic: "images/produto10.jpg",
 				 description: "Casinha Plástica para cães tamanho nº1 na cor Rosa", price: 69.90, type: "casa", qtt: 10},
-				{name: "Ração Purina Dog Chow Adultos Raças Pequenas", pic: "images/produto11.jpg",
+				{id: 11, name: "Ração Purina Dog Chow Adultos Raças Pequenas", pic: "images/produto11.jpg",
 				 description: "Formulado com ingredientes de alta qualidade", price: 14.50, type: "racao", qtt: 10},
-				{name: "Caixa de Transporte Cães Panther Pop Nº2 Azul", pic: "images/produto12.jpg",
+				{id: 12, name: "Caixa de Transporte Cães Panther Pop Nº2 Azul", pic: "images/produto12.jpg",
 				 description: "Segurança na hora de levar o seu cachorro para viajar!", price: 45.90, type: "casa", qtt: 10},
-				{name: "Anti Pulgas Bayer Advocate Gatos até 4 Kg", pic: "images/produto13.jpg",
+				{id: 13, name: "Anti Pulgas Bayer Advocate Gatos até 4 Kg", pic: "images/produto13.jpg",
 				 description: "Advocate da Bayer é indicado para tratar infestações", price: 125.00, type: "remedio", qtt: 10},
-				{name: "Shampoo Rex Dermatite 750 ml", pic: "images/produto14.jpg",
+				{id: 14, name: "Shampoo Rex Dermatite 750 ml", pic: "images/produto14.jpg",
 				 description: "A escolha certa para deixar seu pet elegante e bonito.", price: 12.90, type: "remedio", qtt: 10},
-				{name: "Ração Peixes - MyFish Color", pic: "images/produto15.jpg",
+				{id: 15, name: "Ração Peixes - MyFish Color", pic: "images/produto15.jpg",
 				 description: "ração em flocos desenvolvida para peixes ornamentais", price: 4.79, type: "racao", qtt: 10},
-				{name: "Ração Hamster NutriRoedores - 500g", pic: "images/produto16.jpg",
+				{id: 16, name: "Ração Hamster NutriRoedores - 500g", pic: "images/produto16.jpg",
 				 description: "Alimento extrusado, balanceado de alta atratividade", price: 19.90, type: "racao", qtt: 10},
-				{name: "Shampoo Antisseptico Matacura Horse 1L", pic: "images/produto17.jpg",
+				{id: 17, name: "Shampoo Antisseptico Matacura Horse 1L", pic: "images/produto17.jpg",
 				 description: "Proporciona perfeita higiene para todos os tipos de pêlos", price: 27.80, type: "remedio", qtt: 10},
-				{name: "Pet Dog Crock Biscoito (500g)", pic: "images/produto18.jpg",
+				{id: 18, name: "Pet Dog Crock Biscoito (500g)", pic: "images/produto18.jpg",
 				 description: "Biscoito delicioso e nutritivo!", price: 13.90, type: "racao", qtt: 10}];
 			this.services = [
 				{name: "Reforço V10", description: "Vacinação", price: 99.90},
@@ -241,9 +243,9 @@ class Server
 		this.services.push(new Service(name, description, price))
 		return "ok"
 	}
-	addProduct(name: string, pic: string, description: string, price: number, type: string, qtt: number) : string
+	addProduct(id: number, name: string, pic: string, description: string, price: number, type: string, qtt: number) : string
 	{
-		this.products.push(new Product(name, pic, description, price, type, qtt))
+		this.products.push(new Product(id, name, pic, description, price, type, qtt))
 		return "ok"
 	}
 	addSchedule(day: string, hour: string, customer:string, pet: string, service: string, creditCard: string, csc: number, expDate: string, cardFlag: string) : string

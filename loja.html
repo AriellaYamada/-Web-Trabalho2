@@ -84,8 +84,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="nav navbar-nav">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="loja.html">Produtos</a></li>
-							<li><a href="short-codes.html">Short Codes</a></li>
-							<li><a href="mail.html">Mail Us</a></li>
 						</ul>
 					</div>
 					</nav>
@@ -110,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="header-right">
 					<div class="cart box_1">
-						<a href="checkout.html">
+						<a href="#" data-toggle="modal" data-target="#checkout" onclick="addProductToCart()">
 							<h3> <div class="total">
 								<span class="simpleCart_total" id="cart_price"> R$0,00</span> (<span class="simpleCart_quantity" id="cart_qtd">0 itens</span>)</div>
 								<img src="images/bag.png" alt="" />
@@ -118,6 +116,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</a>
 						<p><a href="javascript:;" class="simpleCart_empty"></a></p>
 						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div id="checkout" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-lg">
+					    <!-- Modal content-->
+					    <div class="modal-content">
+		     	        	<div class="modal-header">
+						    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="Checkout"></h4>
+						    </div>
+						    <div class="modal-body">
+						    	<!-- ******************* -->
+								<table id="products_table" class="timetable_sub">
+									<thead>
+										<tr>
+											<th>SL No.</th>	
+											<th>Product</th>
+											<th>Product Name</th>
+											<th>Price</th>
+											<th>Remove</th>
+										</tr>
+									</thead>
+									<!--quantity-->
+								</table>
+								<!---728x90-->
+								
+						<!-- //checkout -->
+							</div>
+							<div class="modal-footer">
+					    		<button type="button" class="btn btn-default">Finalizar Compra</button>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"> </div>
@@ -163,101 +194,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="loja.html">Casas</a> <span>(1)</span></li>
 							</ul>
 					</ul>
-				</div>
-				<div class="new-products animated wow slideInUp" data-wow-delay=".5s">
-					<h3>Novos Produtos</h3>
-					<div class="new-products-grids">
-						<div class="new-products-grid">
-							<div class="new-products-grid-left">
-								<a href="single.html"><img src="images/produto_novo_1.jpg" alt=" " class="img-responsive" /></a>
-							</div>
-							<div class="new-products-grid-right">
-								<h4><a href="single.html">Blusa Moleton Futon Dog</a></h4>
-								<div class="rating">
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
-									<p> <span class="item_price">R$91,90</span><a class="item_add" href="#">Carrinho +</a></p>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="new-products-grid">
-							<div class="new-products-grid-left">
-								<a href="single.html"><img src="images/produto_novo_2.jpg" alt=" " class="img-responsive" /></a>
-							</div>
-							<div class="new-products-grid-right">
-								<h4><a href="single.html">Ração Nestlé Purina Pro</a></h4>
-								<div class="rating">
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
-									<p> <span class="item_price">R$28,59</span><a class="item_add" href="#">Carrinho +</a></p>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="new-products-grid">
-							<div class="new-products-grid-left">
-								<a href="single.html"><img src="images/produto_novo_3.jpg" alt=" " class="img-responsive" /></a>
-							</div>
-							<div class="new-products-grid-right">
-								<h4><a href="single.html">Brinquedo Toy for Bird Parquinho</a></h4>
-								<div class="rating">
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/2.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="images/1.png" alt=" " class="img-responsive">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
-									<p> <span class="item_price">R$89,90</span><a class="item_add" href="#">CARRINHO+ </a></p>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="col-md-8 products-right">

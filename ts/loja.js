@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 function inputImageToBase64(input, callback) {
     var reader = new FileReader();
     reader.onload = function () {
@@ -33,7 +31,8 @@ var User = (function () {
     return User;
 }());
 var Product = (function () {
-    function Product(name, pic, description, price, type, qtt) {
+    function Product(id, name, pic, description, price, type, qtt) {
+        this.id = id;
         this.name = name;
         this.pic = pic;
         this.description = description;
@@ -88,41 +87,41 @@ var Server = (function () {
             this.users["admin"] = new User("Administrador", "admin", null, adminProfilePic, "(17) 8765-4321", "admin@petstop.com.br", "admin", true);
             // Produtos exemplo
             this.products = [
-                { name: "Ração Premier Golden Special Cães Adultos Frango e Carne", pic: "images/produto1.jpg",
+                { id: 1, name: "Ração Premier Golden Special Cães Adultos Frango e Carne", pic: "images/produto1.jpg",
                     description: "Ração Premium especial para cães adultos de porte médio", price: 104.90, type: "racao", qtt: 10 },
-                { name: "Ração Premier Golden Formula Cães Adultos Frango e Arroz", pic: "images/produto2.jpg",
+                { id: 2, name: "Ração Premier Golden Formula Cães Adultos Frango e Arroz", pic: "images/produto2.jpg",
                     description: "Ração Premium especial para cães adultos de porte peq.", price: 14.30, type: "racao", qtt: 10 },
-                { name: "Ração Premier Pet Formula Cães Adultos Raças Pequenas", pic: "images/produto3.jpg",
+                { id: 3, name: "Ração Premier Pet Formula Cães Adultos Raças Pequenas", pic: "images/produto3.jpg",
                     description: "Indicada para cães adultos de raça pequena", price: 28.90, type: "racao", qtt: 10 },
-                { name: "Ração Premier Golden Formula Cães Filhotes Frango e Arroz", pic: "images/produto4.jpg",
+                { id: 4, name: "Ração Premier Golden Formula Cães Filhotes Frango e Arroz", pic: "images/produto4.jpg",
                     description: "Alimento premium especial indicada para cães filhotes", price: 15.30, type: "racao", qtt: 10 },
-                { name: "Antipulgas e Carrapatos MSD Bravecto para Cães de 4,5 a 10 kg", pic: "images/produto5.jpg",
+                { id: 5, name: "Antipulgas e Carrapatos MSD Bravecto para Cães de 4,5 a 10 kg", pic: "images/produto5.jpg",
                     description: "Um único comprimido é eficaz por 12 semanas", price: 178.90, type: "remedio", qtt: 10 },
-                { name: "Antipulgas e Carrapatos NexGard 28 mg para Cães de 4 a 10 Kg", pic: "images/produto6.jpg",
+                { id: 6, name: "Antipulgas e Carrapatos NexGard 28 mg para Cães de 4 a 10 Kg", pic: "images/produto6.jpg",
                     description: "Tablete com sabor suave de carne aceito pelos cães", price: 67.35, type: "remedio", qtt: 10 },
-                { name: "Antipulgas e Carrapatos Frontline Plus para Cães de 1 a 10 kg", pic: "images/produto7.jpg",
+                { id: 7, name: "Antipulgas e Carrapatos Frontline Plus para Cães de 1 a 10 kg", pic: "images/produto7.jpg",
                     description: "Embalagem individual, validade: Junho/2017", price: 49.87, type: "remedio", qtt: 10 },
-                { name: "Brinquedo Osso Plaque Ataque Borracha com Cravo - Vermelho", pic: "images/produto8.jpg",
+                { id: 8, name: "Brinquedo Osso Plaque Ataque Borracha com Cravo - Vermelho", pic: "images/produto8.jpg",
                     description: "Ideal para Raças Pequenas e Minis", price: 3.90, type: "brinquedo", qtt: 10 },
-                { name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", pic: "images/produto9.jpg",
+                { id: 9, name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", pic: "images/produto9.jpg",
                     description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo", qtt: 10 },
-                { name: "Casinha para Cães Plástica Plast Pet Nº1 Rosa (55x44x44cm)", pic: "images/produto10.jpg",
+                { id: 10, name: "Casinha para Cães Plástica Plast Pet Nº1 Rosa (55x44x44cm)", pic: "images/produto10.jpg",
                     description: "Casinha Plástica para cães tamanho nº1 na cor Rosa", price: 69.90, type: "casa", qtt: 10 },
-                { name: "Ração Purina Dog Chow Adultos Raças Pequenas", pic: "images/produto11.jpg",
+                { id: 11, name: "Ração Purina Dog Chow Adultos Raças Pequenas", pic: "images/produto11.jpg",
                     description: "Formulado com ingredientes de alta qualidade", price: 14.50, type: "racao", qtt: 10 },
-                { name: "Caixa de Transporte Cães Panther Pop Nº2 Azul", pic: "images/produto12.jpg",
+                { id: 12, name: "Caixa de Transporte Cães Panther Pop Nº2 Azul", pic: "images/produto12.jpg",
                     description: "Segurança na hora de levar o seu cachorro para viajar!", price: 45.90, type: "casa", qtt: 10 },
-                { name: "Anti Pulgas Bayer Advocate Gatos até 4 Kg", pic: "images/produto13.jpg",
+                { id: 13, name: "Anti Pulgas Bayer Advocate Gatos até 4 Kg", pic: "images/produto13.jpg",
                     description: "Advocate da Bayer é indicado para tratar infestações", price: 125.00, type: "remedio", qtt: 10 },
-                { name: "Shampoo Rex Dermatite 750 ml", pic: "images/produto14.jpg",
+                { id: 14, name: "Shampoo Rex Dermatite 750 ml", pic: "images/produto14.jpg",
                     description: "A escolha certa para deixar seu pet elegante e bonito.", price: 12.90, type: "remedio", qtt: 10 },
-                { name: "Ração Peixes - MyFish Color", pic: "images/produto15.jpg",
+                { id: 15, name: "Ração Peixes - MyFish Color", pic: "images/produto15.jpg",
                     description: "ração em flocos desenvolvida para peixes ornamentais", price: 4.79, type: "racao", qtt: 10 },
-                { name: "Ração Hamster NutriRoedores - 500g", pic: "images/produto16.jpg",
+                { id: 16, name: "Ração Hamster NutriRoedores - 500g", pic: "images/produto16.jpg",
                     description: "Alimento extrusado, balanceado de alta atratividade", price: 19.90, type: "racao", qtt: 10 },
-                { name: "Shampoo Antisseptico Matacura Horse 1L", pic: "images/produto17.jpg",
+                { id: 17, name: "Shampoo Antisseptico Matacura Horse 1L", pic: "images/produto17.jpg",
                     description: "Proporciona perfeita higiene para todos os tipos de pêlos", price: 27.80, type: "remedio", qtt: 10 },
-                { name: "Pet Dog Crock Biscoito (500g)", pic: "images/produto18.jpg",
+                { id: 18, name: "Pet Dog Crock Biscoito (500g)", pic: "images/produto18.jpg",
                     description: "Biscoito delicioso e nutritivo!", price: 13.90, type: "racao", qtt: 10 }
             ];
             this.services = [
@@ -173,8 +172,8 @@ var Server = (function () {
         this.services.push(new Service(name, description, price));
         return "ok";
     };
-    Server.prototype.addProduct = function (name, pic, description, price, type, qtt) {
-        this.products.push(new Product(name, pic, description, price, type, qtt));
+    Server.prototype.addProduct = function (id, name, pic, description, price, type, qtt) {
+        this.products.push(new Product(id, name, pic, description, price, type, qtt));
         return "ok";
     };
     Server.prototype.addSchedule = function (day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag) {
@@ -183,16 +182,11 @@ var Server = (function () {
     };
     return Server;
 }());
->>>>>>> 2d1ef086ed03ad193458406c821421fa2d781a56
 ///<reference path="Server.ts"/>
 var server = new Server();
 var cartProducts = [];
 var currentPage = 1;
 function changePage(page) {
-<<<<<<< HEAD
-    let i = 0;
-    let p = (page - 1) * 9;
-=======
     if (page == 0)
         currentPage = 1;
     else
@@ -215,7 +209,6 @@ function changePage(page) {
     });
     var i = 0;
     var p = (currentPage - 1) * 9;
->>>>>>> 2d1ef086ed03ad193458406c821421fa2d781a56
     $(".active").attr("class", "");
     $("#page" + currentPage).attr("class", "active");
     for (i = 1; i <= 9; i++) {
@@ -254,5 +247,54 @@ function cart(pos) {
     });
     $("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
     $("#cart_qtd").html(n.toString() + " itens");
+}
+function addProductToCart() {
+    var i = 0;
+    var aux = new Array(server.products.length);
+    var flags = new Array(server.products.length);
+    for (i = 0; i < aux.length; i++)
+        aux[i] = 0;
+    for (i = 0; i < flags.length; i++)
+        flags[i] = 0;
+    $("#products_table").empty();
+    $("#products_table").append('<thead>' +
+        '<tr>' +
+        '<th>Qtd.</th>' +
+        '<th>Product</th>' +
+        '<th>Product Name</th>' +
+        '<th>Price</th>' +
+        '<th>Remove</th>' +
+        '</tr>' +
+        '</thead>');
+    for (i = 0; i < cartProducts.length; i++) {
+        aux[cartProducts[i].id] += 1;
+    }
+    for (i = 0; i < cartProducts.length; i++) {
+        /*if (aux[cartProducts[i].id] >= 1){
+            $("#products_table").append('<tr class="rem1">' +
+                    '<td class="invert">1</td>' +
+                    '<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
+                    '<td class="invert">' + cartProducts[i].name +'</td>' +
+                    '<td class="invert">R$' + cartProducts[i].price.toFixed(2).replace(".", ",") + '</td>' +
+                    '<td class="invert">' +
+                        '<div class="rem">' +
+                            '<div class="close1"> </div>' +
+                        '</div>' +
+                '</tr>)')
+        }*/
+        if (aux[cartProducts[i].id] >= 1 && flags[cartProducts[i].id] == 0) {
+            $("#products_table").append('<tr class="rem1">' +
+                '<td class="invert">' + aux[cartProducts[i].id] + '</td>' +
+                '<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
+                '<td class="invert">' + cartProducts[i].name + '</td>' +
+                '<td class="invert">R$' + ((cartProducts[i].price) * (aux[cartProducts[i].id])).toFixed(2).replace(".", ",") + '</td>' +
+                '<td class="invert">' +
+                '<div class="rem">' +
+                '<div class="close1"> </div>' +
+                '</div>' +
+                '</tr>)');
+            flags[cartProducts[i].id] = 1;
+        }
+    }
 }
 //# sourceMappingURL=loja.js.map
