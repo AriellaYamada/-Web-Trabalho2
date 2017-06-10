@@ -287,4 +287,56 @@ function removeProductFromCart(id, pos) {
     $("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
     $("#cart_qtd").html(n.toString() + " itens");
 }
+function sort(value) {
+    let sortedProducts = [];
+    let i = 0;
+    if (value === "price") {
+        sortedProducts = server.products.sort(function (a, b) {
+            return a.price - b.price;
+        });
+    }
+    else if (value === "price_desc") {
+        sortedProducts = server.products.sort(function (a, b) {
+            return b.price - a.price;
+        });
+    }
+    else if (value === "name") {
+        sortedProducts = server.products.sort(function (a, b) {
+            if (a.name < b.name)
+                return -1;
+            else if (a.name > b.name)
+                return 1;
+            else
+                return 0;
+        });
+    }
+    /*sortedProducts.forEach(product =>{
+        alert(product.name + " " + product.price);
+    })*/
+    let p = (currentPage - 1) * 9;
+    for (i = 1; i <= 9; i++) {
+        $(".product" + i).each(function () {
+            try {
+                $("#product" + i + "image").attr("src", sortedProducts[i - 1 + p].pic);
+                $("#modal" + i + "image").attr("src", sortedProducts[i - 1 + p].pic);
+                $("#product" + i + "name").html(sortedProducts[i - 1 + p].name);
+                $("#modal" + i + "name").html(sortedProducts[i - 1 + p].name);
+                $("#product" + i + "desc").html(sortedProducts[i - 1 + p].description);
+                $("#modal" + i + "desc").html(sortedProducts[i - 1 + p].description);
+                $("#product" + i + "price").html("R$" + sortedProducts[i - 1 + p].price.toFixed(2).replace(".", ","));
+                $("#modal" + i + "price").html("R$" + sortedProducts[i - 1 + p].price.toFixed(2).replace(".", ","));
+            }
+            catch (e) {
+                $("#product" + i + "image").attr("src", "");
+                $("#modal1image").attr("src", "");
+                $("#product" + i + "name").html("");
+                $("#modal1name").html("");
+                $("#product" + i + "desc").html("");
+                $("#modal1desc").html("");
+                $("#product" + i + "price").html("");
+                $("#modal1price").html("");
+            }
+        });
+    }
+}
 //# sourceMappingURL=loja.js.map
