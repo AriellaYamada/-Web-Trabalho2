@@ -10,6 +10,12 @@ let currentPage: number = 1;
 function changePage(page: number) : void
 {
 
+	let i: number = 0;
+	let p: number = (currentPage-1) * 9;
+
+	for (i = 1; i <= 9; i++)
+		$("#alert" + i).hide();
+
 	if (page == 0)
 		currentPage = 1;
 	else
@@ -23,21 +29,10 @@ function changePage(page: number) : void
 
 	localStorage.currPage = JSON.stringify(currentPage);
 
-	/*if (localStorage.currPage){
-		currentPage = JSON.parse(localStorage.currPage);
-	}
-	else{
-		currentPage = page;
-	}*/
-
-
 	$("a[href='#top']").click(function() {
   		$("html, body").animate({ scrollTop: 100 }, "slow");
   		return false;
 	});
-
-	let i: number = 0;
-	let p: number = (currentPage-1) * 9;
 
 	$(".active").attr("class", "");
 	$("#page" + currentPage).attr("class", "active");
@@ -86,6 +81,12 @@ function cart(pos: number)
 
 	$("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
 	$("#cart_qtd").html(n.toString() + " itens");
+
+	$("#alert" + pos).alert();
+	$("#alert" + pos).fadeTo(2000, 500).slideUp(500, function(){
+    	$("#alert" + pos).slideUp(500);
+    });
+
 }
 
 function addProductToCart()
@@ -105,10 +106,10 @@ function addProductToCart()
 	$("#products_table").append('<thead>' +
 									'<tr>' +
 										'<th>Qtd.</th>' +
-										'<th>Product</th>' +
-										'<th>Product Name</th>' +
-										'<th>Price</th>' +
-										'<th>Remove</th>' +
+										'<th>Produto</th>' +
+										'<th>Nome do Produto</th>' +
+										'<th>Preço</th>' +
+										'<th>Remover</th>' +
 									'</tr>' +
 								'</thead>')
 
@@ -117,30 +118,46 @@ function addProductToCart()
 	}
 
 	for (i = 0; i < cartProducts.length; i++){
-		/*if (aux[cartProducts[i].id] >= 1){
-			$("#products_table").append('<tr class="rem1">' +
-					'<td class="invert">1</td>' +
-					'<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
-					'<td class="invert">' + cartProducts[i].name +'</td>' +
-					'<td class="invert">R$' + cartProducts[i].price.toFixed(2).replace(".", ",") + '</td>' +
-					'<td class="invert">' +
-						'<div class="rem">' +
-							'<div class="close1"> </div>' +
-						'</div>' +
-				'</tr>)')
-		}*/
 		if (aux[cartProducts[i].id] >= 1 && flags[cartProducts[i].id] == 0){
-			$("#products_table").append('<tr class="rem1">' +
+			$("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
 					'<td class="invert">' + aux[cartProducts[i].id] + '</td>' +
 					'<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
 					'<td class="invert">' + cartProducts[i].name +'</td>' +
 					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[cartProducts[i].id])).toFixed(2).replace(".", ",") + '</td>' +
 					'<td class="invert">' +
 						'<div class="rem">' +
-							'<div class="close1"> </div>' +
+							'<a class="close1" onclick="removeProductFromCart(' + cartProducts[i].id + ',' + i + ')"> </a>' +
 						'</div>' +
 				'</tr>)')
 			flags[cartProducts[i].id] = 1;
 		}
 	}
+}
+
+function removeProductFromCart(id: number, pos: number)
+{
+	let i: number = 0;
+	let toRemove: Product[] = [];
+	let sum: number = 0;
+	let n: number = 0;
+
+	$("#cartProd" + pos).remove();
+
+	for (i = 0; i < cartProducts.length; i++){
+		if (cartProducts[i].id === id){
+			toRemove.push(cartProducts[i]);
+		}
+	}
+
+	cartProducts = cartProducts.filter(item => toRemove.indexOf(item));
+
+
+	cartProducts.forEach(product => {
+		sum += product.price;
+		n++;
+	});
+
+	$("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
+	$("#cart_qtd").html(n.toString() + " itens");
+
 }
