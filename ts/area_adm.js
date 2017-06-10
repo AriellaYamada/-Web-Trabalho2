@@ -146,22 +146,7 @@ $(document).ready(function () {
     });
     //Agendamento de serviceRegForm
     $("#newScheduleForm").on("submit", function (ev) {
-        //Validacao de campos
-        if ($("#creditCard").val().length == 16) {
-            let i;
-            let cardNumber = $("#creditCard").val();
-            for (i in cardNumber) {
-                if (isNaN(cardNumber[i]))
-                    $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
-            }
-        }
-        else {
-            $("#creditCardError").html("<strong>Digite um cartão válido</strong>");
-        }
-        if ($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
-            $("#cscError").html("<strong>Digite um número válido</strong>");
-        }
-        //Buscando dados dos campos
+        //Conteudo do formulario
         let day = $("#calendar").val();
         let time = $("#time option:selected").val();
         let userId = $("#selectCustomer option:selected").val();
@@ -171,7 +156,23 @@ $(document).ready(function () {
         let csc = $("#csc").val();
         let expDate = $("#expDate").val();
         let cardFlag = $("input[name=flag]:checked").val();
-        let result = server.addSchedule(day, time, userId, pet, service, creditCard, csc, expDate, cardFlag);
+        //Validacao de campos
+        let regexp = /^\d{16}$/;
+        if (!regexp.test(creditCard)) {
+            $("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        regexp = /^\d{3}$/;
+        if (!regexp.test(csc)) {
+            $("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        regexp = /^[1-12]\/\d{2}$/;
+        if (!regexp.test(expDate)) {
+            $("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut();
+            return false;
+        }
+        let result = server.addSchedule(day, time, userId, pet, service, creditCard, Number(csc), expDate, cardFlag);
         if (result != "ok") {
             $("#newScheduleError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
             return false;

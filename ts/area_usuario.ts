@@ -166,36 +166,38 @@ $(document).ready(function()
 		let price = server.services[serviceId].price
 		$("#servicePrice").html("<h5>R$" + price + "</h5>")
 	})
+
 	//Agendamento de serviceRegForm
 	$("#newScheduleForm").on("submit", function (ev)
 	{
-		//Validacao de campos
-		if($("#creditCard").val().length == 16) {
-			let i
-			let cardNumber =  $("#creditCard").val()
-			for(i in cardNumber) {
-				console.log("teste3")
-				if(isNaN(cardNumber[i]))
-					$("#creditCardError").html("<strong>Digite um cartão válido</strong>")
-			}
-		} else {
-			$("#creditCardError").html("<strong>Digite um cartão válido</strong>")
-		}
-		if($("#csc").val().length != 3 || !isNaN($("#csc").val())) {
-			$("#cscError").html("<strong>Digite um número válido</strong>")
-		}
-		//Buscando dados dos campos
+
+		//Conteudo do formulario
 		let day: string = $("#calendar").val()
 		let time: string = $("#time option:selected").val()
 		let pet: string = $("#pet option:selected").val()
 		let service: string = $("#service option:selected").val()
 		let creditCard: string = $("#creditCard").val()
-		let csc: number = $("#csc").val()
+		let csc: string = $("#csc").val()
 		let expDate: string = $("#expDate").val()
 		let cardFlag: string = $("input[name=flag]:checked").val()
 
-		//FALTA VERIFICAR ERROS
-		let result: string = server.addSchedule(day, time, currentUser, pet, service, creditCard, csc, expDate, cardFlag)
+		//Validacao de campos
+		let regexp = /^\d{16}$/
+		if(!regexp.test(creditCard)) {
+			$("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut()
+			return false
+		}
+		regexp = /^\d{3}$/
+		if(!regexp.test(csc)) {
+			$("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut()
+			return false
+		}
+		regexp = /^[1-12]\/\d{2}$/
+		if(!regexp.test(expDate)) {
+			$("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut()
+			return false
+		}
+		let result: string = server.addSchedule(day, time, currentUser, pet, service, creditCard, Number(csc), expDate, cardFlag)
 
 		if (result != "ok")
 		{

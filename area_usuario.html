@@ -176,6 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<div class="collapse alert alert-danger" id="cscError"></div>
 											<input id="csc" class='CSC' type='text' name='CSC' required></input>
 											<h4>Validade:</h4>
+											<div class="collapse alert alert-danger" id="expDateError"></div>
 											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
@@ -186,7 +187,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											</div>
 										</div>
 										<div class="modal-footer">
-											<h3><button type="submit" class="label label-primary" value="Salvar"/>Agendar</button></h3>
+											<h3><button type="subtmit" class="label label-primary" value="Salvar"/>Agendar</button></h3>
 											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
 										</div>
 									</form>
@@ -243,6 +244,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="typo">
 			<div class="container">
 				<h2>Seus Pets</h2>
+				<div id="newPetError" class="collapse alert alert-danger"></div>
 				<div class="new-collections-grids" id="petContainer">
 				</div>
 				<div class="regButtons">

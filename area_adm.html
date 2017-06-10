@@ -122,6 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Próximos Agendamentos</h3>
+						<div id="newScheduleError" class="collapse alert alert-danger"></div>
 						<table class="table table-hover" id="tableSchedules">
 							<thead>
 								<tr>
@@ -178,13 +179,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<div class="collapse alert alert-danger" id="cscError"></div>
 											<input id="csc" class='CSC' type='text' name='CSC' required></input>
 											<h4>Validade:</h4>
+											<div class="collapse alert alert-danger" id="expDateError"></div>
 											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
-												<input type='radio' name="flag" id="visa" required=""></input> <img src='img/visa.png' alt='Visa'></img>
-												<input type='radio' name="flag" id="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
-												<input type='radio' name="flag" id="amex"></input><img src='img/amex.png' alt='American Express'></img>
-												<input type='radio' name="flag" id="elo"></input><img src='img/elo.png' alt='Elo'></img>
+												<input type='radio' name="flag" name="visa" required=""></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name="flag" name="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name="flag" name="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name="flag" name="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
 										</div>
 										<div class="modal-footer">
@@ -272,6 +274,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Usuários Cadastrados</h3>
+						<div id="newUserError" class="collapse alert alert-danger"></div>
 						<div class="searchContent">
 							<input class="search" type="text" placeholder="Buscar usuários"></input>
 							<h4> por: </h4>
