@@ -178,10 +178,21 @@ class Server {
 var server = new Server();
 let cartProducts = [];
 let currentPage = 1;
+let nPages = 0;
+let pageFlag = 0;
+let filterFlag = 0;
 function changePage(page) {
     currentPage = page;
     let i = 0;
     let p = (currentPage - 1) * 9;
+    nPages = Math.ceil(server.products.length / 9);
+    for (i = 2; i <= nPages; i++) {
+        $("#page" + i).remove();
+    }
+    for (i = 2; i <= nPages; i++) {
+        $("#pagination").append('<li id="page' + i + '"><a href="#top" onclick="changePage(' + i + ')">2</a></li>');
+    }
+    pageFlag = 1;
     $("a[href='#top']").click(function () {
         $("html, body").animate({ scrollTop: 100 }, "slow");
         return false;
@@ -235,6 +246,7 @@ function addProductToCart() {
     let i = 0;
     let aux = new Array(server.products.length);
     let flags = new Array(server.products.length);
+    let sum = 0;
     for (i = 0; i < aux.length; i++)
         aux[i] = 0;
     for (i = 0; i < flags.length; i++)
@@ -267,6 +279,15 @@ function addProductToCart() {
             flags[cartProducts[i].id] = 1;
         }
     }
+    cartProducts.forEach(product => {
+        sum += product.price;
+    });
+    $("#products_table").append('<tr>' +
+        '<th>Total</th>' +
+        '<th colspan="2"></th>' +
+        '<th id="total_price">R$ ' + sum.toFixed(2).replace(".", ",") + '</th>' +
+        '<th></th>' +
+        '</tr>');
 }
 function removeProductFromCart(id, pos) {
     let i = 0;
@@ -286,6 +307,7 @@ function removeProductFromCart(id, pos) {
     });
     $("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
     $("#cart_qtd").html(n.toString() + " itens");
+    $("#total_price").html("R$" + sum.toFixed(2).replace(".", ","));
 }
 function sort(value) {
     let sortedProducts = [];

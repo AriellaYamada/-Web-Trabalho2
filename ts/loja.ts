@@ -6,6 +6,9 @@ var server: Server = new Server()
 
 let cartProducts: Product[] = [];
 let currentPage: number = 1;
+let nPages: number = 0;
+let pageFlag: number = 0;
+let filterFlag: number = 0;
 
 function changePage(page: number) : void
 {
@@ -13,6 +16,18 @@ function changePage(page: number) : void
 
 	let i: number = 0;
 	let p: number = (currentPage-1) * 9;
+
+	nPages = Math.ceil(server.products.length / 9);
+
+	for (i = 2; i <= nPages; i++){
+		$("#page" + i).remove();
+	}
+
+	for (i = 2; i <= nPages; i++){
+		$("#pagination").append('<li id="page' + i + '"><a href="#top" onclick="changePage('+ i + ')">2</a></li>');
+	}
+	pageFlag = 1;
+
 
 	$("a[href='#top']").click(function() {
   		$("html, body").animate({ scrollTop: 100 }, "slow");
@@ -83,6 +98,7 @@ function addProductToCart()
 	let i: number = 0;
 	let aux: number[] = new Array<number>(server.products.length);
 	let flags: number[] = new Array<number>(server.products.length);
+	let sum: number = 0;
 
 	for (i = 0; i < aux.length; i++)
 		aux[i] = 0;
@@ -120,6 +136,17 @@ function addProductToCart()
 			flags[cartProducts[i].id] = 1;
 		}
 	}
+
+	cartProducts.forEach(product => {
+		sum += product.price;
+	});
+
+	$("#products_table").append('<tr>' +
+									'<th>Total</th>' +
+									'<th colspan="2"></th>' +
+									'<th id="total_price">R$ ' + sum.toFixed(2).replace(".", ",") + '</th>' +
+									'<th></th>' +
+								'</tr>');
 }
 
 function removeProductFromCart(id: number, pos: number)
@@ -139,7 +166,6 @@ function removeProductFromCart(id: number, pos: number)
 
 	cartProducts = cartProducts.filter(item => toRemove.indexOf(item));
 
-
 	cartProducts.forEach(product => {
 		sum += product.price;
 		n++;
@@ -148,11 +174,13 @@ function removeProductFromCart(id: number, pos: number)
 	$("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
 	$("#cart_qtd").html(n.toString() + " itens");
 
+	$("#total_price").html("R$" + sum.toFixed(2).replace(".", ","));
+
 }
 
 function sort(value: string)
 {
-	let sortedProducts: Product[] = []
+	let sortedProducts: Product[] = [];
 	let i: number = 0;
 
 	if (value === "price"){
