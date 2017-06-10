@@ -215,7 +215,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<input class="search" type="text" placeholder="Buscar serviços"></input>
 							<h4> por: </h4>
 							<select>
-								<option value='name'>Nome</option>
+								<option value='name' required>Nome</option>
 								<option value='id'>ID</option>
 								<option value='description'>Descrição</option>
 								<option value='price'>Preço</option>
@@ -247,11 +247,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="modal-body">
 										<form id="newServiceForm">
 											<h4>Nome:</h4>
-											<input type='text' id='sname'></input>
+											<input type='text' id='sname' required></input>
 											<h4>Descrição:</h4>
-											<input type="text" id='sdescription'></input>
+											<input type="text" id='sdescription' required></input>
 											<h4>Preço:<br/></h4>
-											<input type='text' id='sprice' placeholder="R$"></input></br>
+											<input type='text' id='sprice' placeholder="R$" required></input></br>
 										</div>
 										<div class="modal-footer">
 											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
@@ -311,13 +311,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<h4>Nome:</h4>
 												<input type='text' name='name'></input>
 												<h4>Usuário (ID):</h4>
-												<input type='text' name='id'></input>
+												<input type='text' name='id' required></input>
 												<h4>Foto:</h4>
 												<input type="file" name="pic" required></input>
 												<h4>Telefone: </h4>
-												<input type="text" name="telephone"></input>
+												<div class="collapse alert alert-danger" id="telError"></div>
+												<input type="text" name="telephone" required></input>
 												<h4>E-mail: <br/></h4>
-												<input type='text' name='email'></input></br>
+												<div class="collapse alert alert-danger" id="emailError"></div>
+												<input type='text' name='email' required></input></br>
 												<h4>Tipo de Usuário:</h4>
 												<input type='radio' name='usertype' value='client' checked>Cliente</input>
 												<input type='radio' name='usertype' value='admin'>Administrador</input>

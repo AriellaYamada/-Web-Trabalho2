@@ -227,6 +227,16 @@ $(document).ready(function () {
         let email = $("#newUserForm input[name=email]").val();
         let permissions = $("#newUserForm input[name=usertype]").val();
         let address = $("#newUserForm input[name=address]").val();
+        let regexp = /^\(\d{2}\)\d{8,9}$/;
+        if (!regexp.test(tel)) {
+            $("#telError").html("<strong>Erro:</strong> Telefone inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        regexp = /\@\w\.com/;
+        if (!regexp.test(email)) {
+            $("#emailError").html("<strong>Erro:</strong> E-mail inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
         let result;
         result = server.addUser(name, id, address, null, tel, email, pass, permissions);
         if (result != "ok") {
