@@ -23,9 +23,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <!-- //js -->
 <!-- cart -->
-<script src="js/simpleCart.min.js"> </script>
+<!--<script src="js/simpleCart.min.js"> </script>-->
 <!-- cart -->
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+<!--<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">-->
 <!-- for bootstrap working -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- //for bootstrap working -->
@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //animation-effect -->
 </head>
 
-<body onload="changePage(1)">
+<body onload="changePage(0)">
 
 <!-- header -->
 	<div class="header">
@@ -112,11 +112,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="cart box_1">
 						<a href="checkout.html">
 							<h3> <div class="total">
-								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> itens)</div>
+								<span class="simpleCart_total" id="cart_price"> R$0,00</span> (<span class="simpleCart_quantity" id="cart_qtd">0 itens</span>)</div>
 								<img src="images/bag.png" alt="" />
 							</h3>
 						</a>
-						<p><a href="javascript:;" class="simpleCart_empty">Vazio</a></p>
+						<p><a href="javascript:;" class="simpleCart_empty"></a></p>
 						<div class="clearfix"> </div>
 					</div>
 				</div>
@@ -307,7 +307,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product1" id="product1name"></a></h4>
 							<p class="product1" id="product1desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart" class="price">
-								<p> <span class="item_price" class="product1" id="product1price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product1" id="product1price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(1)">Carrinho+</button><br/></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -362,7 +362,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product2" id="product2name"></a></h4>
 							<p class="product2" id="product2desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product2" id="product2price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product2" id="product2price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(2)">Carrinho+</button></p>
 							</div>
 							<!-- Modal -->
 							</div>
@@ -417,7 +417,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product3" id="product3name"></a></h4>
 							<p class="product3" id="product3desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product3" id="product3price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product3" id="product3price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(3)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -472,7 +472,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product4" id="product4name"></a></h4>
 							<p class="product4" id="product4desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product4" id="product4price"></span><a class="item_add" href="#">CARRINHO+ </a></p>
+								<p> <span class="item_price" class="product4" id="product4price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(4)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -525,7 +525,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product5" id="product5name"></a></h4>
 							<p class="product5" id="product5desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product5" id="product5price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product5" id="product5price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(5)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -578,7 +578,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product6" id="product6name"></a></h4>
 							<p class="product6" id="product6desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product6" id="product6price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product6" id="product6price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(6)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -633,7 +633,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product7" id="product7name"></a></h4>
 							<p class="product7" id="product7desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product7" id="product7price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product7" id="product7price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(7)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -686,7 +686,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product8" id="product8name"></a></h4>
 							<p class="product8" id="product8desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product8" id="product8price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product8" id="product8price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(8)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -739,7 +739,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4><a href="single.html" class="product9" id="product9name"></a></h4>
 							<p class="product9" id="product9desc"></p>
 							<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-								<p> <span class="item_price" class="product9" id="product9price"></span><a class="item_add" href="#">CARRINHO+</a></p>
+								<p> <span class="item_price" class="product9" id="product9price"></span><br/><button type="button" class="btn btn-warning" onclick="cart(9)">Carrinho+</button></p>
 							</div>
 						</div>
 						<!-- Modal -->
@@ -773,11 +773,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active" id="page1"><a href="#">1<span class="sr-only">(current)</span></a></li>
-					<li id="page2"><a href='#' onclick="changePage(2)">2</a></li>
-					<li id="page3"><a href="#" onclick="changePage(3)">3</a></li>
-					<li id="page4"><a href="#" onclick="changePage(4)">4</a></li>
-					<li id="page5"><a href="#" onclick="changePage(5)">5</a></li>
+					<li class="active" id="page1"><a href="#top" onclick="changePage(1)">1<span class="sr-only">(current)</span></a></li>
+					<li id="page2"><a href='#top' onclick="changePage(2)">2</a></li>
+					<li id="page3"><a href="#top" onclick="changePage(3)">3</a></li>
+					<li id="page4"><a href="#top" onclick="changePage(4)">4</a></li>
+					<li id="page5"><a href="#top" onclick="changePage(5)">5</a></li>
 					<li>
 					  <a href="#" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>

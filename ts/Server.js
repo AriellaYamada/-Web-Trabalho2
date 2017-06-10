@@ -96,7 +96,25 @@ class Server {
                 { name: "Brinquedo Osso Plaque Ataque Borracha com Cravo - Vermelho", pic: "images/produto8.jpg",
                     description: "Ideal para Raças Pequenas e Minis", price: 3.90, type: "brinquedo", qtt: 10 },
                 { name: "Brinquedo Furacão Pet Dental Bone Algodão com Nó - Azul", pic: "images/produto9.jpg",
-                    description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo", qtt: 10 }
+                    description: "Resistente; Auxlia no combate ao tártaro", price: 12.90, type: "brinquedo", qtt: 10 },
+                { name: "Casinha para Cães Plástica Plast Pet Nº1 Rosa (55x44x44cm)", pic: "images/produto10.jpg",
+                    description: "Casinha Plástica para cães tamanho nº1 na cor Rosa", price: 69.90, type: "casa", qtt: 10 },
+                { name: "Ração Purina Dog Chow Adultos Raças Pequenas", pic: "images/produto11.jpg",
+                    description: "Formulado com ingredientes de alta qualidade", price: 14.50, type: "racao", qtt: 10 },
+                { name: "Caixa de Transporte Cães Panther Pop Nº2 Azul", pic: "images/produto12.jpg",
+                    description: "Segurança na hora de levar o seu cachorro para viajar!", price: 45.90, type: "casa", qtt: 10 },
+                { name: "Anti Pulgas Bayer Advocate Gatos até 4 Kg", pic: "images/produto13.jpg",
+                    description: "Advocate da Bayer é indicado para tratar infestações", price: 125.00, type: "remedio", qtt: 10 },
+                { name: "Shampoo Rex Dermatite 750 ml", pic: "images/produto14.jpg",
+                    description: "A escolha certa para deixar seu pet elegante e bonito.", price: 12.90, type: "remedio", qtt: 10 },
+                { name: "Ração Peixes - MyFish Color", pic: "images/produto15.jpg",
+                    description: "ração em flocos desenvolvida para peixes ornamentais", price: 4.79, type: "racao", qtt: 10 },
+                { name: "Ração Hamster NutriRoedores - 500g", pic: "images/produto16.jpg",
+                    description: "Alimento extrusado, balanceado de alta atratividade", price: 19.90, type: "racao", qtt: 10 },
+                { name: "Shampoo Antisseptico Matacura Horse 1L", pic: "images/produto17.jpg",
+                    description: "Proporciona perfeita higiene para todos os tipos de pêlos", price: 27.80, type: "remedio", qtt: 10 },
+                { name: "Pet Dog Crock Biscoito (500g)", pic: "images/produto18.jpg",
+                    description: "Biscoito delicioso e nutritivo!", price: 13.90, type: "racao", qtt: 10 }
             ];
             this.services = [
                 { name: "Reforço V10", description: "Vacinação", price: 99.90 },
