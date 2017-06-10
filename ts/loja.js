@@ -179,20 +179,9 @@ var server = new Server();
 let cartProducts = [];
 let currentPage = 1;
 function changePage(page) {
+    currentPage = page;
     let i = 0;
     let p = (currentPage - 1) * 9;
-    for (i = 1; i <= 9; i++)
-        $("#alert" + i).hide();
-    if (page == 0)
-        currentPage = 1;
-    else
-        currentPage = page;
-    if (page == 0) {
-        if (localStorage.currPage) {
-            currentPage = JSON.parse(localStorage.currPage);
-        }
-    }
-    localStorage.currPage = JSON.stringify(currentPage);
     $("a[href='#top']").click(function () {
         $("html, body").animate({ scrollTop: 100 }, "slow");
         return false;
@@ -223,6 +212,8 @@ function changePage(page) {
             }
         });
     }
+    for (i = 1; i <= 9; i++)
+        $("#alert" + i).hide();
 }
 function cart(pos) {
     let p = (currentPage - 1) * 9;
