@@ -1,4 +1,3 @@
-
 ///<reference path="Server.ts"/>
 
 declare var $: any;
@@ -95,16 +94,10 @@ function cart(pos: number)
 function addProductToCart()
 {
 
-	let i: number = 0;
+	let i
 	let aux: number[] = new Array<number>(server.products.length+1);
 	let flags: number[] = new Array<number>(server.products.length+1);
 	let sum: number = 0;
-
-	for (i = 0; i < aux.length; i++)
-		aux[i] = 0;
-
-	for (i = 0; i < flags.length; i++)
-		flags[i] = 0;
 
 	$("#products_table").empty();
 	$("#products_table").append('<thead>' +
@@ -117,23 +110,20 @@ function addProductToCart()
 									'</tr>' +
 								'</thead>')
 
-	for (i = 0; i < cartProducts.length; i++){
-		aux[cartProducts[i].id] += 1;
-	}
-
-	for (i = 0; i < cartProducts.length; i++){
-		if (aux[cartProducts[i].id] >= 1 && flags[cartProducts[i].id] == 0){
+	for (i in cartProducts){
+		let productId = server.products.indexOf(cartProducts[i])
+		if (aux[productId] >= 1 && flags[productId] == 0){
 			$("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
-					'<td class="invert">' + aux[cartProducts[i].id] + '</td>' +
+					'<td class="invert">' + aux[productId] + '</td>' +
 					'<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
 					'<td class="invert">' + cartProducts[i].name +'</td>' +
-					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[cartProducts[i].id])).toFixed(2).replace(".", ",") + '</td>' +
+					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[productId])).toFixed(2).replace(".", ",") + '</td>' +
 					'<td class="invert">' +
 						'<div class="rem">' +
-							'<a class="close1" onclick="removeProductFromCart(' + cartProducts[i].id + ',' + i + ')"> </a>' +
+							'<a class="close1" onclick="removeProductFromCart(' + productId + ',' + i + ')"> </a>' +
 						'</div>' +
 				'</tr>)')
-			flags[cartProducts[i].id] = 1;
+			flags[productId] = 1;
 		}
 	}
 
@@ -151,15 +141,16 @@ function addProductToCart()
 
 function removeProductFromCart(id: number, pos: number)
 {
-	let i: number = 0;
+	let i
 	let toRemove: Product[] = [];
 	let sum: number = 0;
 	let n: number = 0;
 
 	$("#cartProd" + pos).remove();
 
-	for (i = 0; i < cartProducts.length; i++){
-		if (cartProducts[i].id === id){
+	for (i in cartProducts){
+		let productId = server.products.indexOf(cartProducts[i])
+		if (productId === id){
 			toRemove.push(cartProducts[i]);
 		}
 	}

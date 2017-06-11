@@ -212,14 +212,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<h3 class="bars">Serviços</h3>
 						<div id="newServiceError" class="collapse alert alert-danger"></div>
 						<div class="searchContent">
-							<input class="search" type="text" placeholder="Buscar serviços"></input>
+							<input class="search" type="text" placeholder="Buscar serviços" id="searchText"></input>
 							<h4> por: </h4>
-							<select>
+							<select id="searchField">
 								<option value='name' required>Nome</option>
 								<option value='id'>ID</option>
 								<option value='description'>Descrição</option>
 								<option value='price'>Preço</option>
 							</select>
+							<h3><button class="label label-default" id="serviceSearch">Buscar</button></h3>
 						</div>
 						<table class="table table-hover" id="tableServices">
 							<thead>
