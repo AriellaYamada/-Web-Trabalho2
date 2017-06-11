@@ -3,12 +3,47 @@
 
 declare var $: any;
 var server: Server = new Server()
+var currentUser: string = localStorage.PetStopCurrentUser
 
 let cartProducts: Product[] = [];
 let currentPage: number = 1;
 let nPages: number = 0;
 let pageFlag: number = 0;
 let filterFlag: number = 0;
+
+// Pseudo login
+function authenticate() : void
+{
+	let username : string = (<HTMLInputElement>document.getElementById("login_user")).value;
+	let password : string = (<HTMLInputElement>document.getElementById("pass_user")).value;
+
+	if (server.login(username, password))
+	{
+		localStorage.PetStopCurrentUser = username
+		if (server.isAdmin(username))
+			window.location.href = "area_adm.html"
+		else
+			window.location.href = "loja.html"
+	}
+	else
+	{
+		$("#login_failed").show()
+		$("html, body").animate({scrollTop: 0}, "fast")
+	}
+}
+
+$(document).ready(function()
+{
+	$("#login_button").click(authenticate)				// associando a função acima ao botão de login
+	$("#pass_user").keypress(function(e)				// para o "enter" funcionar para fazer login
+	{
+		if (e.keyCode == 13)
+			$("#login_button").click()
+	})
+
+	// Nome de usuário na saudação:
+	$("#greetName").html(server.users[currentUser].userName)
+})
 
 function changePage(page: number) : void
 {
@@ -118,22 +153,24 @@ function addProductToCart()
 								'</thead>')
 
 	for (i = 0; i < cartProducts.length; i++){
-		aux[cartProducts[i].id] += 1;
+		let productId = server.products.indexOf(cartProducts[i])
+		aux[productId] += 1;
 	}
 
 	for (i = 0; i < cartProducts.length; i++){
-		if (aux[cartProducts[i].id] >= 1 && flags[cartProducts[i].id] == 0){
+		let productId = server.products.indexOf(cartProducts[i])
+		if (aux[productId] >= 1 && flags[productId] == 0){
 			$("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
-					'<td class="invert">' + aux[cartProducts[i].id] + '</td>' +
+					'<td class="invert">' + aux[productId] + '</td>' +
 					'<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
 					'<td class="invert">' + cartProducts[i].name +'</td>' +
-					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[cartProducts[i].id])).toFixed(2).replace(".", ",") + '</td>' +
+					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[productId])).toFixed(2).replace(".", ",") + '</td>' +
 					'<td class="invert">' +
 						'<div class="rem">' +
-							'<a class="close1" onclick="removeProductFromCart(' + cartProducts[i].id + ',' + i + ')"> </a>' +
+							'<a class="close1" onclick="removeProductFromCart(' + productId + ',' + i + ')"> </a>' +
 						'</div>' +
 				'</tr>)')
-			flags[cartProducts[i].id] = 1;
+			flags[productId] = 1;
 		}
 	}
 
@@ -159,7 +196,8 @@ function removeProductFromCart(id: number, pos: number)
 	$("#cartProd" + pos).remove();
 
 	for (i = 0; i < cartProducts.length; i++){
-		if (cartProducts[i].id === id){
+		let productId = server.products.indexOf(cartProducts[i])
+		if (productId === id){
 			toRemove.push(cartProducts[i]);
 		}
 	}

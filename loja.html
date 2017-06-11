@@ -34,6 +34,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- animation-effect -->
 <link href="css/animate.min.css" rel="stylesheet">
 <script src="js/wow.min.js"></script>
+<script type="text/javascript" src="ts/Server.js"></script>
+<!-- //mock server -->
+<!-- pseudo login -->
 <script src="ts/loja.js"></script>
 <script>
  new WOW().init();
@@ -43,68 +46,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body onload="changePage(1)">
 
-<!-- header -->
-	<div class="header">
-		<div class="container">
-			<div class="header-grid">
-				<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
-					<ul>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">petstop@gmail.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i><span>4002</span> 8922</li>
-						<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="login.html">Login</a></li>
-						<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="register.html">Register</a></li>
-					</ul>
-				</div>
-				<div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">
-					<ul class="social-icons">
-						<li><a href="#" class="facebook"></a></li>
-						<li><a href="#" class="twitter"></a></li>
-						<li><a href="#" class="g"></a></li>
-						<li><a href="#" class="instagram"></a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="logo-nav">
-				<div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">
-					<h1><a href="loja.html">PetStop <span>Loja Online</span></a></h1>
-				</div>
-				<div class="logo-nav-left1">
-					<nav class="navbar navbar-default">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header nav_2">
-						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
+	<!-- header -->
+		<div class="header">
+			<div class="container">
+				<div class="header-grid">
+					<div class="collapse alert alert-danger" id="login_failed">
+						<strong>Erro!</strong> Usuário e/ou senha inválidos.
 					</div>
-					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-						<ul class="nav navbar-nav">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="loja.html">Produtos</a></li>
+					<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
+						<ul>
+							<li>Login: <input type="text" id="login_user"></input></li>
+							<li>Senha: <input type="password" id="pass_user"></input></li>
+							<li><button id="login_button"> Entrar </button></li>
 						</ul>
 					</div>
-					</nav>
+
+					<div class="clearfix"> </div>
 				</div>
-				<div class="logo-nav-right">
-					<div class="search-box">
-						<div id="sb-search" class="sb-search">
-							<form>
-								<input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
-								<input class="sb-search-submit" type="submit" value="">
-								<span class="sb-icon-search"> </span>
-							</form>
-						</div>
+				<div class="logo-nav">
+					<div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">
+						<h1><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h1>
 					</div>
-						<!-- search-scripts -->
-						<script src="js/classie.js"></script>
-						<script src="js/uisearch.js"></script>
-							<script>
-								new UISearch( document.getElementById( 'sb-search' ) );
-							</script>
-						<!-- //search-scripts -->
+					<div class="logo-nav-left1">
+						<nav class="navbar navbar-default">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header nav_2">
+							<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+							<ul class="nav navbar-nav">
+								<li class="active"><a href="index.html" class="act">Loja</a></li>
+								<li class="active"><a href="#about" class="act">Sobre Nós</a></li>
+								<li class="active"><a href="#services" class="act">Serviços</a></li>
+								<li class="active"><a href="#contact" class="act">Contato</a></li>
+							</ul>
+						</div>
+						</nav>
+					</div>
+					<div class="logo-nav-right">
+						<div class="search-box">
+							<div id="sb-search" class="sb-search">
+								<form>
+									<input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
+									<input class="sb-search-submit" type="submit" value="">
+									<span class="sb-icon-search"> </span>
+								</form>
+							</div>
+						</div>
+							<!-- search-scripts -->
+							<script src="js/classie.js"></script>
+							<script src="js/uisearch.js"></script>
+								<script>
+									new UISearch( document.getElementById( 'sb-search' ) );
+								</script>
+							<!-- //search-scripts -->
 				</div>
 				<div class="header-right">
 					<div class="cart box_1">
@@ -132,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<table id="products_table" class="timetable_sub">
 									<thead>
 										<tr>
-											<th>SL No.</th>	
+											<th>SL No.</th>
 											<th>Product</th>
 											<th>Product Name</th>
 											<th>Price</th>
@@ -142,7 +142,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<!--quantity-->
 								</table>
 								<!---728x90-->
-								
+
 						<!-- //checkout -->
 							</div>
 							<div class="modal-footer">
@@ -601,95 +601,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- //breadcrumbs -->
 <!-- footer -->
+<a name="contact"></a>
 	<div class="footer">
 		<div class="container">
 			<div class="footer-grids">
-				<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".5s">
-					<h3>About Us</h3>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.<span>Excepteur sint occaecat cupidatat
-						non proident, sunt in culpa qui officia deserunt mollit.</span></p>
-				</div>
 				<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".6s">
-					<h3>Contact Info</h3>
+					<h3>Contato</h3>
 					<ul>
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Av. Trabalhador São Carlense, 400 - Parque Arnold Schimidt <span>São Carlos - SP</span></li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Av. Trabalhador São Carlense, 400 - Parque Arnold Schimidt <span>São Carlos - SP.</span></li>
 						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">petstop@gmail.com</a></li>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>4002 8922</li>
 					</ul>
 				</div>
-				<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
-					<h3>Flickr Posts</h3>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="footer-grid-left">
-						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="col-md-3 footer-grid animated wow slideInLeft" data-wow-delay=".8s">
-					<h3>Blog Posts</h3>
-					<div class="footer-grid-sub-grids">
-						<div class="footer-grid-sub-grid-left">
-							<a href="single.html"><img src="images/9.jpg" alt=" " class="img-responsive" /></a>
-						</div>
-						<div class="footer-grid-sub-grid-right">
-							<h4><a href="single.html">culpa qui officia deserunt</a></h4>
-							<p>Posted On 25/3/2016</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="footer-grid-sub-grids">
-						<div class="footer-grid-sub-grid-left">
-							<a href="single.html"><img src="images/10.jpg" alt=" " class="img-responsive" /></a>
-						</div>
-						<div class="footer-grid-sub-grid-right">
-							<h4><a href="single.html">Quis autem vel eum iure</a></h4>
-							<p>Posted On 25/3/2016</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
+
 			<div class="footer-logo animated wow slideInUp" data-wow-delay=".5s">
-				<h2><a href="index.html">PetStop<span>Compre em qualquer lugar</span></a></h2>
+				<h2><a href="index.html">Pet Stop <span>Cuidado animal</span></a></h2>
 			</div>
 			<div class="copy-right animated wow slideInUp" data-wow-delay=".5s">
-				<p>2017 PetStop. Todos os Direitos Reservados</p>
+				<p>&copy 2016 Pet Stop. Todos os direitos reservados</a></p>
 			</div>
 		</div>
 	</div>
+</div>
 <!-- //footer -->
 </body>
 </html>
