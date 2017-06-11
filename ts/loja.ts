@@ -96,8 +96,8 @@ function addProductToCart()
 {
 
 	let i: number = 0;
-	let aux: number[] = new Array<number>(server.products.length);
-	let flags: number[] = new Array<number>(server.products.length);
+	let aux: number[] = new Array<number>(server.products.length+1);
+	let flags: number[] = new Array<number>(server.products.length+1);
 	let sum: number = 0;
 
 	for (i = 0; i < aux.length; i++)

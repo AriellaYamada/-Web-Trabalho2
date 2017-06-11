@@ -244,8 +244,8 @@ function cart(pos) {
 }
 function addProductToCart() {
     let i = 0;
-    let aux = new Array(server.products.length);
-    let flags = new Array(server.products.length);
+    let aux = new Array(server.products.length + 1);
+    let flags = new Array(server.products.length + 1);
     let sum = 0;
     for (i = 0; i < aux.length; i++)
         aux[i] = 0;
