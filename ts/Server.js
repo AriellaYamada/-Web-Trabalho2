@@ -57,7 +57,9 @@ class Schedule {
     }
 }
 class Sale {
+
     constructor(customer, products, day, creditCard, csc, expDate, total, status) {
+
         this.customer = customer;
         this.products = products;
         this.day = day;

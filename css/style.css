@@ -47,10 +47,14 @@ form input, label, button {
 .regButtons {
   display: inline-block;
 }
-.searchContent input, h4, select{
+.searchContent input, h4, select {
 	display: inline-block;
 	font-size: 18px;
 	color: #999;
+}
+.searchContent button, h3 {
+	display: inline-block;
+	margin-right: 10px;
 }
 .regButtons h4, button{
 	display: inline;
@@ -675,14 +679,15 @@ figure.effect-julia:hover p {
     margin: 0;
     position: relative;
     font-size: 3em;
+		display: block;
 }
 .new-collections h3:before,.new-collections h3:after,h3.title:before,h3.title:after,.mail h3:before,.mail h3:after,.single-related-products h3:before,.single-related-products h3:after,.login h3:before,.login h3:after,.register h3:before,.register h3:after{
 	position: absolute;
     top: 50%;
     width: 15%;
     height: 1px;
-    background: #D5D5D5;
     content: '';
+		display: block;
 }
 .new-collections h3:before,.single-related-products h3:before{
 	left:17%;

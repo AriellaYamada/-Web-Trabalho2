@@ -120,6 +120,7 @@ class Sale
 	status : string
 
 	constructor (customer: string, products: Product[], day: string, creditCard: string, csc: string, expDate: string, total: number, status: string)
+
 	{
 		this.customer = customer
 		this.products = products

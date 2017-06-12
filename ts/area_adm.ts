@@ -50,7 +50,7 @@ function refreshSchedules() : void
 function refreshServiceData() : void
 {
 	let s
-	let lineService = $("<tbody></tbody>")
+	let lineService = $("<tbody id='lineService'></tbody>")
 	for (s in server.services) {
 			let line = $("<tr></tr>")
 			let service : Service = server.services[s]
@@ -208,6 +208,30 @@ $(document).ready(function()
 		}
 		return true
 	})
+	//Busca de servicos
+	$("#serviceSearch").on("click", function ()
+{
+	let search : string = $("#searchText").val()
+	let field : string = $("#searchField option:selected").val()
+	console.log(field)
+	if(field == "name") {
+		let s
+		let lineService = $("#lineService")
+		for (s in server.services) {
+			let service : Service = server.services[s]
+			if(service.name == search) {
+				console.log("teste")
+				let line = $("<tr></tr>")
+				line.append($("<td>" + s + "</td>"))
+				line.append($("<td>" + service.name + "</td>"))
+				line.append($("<td>" + service.description + "</td>"))
+				line.append($("<td> R$" + service.price + "</td>"))
+				lineService.append(line)
+			}
+		}
+		$("#lineService").html(lineService)
+	}
+})
 	//Cadastro de Servicos
 	$("#newServiceForm").on("submit", function(ev)
 	{

@@ -66,7 +66,9 @@ function cart(pos) {
     $("#alert" + pos).fadeTo(2000, 500).slideUp(500, function () {
         $("#alert" + pos).slideUp(500);
     });
+
     sessionStorage.PetStopCartData = JSON.stringify(this.cartProducts);
+
 }
 function sort(value) {
     let sortedProducts = [];

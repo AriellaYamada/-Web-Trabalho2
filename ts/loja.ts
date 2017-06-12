@@ -1,4 +1,3 @@
-
 ///<reference path="Server.ts"/>
 
 declare var $: any;
