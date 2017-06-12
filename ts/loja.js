@@ -1,10 +1,11 @@
 ///<reference path="Server.ts"/>
 var server = new Server();
-let cartProducts = [];
-let currentPage = 1;
-let nPages = 0;
-let pageFlag = 0;
-let filterFlag = 0;
+var currentUser = localStorage.PetStopCurrentUser;
+var cartProducts = [];
+var currentPage = 1;
+var nPages = 0;
+var pageFlag = 0;
+var filterFlag = 0;
 function changePage(page) {
     currentPage = page;
     let i = 0;
@@ -65,68 +66,9 @@ function cart(pos) {
     $("#alert" + pos).fadeTo(2000, 500).slideUp(500, function () {
         $("#alert" + pos).slideUp(500);
     });
-}
-function addProductToCart() {
-    let i;
-    let aux = new Array(server.products.length + 1);
-    let flags = new Array(server.products.length + 1);
-    let sum = 0;
-    $("#products_table").empty();
-    $("#products_table").append('<thead>' +
-        '<tr>' +
-        '<th>Qtd.</th>' +
-        '<th>Produto</th>' +
-        '<th>Nome do Produto</th>' +
-        '<th>Preço</th>' +
-        '<th>Remover</th>' +
-        '</tr>' +
-        '</thead>');
-    for (i in cartProducts) {
-        let productId = server.products.indexOf(cartProducts[i]);
-        if (aux[productId] >= 1 && flags[productId] == 0) {
-            $("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
-                '<td class="invert">' + aux[productId] + '</td>' +
-                '<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
-                '<td class="invert">' + cartProducts[i].name + '</td>' +
-                '<td class="invert">R$' + ((cartProducts[i].price) * (aux[productId])).toFixed(2).replace(".", ",") + '</td>' +
-                '<td class="invert">' +
-                '<div class="rem">' +
-                '<a class="close1" onclick="removeProductFromCart(' + productId + ',' + i + ')"> </a>' +
-                '</div>' +
-                '</tr>)');
-            flags[productId] = 1;
-        }
-    }
-    cartProducts.forEach(product => {
-        sum += product.price;
-    });
-    $("#products_table").append('<tr>' +
-        '<th>Total</th>' +
-        '<th colspan="2"></th>' +
-        '<th id="total_price">R$ ' + sum.toFixed(2).replace(".", ",") + '</th>' +
-        '<th></th>' +
-        '</tr>');
-}
-function removeProductFromCart(id, pos) {
-    let i;
-    let toRemove = [];
-    let sum = 0;
-    let n = 0;
-    $("#cartProd" + pos).remove();
-    for (i in cartProducts) {
-        let productId = server.products.indexOf(cartProducts[i]);
-        if (productId === id) {
-            toRemove.push(cartProducts[i]);
-        }
-    }
-    cartProducts = cartProducts.filter(item => toRemove.indexOf(item));
-    cartProducts.forEach(product => {
-        sum += product.price;
-        n++;
-    });
-    $("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
-    $("#cart_qtd").html(n.toString() + " itens");
-    $("#total_price").html("R$" + sum.toFixed(2).replace(".", ","));
+
+    sessionStorage.PetStopCartData = JSON.stringify(this.cartProducts);
+
 }
 function sort(value) {
     let sortedProducts = [];
@@ -152,8 +94,8 @@ function sort(value) {
         });
     }
     /*sortedProducts.forEach(product =>{
-        alert(product.name + " " + product.price);
-    })*/
+    alert(product.name + " " + product.price);
+})*/
     let p = (currentPage - 1) * 9;
     for (i = 1; i <= 9; i++) {
         $(".product" + i).each(function () {

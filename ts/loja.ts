@@ -2,12 +2,13 @@
 
 declare var $: any;
 var server: Server = new Server()
+var currentUser: string = localStorage.PetStopCurrentUser
 
-let cartProducts: Product[] = [];
-let currentPage: number = 1;
-let nPages: number = 0;
-let pageFlag: number = 0;
-let filterFlag: number = 0;
+var cartProducts: Product[] = [];
+var currentPage: number = 1;
+var nPages: number = 0;
+var pageFlag: number = 0;
+var filterFlag: number = 0;
 
 function changePage(page: number) : void
 {
@@ -29,8 +30,8 @@ function changePage(page: number) : void
 
 
 	$("a[href='#top']").click(function() {
-  		$("html, body").animate({ scrollTop: 100 }, "slow");
-  		return false;
+		$("html, body").animate({ scrollTop: 100 }, "slow");
+		return false;
 	});
 
 	$(".active").attr("class", "");
@@ -65,7 +66,7 @@ function changePage(page: number) : void
 	}
 
 	for (i = 1; i <= 9; i++)
-		$("#alert" + i).hide();
+	$("#alert" + i).hide();
 }
 
 function cart(pos: number)
@@ -86,87 +87,10 @@ function cart(pos: number)
 
 	$("#alert" + pos).alert();
 	$("#alert" + pos).fadeTo(2000, 500).slideUp(500, function(){
-    	$("#alert" + pos).slideUp(500);
-    });
-
-}
-
-function addProductToCart()
-{
-
-	let i
-	let aux: number[] = new Array<number>(server.products.length+1);
-	let flags: number[] = new Array<number>(server.products.length+1);
-	let sum: number = 0;
-
-	$("#products_table").empty();
-	$("#products_table").append('<thead>' +
-									'<tr>' +
-										'<th>Qtd.</th>' +
-										'<th>Produto</th>' +
-										'<th>Nome do Produto</th>' +
-										'<th>Preço</th>' +
-										'<th>Remover</th>' +
-									'</tr>' +
-								'</thead>')
-
-	for (i in cartProducts){
-		let productId = server.products.indexOf(cartProducts[i])
-		if (aux[productId] >= 1 && flags[productId] == 0){
-			$("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
-					'<td class="invert">' + aux[productId] + '</td>' +
-					'<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
-					'<td class="invert">' + cartProducts[i].name +'</td>' +
-					'<td class="invert">R$' + ((cartProducts[i].price)*(aux[productId])).toFixed(2).replace(".", ",") + '</td>' +
-					'<td class="invert">' +
-						'<div class="rem">' +
-							'<a class="close1" onclick="removeProductFromCart(' + productId + ',' + i + ')"> </a>' +
-						'</div>' +
-				'</tr>)')
-			flags[productId] = 1;
-		}
-	}
-
-	cartProducts.forEach(product => {
-		sum += product.price;
+		$("#alert" + pos).slideUp(500);
 	});
 
-	$("#products_table").append('<tr>' +
-									'<th>Total</th>' +
-									'<th colspan="2"></th>' +
-									'<th id="total_price">R$ ' + sum.toFixed(2).replace(".", ",") + '</th>' +
-									'<th></th>' +
-								'</tr>');
-}
-
-function removeProductFromCart(id: number, pos: number)
-{
-	let i
-	let toRemove: Product[] = [];
-	let sum: number = 0;
-	let n: number = 0;
-
-	$("#cartProd" + pos).remove();
-
-	for (i in cartProducts){
-		let productId = server.products.indexOf(cartProducts[i])
-		if (productId === id){
-			toRemove.push(cartProducts[i]);
-		}
-	}
-
-	cartProducts = cartProducts.filter(item => toRemove.indexOf(item));
-
-	cartProducts.forEach(product => {
-		sum += product.price;
-		n++;
-	});
-
-	$("#cart_price").html("R$" + sum.toFixed(2).replace(".", ","));
-	$("#cart_qtd").html(n.toString() + " itens");
-
-	$("#total_price").html("R$" + sum.toFixed(2).replace(".", ","));
-
+	sessionStorage.PetStopCartData = JSON.stringify(this.cartProducts)
 }
 
 function sort(value: string)
@@ -187,45 +111,45 @@ function sort(value: string)
 	else if (value === "name"){
 		sortedProducts = server.products.sort(function(a, b) {
 			if (a.name < b.name)
-				return -1;
+			return -1;
 			else if (a.name > b.name)
-				return 1;
+			return 1;
 			else
-				return 0;
+			return 0;
 		});
 	}
 
 	/*sortedProducts.forEach(product =>{
-		alert(product.name + " " + product.price);
-	})*/
+	alert(product.name + " " + product.price);
+})*/
 
-	let p: number = (currentPage-1) * 9;
+let p: number = (currentPage-1) * 9;
 
-	for (i = 1; i <= 9; i++){
-		$(".product" + i).each(function()
+for (i = 1; i <= 9; i++){
+	$(".product" + i).each(function()
+	{
+		try
 		{
-			try
-			{
-				$("#product" + i + "image").attr("src", sortedProducts[i-1+p].pic);
-				$("#modal" + i + "image").attr("src", sortedProducts[i-1+p].pic);
-				$("#product" + i + "name").html(sortedProducts[i-1+p].name);
-				$("#modal" + i + "name").html(sortedProducts[i-1+p].name);
-				$("#product" + i + "desc").html(sortedProducts[i-1+p].description);
-				$("#modal" + i + "desc").html(sortedProducts[i-1+p].description);
-				$("#product" + i + "price").html("R$" + sortedProducts[i-1+p].price.toFixed(2).replace(".", ","));
-				$("#modal" + i + "price").html("R$" + sortedProducts[i-1+p].price.toFixed(2).replace(".", ","));
-			}
-			catch (e)
-			{
-				$("#product" + i + "image").attr("src", "");
-				$("#modal1image").attr("src", "");
-				$("#product" + i + "name").html("");
-				$("#modal1name").html("");
-				$("#product" + i + "desc").html("");
-				$("#modal1desc").html("");
-				$("#product" + i + "price").html("");
-				$("#modal1price").html("");
-			}
-		})
-	}
+			$("#product" + i + "image").attr("src", sortedProducts[i-1+p].pic);
+			$("#modal" + i + "image").attr("src", sortedProducts[i-1+p].pic);
+			$("#product" + i + "name").html(sortedProducts[i-1+p].name);
+			$("#modal" + i + "name").html(sortedProducts[i-1+p].name);
+			$("#product" + i + "desc").html(sortedProducts[i-1+p].description);
+			$("#modal" + i + "desc").html(sortedProducts[i-1+p].description);
+			$("#product" + i + "price").html("R$" + sortedProducts[i-1+p].price.toFixed(2).replace(".", ","));
+			$("#modal" + i + "price").html("R$" + sortedProducts[i-1+p].price.toFixed(2).replace(".", ","));
+		}
+		catch (e)
+		{
+			$("#product" + i + "image").attr("src", "");
+			$("#modal1image").attr("src", "");
+			$("#product" + i + "name").html("");
+			$("#modal1name").html("");
+			$("#product" + i + "desc").html("");
+			$("#modal1desc").html("");
+			$("#product" + i + "price").html("");
+			$("#modal1price").html("");
+		}
+	})
+}
 }
