@@ -6,6 +6,23 @@ var currentPage = 1;
 var nPages = 0;
 var pageFlag = 0;
 var filterFlag = 0;
+// Pseudo login
+function authenticate() {
+    let username = document.getElementById("login_user").value;
+    let password = document.getElementById("pass_user").value;
+    if (!server.isAdmin(username)) {
+        if (server.login(username, password)) {
+            localStorage.PetStopCurrentUser = username;
+            window.location.href = "loja.html";
+        }
+        else {
+            $("#login_failed").show();
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+        }
+    }
+    else
+        $("#loginError").html("Usuários administradores não podem realizar pedidos.");
+}
 function changePage(page) {
     currentPage = page;
     let i = 0;
@@ -66,9 +83,7 @@ function cart(pos) {
     $("#alert" + pos).fadeTo(2000, 500).slideUp(500, function () {
         $("#alert" + pos).slideUp(500);
     });
-
     sessionStorage.PetStopCartData = JSON.stringify(this.cartProducts);
-
 }
 function sort(value) {
     let sortedProducts = [];
@@ -122,4 +137,13 @@ function sort(value) {
         });
     }
 }
+$(document).ready(function () {
+    if (!currentUser == undefined)
+        $("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="index.html">Logout</a></li></ul>');
+    $("#login_button").click(authenticate);
+    $("#pass_user").keypress(function (e) {
+        if (e.keyCode == 13)
+            $("#login_button").click();
+    });
+});
 //# sourceMappingURL=loja.js.map

@@ -62,7 +62,7 @@ function refreshProducts() {
         if (aux[productId] >= 1 && flags[productId] == 0) {
             $("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
                 '<td class="invert">' + aux[productId] + '</td>' +
-                '<td class="invert-image"><a href="single.html"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
+                '<td class="invert-image"><img src="' + cartProducts[i].pic + '"alt=" " class="img-responsive" /></a></td>' +
                 '<td class="invert">' + cartProducts[i].name + '</td>' +
                 '<td class="invert">R$' + ((cartProducts[i].price) * (aux[productId])).toFixed(2).replace(".", ",") + '</td>' +
                 '<td class="invert">' +

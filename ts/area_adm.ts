@@ -64,6 +64,26 @@ function refreshServiceData() : void
 	$("#tableServices").append(lineService)
 }
 
+function refreshProductData() : void
+{
+	let p
+	let lineService = $("<tbody id='lineService'></tbody>")
+	for (p in server.products) {
+			let line = $("<tr></tr>")
+			let product : Product = server.products[p]
+			line.append($("<td>" + p + "</td>"))
+			line.append($("<td>" + product.name + "</td>"))
+			line.append($("<td><img src='" + product.pic + "' alt class='img-responsive' /></td>"))
+			line.append($("<td>" + product.description + "</td>"))
+			line.append($("<td> R$" + product.price + "</td>"))
+			line.append($("<td>" + product.type + "</td>"))
+			line.append($("<td>" + product.qtt + "</td>"))
+			lineService.append(line)
+	}
+	$("#tableProducts").append(lineService)
+
+}
+
 function refreshUserData() : void
 {
 	$(".clientData").each(function()
@@ -115,6 +135,9 @@ $(document).ready(function()
 
 	//Lista de servicos
 	refreshServiceData()
+
+	//Lista de Produtos
+	refreshProductData()
 
 	//Atualizacao do calendario, pets e servicos
 	$("#serviceRegForm").on("click", function ()
@@ -249,6 +272,7 @@ $(document).ready(function()
 	$("#newProductForm").on("submit", function (ev)
 	{
 		let name: string = $("#pname").val()
+
 		let description: string = $("#pdescription").val()
 		let pprice: number = $("pprice").val()
 		let pqtt: number = $("pquantity").val()
@@ -258,10 +282,10 @@ $(document).ready(function()
 			$("#newProductError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut()
 			return false
 		}
-		/*inputImageToBase64($("#newUserForm input[name=pic]")[0].files[0], pic =>
+		inputImageToBase64($("#newProductForm input[name=ppic]")[0].files[0], pic =>
 		{
-		server.users[server].userPic = pic
-	})*/
+		server.products[server.products.length].pic = pic
+	})
 	return true
 
 })

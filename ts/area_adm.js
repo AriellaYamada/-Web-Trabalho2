@@ -54,6 +54,23 @@ function refreshServiceData() {
     }
     $("#tableServices").append(lineService);
 }
+function refreshProductData() {
+    let p;
+    let lineService = $("<tbody id='lineService'></tbody>");
+    for (p in server.products) {
+        let line = $("<tr></tr>");
+        let product = server.products[p];
+        line.append($("<td>" + p + "</td>"));
+        line.append($("<td>" + product.name + "</td>"));
+        line.append($("<td><img src='" + product.pic + "' alt class='img-responsive' /></td>"));
+        line.append($("<td>" + product.description + "</td>"));
+        line.append($("<td> R$" + product.price + "</td>"));
+        line.append($("<td>" + product.type + "</td>"));
+        line.append($("<td>" + product.qtt + "</td>"));
+        lineService.append(line);
+    }
+    $("#tableProducts").append(lineService);
+}
 function refreshUserData() {
     $(".clientData").each(function () {
         let field_name = $(this).attr("id");
@@ -95,6 +112,8 @@ $(document).ready(function () {
     refreshSchedules();
     //Lista de servicos
     refreshServiceData();
+    //Lista de Produtos
+    refreshProductData();
     //Atualizacao do calendario, pets e servicos
     $("#serviceRegForm").on("click", function () {
         let today = new Date().toISOString().split("T")[0];
@@ -225,10 +244,9 @@ $(document).ready(function () {
             $("#newProductError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut();
             return false;
         }
-        /*inputImageToBase64($("#newUserForm input[name=pic]")[0].files[0], pic =>
-        {
-        server.users[server].userPic = pic
-    })*/
+        inputImageToBase64($("#newProductForm input[name=ppic]")[0].files[0], pic => {
+            server.products[server.products.length].pic = pic;
+        });
         return true;
     });
     // Para quando o administrador altera sua foto:

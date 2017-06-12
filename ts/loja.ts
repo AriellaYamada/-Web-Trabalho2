@@ -10,6 +10,27 @@ var nPages: number = 0;
 var pageFlag: number = 0;
 var filterFlag: number = 0;
 
+// Pseudo login
+function authenticate() : void
+{
+	let username : string = (<HTMLInputElement>document.getElementById("login_user")).value;
+	let password : string = (<HTMLInputElement>document.getElementById("pass_user")).value;
+
+	if (!server.isAdmin(username))
+	{
+		if (server.login(username, password))
+		{
+			localStorage.PetStopCurrentUser = username
+			window.location.href = "loja.html"
+		} else
+		{
+			$("#login_failed").show()
+			$("html, body").animate({scrollTop: 0}, "fast")
+		}
+	} else
+		$("#loginError").html("Usuários administradores não podem realizar pedidos.")
+}
+
 function changePage(page: number) : void
 {
 	currentPage = page;
@@ -153,3 +174,16 @@ for (i = 1; i <= 9; i++){
 	})
 }
 }
+$(document).ready(function()
+{
+	if (!currentUser == undefined)
+		$("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="index.html">Logout</a></li></ul>')
+
+	$("#login_button").click(authenticate)
+	$("#pass_user").keypress(function(e)				// para o "enter" funcionar para fazer login
+	{
+		if (e.keyCode == 13)
+			$("#login_button").click()
+	})
+
+})
