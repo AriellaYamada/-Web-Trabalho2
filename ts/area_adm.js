@@ -114,6 +114,11 @@ $(document).ready(function () {
     refreshServiceData();
     //Lista de Produtos
     refreshProductData();
+    $("#logout").css("cursor", "pointer");
+    $("#logout").click(function (ev) {
+        localStorage.removeItem("PetStopCurrentUser");
+        window.location.href = "index.html";
+    });
     //Atualizacao do calendario, pets e servicos
     $("#serviceRegForm").on("click", function () {
         let today = new Date().toISOString().split("T")[0];

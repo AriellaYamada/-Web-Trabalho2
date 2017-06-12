@@ -117,12 +117,17 @@ $(document).ready(function () {
         $("#login_failed").show();
     }
     else {
-        $("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="index.html">Logout</a></li></ul>');
+        $("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a id="logout">Logout</a></li></ul>');
     }
     $("#login_button").click(authenticate);
     $("#pass_user").keypress(function (e) {
         if (e.keyCode == 13)
             $("#login_button").click();
+    });
+    $("#logout").css("cursor", "pointer");
+    $("#logout").click(function (ev) {
+        localStorage.removeItem("PetStopCurrentUser");
+        window.location.href = "loja.html";
     });
     refreshProducts();
     // Para salvar o estado do servidor mock ao sair da página:

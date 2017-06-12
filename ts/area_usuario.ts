@@ -144,9 +144,11 @@ $(document).ready(function()
 	refreshUserPets()
 	refreshUserData()
 
+	$("#logout").css("cursor", "pointer")
 	$("#logout").click(function(ev)
 	{
 		localStorage.removeItem("PetStopCurrentUser")
+		window.location.href = "index.html"
 	})
 	
 	// Para quando o cliente altera sua foto:

@@ -28,6 +28,14 @@ function authenticate() : void
 
 $(document).ready(function()
 {
+	if (localStorage.PetStopCurrentUser)
+	{
+		if (server.isAdmin(localStorage.PetStopCurrentUser))
+			window.location.href = "area_adm.html"
+		else
+			window.location.href = "area_usuario.html"
+	}
+
 	$("#login_button").click(authenticate)				// associando a função acima ao botão de login
 	$("#pass_user").keypress(function(e)				// para o "enter" funcionar para fazer login
 	{

@@ -120,6 +120,11 @@ $(document).ready(function () {
     // Preenchendo pets e dados do usuário:
     refreshUserPets();
     refreshUserData();
+    $("#logout").css("cursor", "pointer");
+    $("#logout").click(function (ev) {
+        localStorage.removeItem("PetStopCurrentUser");
+        window.location.href = "index.html";
+    });
     // Para quando o cliente altera sua foto:
     $("#clientPicUploader").on("change", function () {
         inputImageToBase64(this.files[0], result => { server.users[currentUser].userPic = result; refreshUserData(); });

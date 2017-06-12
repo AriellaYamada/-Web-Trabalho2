@@ -180,7 +180,7 @@ for (i = 1; i <= 9; i++){
 $(document).ready(function()
 {
 	if (!(currentUser == undefined)) {
-		$("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="loja.html" id="logout">Logout</a></li></ul>')
+		$("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a id="logout">Logout</a></li></ul>')
 	}
 
 	$("#login_button").click(authenticate)
@@ -189,8 +189,10 @@ $(document).ready(function()
 		if (e.keyCode == 13)
 			$("#login_button").click()
 	})
+	$("#logout").css("cursor", "pointer")
 	$("#logout").click(function(ev)
 	{
 		localStorage.removeItem("PetStopCurrentUser")
+		window.location.href = "loja.html"
 	})
 })
