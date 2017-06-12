@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PetStop | Loja Online</title>
+	<title>Pet Stop</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,28 +19,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //for-mobile-apps -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<!-- //js -->
-	<!-- cart -->
-	<!--<script src="js/simpleCart.min.js"> </script>-->
-	<!-- cart -->
-	<!--<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">-->
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- //jQuery -->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- for bootstrap working -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<!-- //for bootstrap working -->
 	<!-- animation-effect -->
-	<link href="css/animate.min.css" rel="stylesheet">
 	<script src="js/wow.min.js"></script>
-	<script type="text/javascript" src="ts/Server.js"></script>
-	<!-- //mock server -->
-	<!-- pseudo login -->
 	<script>
 	new WOW().init();
 	</script>
-	<script src="ts/carrinho.js"></script>
-	<script src="ts/loja.js"></script>
 	<!-- //animation-effect -->
+	<script src="ts/Server.js"></script>
+	<script src="ts/carrinho.js"></script>
 </head>
 
 <body>
@@ -119,66 +112,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //breadcrumbs -->
 	<!-- checkout -->
-		<div class="checkout">
-			<div class="container">
-				<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Seu carrinho possui: <span id="numProducts"></span></h3>
-				<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
-					<table id="products_table" class="timetable_sub">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Produto</th>
-								<th>Descrição</th>
-								<th>Quantidade</th>
-								<th>Preço</th>
-								<th>Remover</th>
-							</tr>
-						</thead>
-					</table>
-					<div class="checkoutButtons">
-						<h2><button class="label label-default" id="checkout">Finalizar pedido</button></h2>
-					</div>
-					<!-- Modal -->
-					<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<h3 class="bars">Finalizar Pedido</h3>
-								</div>
-								<div class="modal-body">
-									<form id="checkoutSale" method="post">
-										<h4>Preço:</h4>
-										<span id="total"></span>
-										<h4>Número do Cartão de Crédito: </h4>
-										<div class="collapse alert alert-danger" id="creditCardError"></div>
-										<input id="creditCard" type='text'required></input>
-										<h4>Código de Segurança:</h4>
-										<div class="collapse alert alert-danger" id="cscError"></div>
-										<input id="csc" class='CSC' type='text' name='CSC' required></input>
-										<h4>Validade:</h4>
-										<div class="collapse alert alert-danger" id="expDateError"></div>
-										<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
-										<div class="CardFlag">
-											<h4>Bandeira:</h4>
-											<input type='radio' name="flag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
-											<input type='radio' name="flag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
-											<input type='radio' name="flag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
-											<input type='radio' name="flag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<h3><button type="subtmit" class="label label-primary" value="Salvar"/>Agendar</button></h3>
-										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
-									</div>
-								</form>
-							</div>
+	<div class="checkout">
+		<div class="container">
+			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Seu carrinho possui: <span id="numProducts"></span></h3>
+			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<table id="products_table" class="timetable_sub">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Produto</th>
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							<th>Preço</th>
+							<th>Remover</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="checkout-left">
+				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+					<h4>Finalizar</h4>
+					<form id="saleReg" method="post">
+						<h5>Número do Cartão de Crédito: </h5>
+						<div class="collapse alert alert-danger" id="creditCardError"></div>
+						<input id="creditCard" type='text'required></input>
+						<h5>Código de Segurança:</h5>
+						<div class="collapse alert alert-danger" id="cscError"></div>
+						<input id="csc" class='CSC' type='text' name='CSC' required></input>
+						<h5>Validade:</h5>
+						<div class="collapse alert alert-danger" id="expDateError"></div>
+						<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
+						<div class="CardFlag">
+							<h5>Bandeira:</h5>
+							<input type='radio' name="flag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
+							<input type='radio' name="flag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+							<input type='radio' name="flag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
+							<input type='radio' name="flag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
 						</div>
 					</div>
-					<!-- fim modal -->
-				</div>
+					<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+						<a href="loja.html" id="checkoutPayment"><span class="glyphicon glyphicon-menu-left" aria-hidden="true">Efetuar pagamento</span></a>
+					</div>
+				</form>
+				<div class="clearfix"> </div>
 			</div>
 		</div>
+	</div>
 	<!-- //checkout -->
 	<!-- footer -->
 	<a name="contact"></a>

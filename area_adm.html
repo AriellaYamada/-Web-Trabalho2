@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 								<ul class="nav navbar-nav">
-									<li class="active"><a href="index.html" class="act">Agendamentos</a></li>
+									<li class="active"><a href="#schedule" class="act">Agendamentos</a></li>
 									<li class="active"><a href="#products" class="act">Estoque</a></li>
 									<li class="active"><a href="#services" class="act">Serviços</a></li>
 									<li class="active"><a href="#users" class="act">Usuários</a></li>
@@ -256,6 +256,71 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 		<!-- //servicos -->
+		<!-- PRODUTOS -->
+		<a name="products"></a>
+		<div class="typo">
+			<div class="container">
+				<div class="typo-grids">
+					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+						<h3 class="bars">Serviços</h3>
+						<div id="newServiceError" class="collapse alert alert-danger"></div>
+						<div class="searchContent">
+							<input class="search" type="text" placeholder="Buscar serviços" id="searchText"></input>
+							<h4> por: </h4>
+							<select id="searchField">
+								<option value='name' required>Nome</option>
+								<option value='id'>ID</option>
+								<option value='description'>Descrição</option>
+								<option value='price'>Preço</option>
+							</select>
+							<h3><button class="label label-default" id="serviceSearch">Buscar</button></h3>
+						</div>
+						<table class="table table-hover" id="tableServices">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Nome</th>
+									<th>Descrição</th>
+									<th>Preço</th>
+									<th>Detalhes</th>
+								</tr>
+							</thead>
+						</table>
+						<div class="regButtons">
+							<h4><button class="label label-success" data-toggle="modal" data-target="#newserviceReg">Criar Novo Serviço</button></h4>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="newserviceReg" role="dialog" tabindex="-1">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h3 class="bars">Cadastro de Serviços</h3>
+									</div>
+									<div class="modal-body">
+										<form id="newServiceForm">
+											<h4>Nome:</h4>
+											<input type='text' id='sname' required></input>
+											<h4>Descrição:</h4>
+											<input type="text" id='sdescription' required></input>
+											<h4>Preço:<br/></h4>
+											<input type='text' id='sprice' placeholder="R$" required></input></br>
+										</div>
+										<div class="modal-footer">
+											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
+											<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- fim modal -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //produtos -->
 		<!-- USUARIOS -->
 		<a name="users"></a>
 		<div class="typo">

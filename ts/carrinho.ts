@@ -6,6 +6,8 @@ var server: Server = new Server()
 var currentUser: string = localStorage.PetStopCurrentUser
 var cartProducts : Product[]
 
+let total = 0
+
 // Pseudo login
 function authenticate() : void
 {
@@ -92,6 +94,8 @@ function refreshProducts()
 		sum += product.price;
 	});
 
+	total = sum
+
 	$("#products_table").append('<tr>' +
 	'<th>Total</th>' +
 	'<th colspan="2"></th>' +
@@ -153,4 +157,39 @@ $(document).ready(function()
 	})
 
 	refreshProducts()
+
+	$("#checkoutPayment").on("click", function (ev)
+{
+	let day = new Date().toISOString().split("T")[0]
+	let creditCard: string = $("#creditCard").val()
+	let csc: string = $("#csc").val()
+	let expDate: string = $("#expDate").val()
+	let cardFlag: string = $("input[name=flag]:checked").val()
+
+	//Validacao de campos
+	let regexp = /^\d{16}$/
+	if(!regexp.test(creditCard)) {
+		$("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut()
+		return false
+	}
+	regexp = /^\d{3}$/
+	if(!regexp.test(csc)) {
+		$("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut()
+		return false
+	}
+	regexp = /^[1-12]\/\d{2}$/
+	if(!regexp.test(expDate)) {
+		$("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut()
+		return false
+	}
+	let result: string = server.addSale(currentUser, cartProducts, day, creditCard, csc, expDate, total, "solicitado")
+
+	if (result != "ok")
+	{
+		$("#newScheduleError").html("<strong>Erro:</strong> " + result).show().delay(5000).fadeOut()
+		return false
+	}
+	sessionStorage.clear()
+	return true
+})
 })
