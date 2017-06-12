@@ -114,15 +114,19 @@ class Sale
 	products : Product[]
 	day : string
 	creditCard : string
+	csc : string
+	expDate : string
 	total : number
 	status : string
 
-	constructor (customer: string, products: Product[], day: string, creditCard: string, total: number, status: string)
+	constructor (customer: string, products: Product[], day: string, creditCard: string, csc: string, expDate: string, total: number, status: string)
 	{
 		this.customer = customer
 		this.products = products
 		this.day = day
 		this.creditCard = creditCard
+		this.csc = csc
+		this.expDate = expDate
 		this.total = total
 		this.status = status
 	}
@@ -273,9 +277,9 @@ class Server
 		this.schedules.push(new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag))
 		return "ok"
 	}
-	addSale (customer: string, products: Product[], day: string, creditCard: string, total: number, status: string)
+	addSale (customer: string, products: Product[], day: string, creditCard: string, csc: string, expDate: string, total: number, status: string)
 	{
-		this.sales.push(new Sale(customer, products, day, creditCard, total, status))
+		this.sales.push(new Sale(customer, products, day, creditCard, csc, expDate, total, status))
 		return "ok"
 	}
 }

@@ -57,11 +57,13 @@ class Schedule {
     }
 }
 class Sale {
-    constructor(customer, products, day, creditCard, total, status) {
+    constructor(customer, products, day, creditCard, csc, expDate, total, status) {
         this.customer = customer;
         this.products = products;
         this.day = day;
         this.creditCard = creditCard;
+        this.csc = csc;
+        this.expDate = expDate;
         this.total = total;
         this.status = status;
     }
@@ -184,8 +186,8 @@ class Server {
         this.schedules.push(new Schedule(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag));
         return "ok";
     }
-    addSale(customer, products, day, creditCard, total, status) {
-        this.sales.push(new Sale(customer, products, day, creditCard, total, status));
+    addSale(customer, products, day, creditCard, csc, expDate, total, status) {
+        this.sales.push(new Sale(customer, products, day, creditCard, csc, expDate, total, status));
         return "ok";
     }
 }
