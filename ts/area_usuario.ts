@@ -56,6 +56,30 @@ function refreshUserSchedules () : void
 	}
 	$("#tableSchedules").append(lineSchedule)
 }
+function refreshSales() : void
+{
+	let s
+	let lineSale = $("<tbody id='lineSales'></tbody>")
+	for (s in server.sales) {
+		let sale : Sale = server.sales[s]
+		if(sale.customer == currentUser) {
+			let line = $("<tr></tr>")
+			line.append($("<td>" + s + "</td>"))
+			let p
+			let linep
+			for(p in sale.products) {
+				let product : Product = sale.products[p]
+				linep += "<p>" + product.name + "</p>"
+			}
+			line.append($("<td>" + linep + "</td>"))
+			line.append($("<td>" + sale.day + "</td>"))
+			line.append($("<td> R$" + sale.total + "</td>"))
+			line.append($("<td>" + sale.status + "</td>"))
+			lineSale.append(line)
+		 }
+	}
+	$("#tableSales").append(lineSale)
+}
 
 function refreshUserPets() : void
 {
@@ -113,6 +137,8 @@ $(document).ready(function()
 
 	//Preenchendo dados dos agendamentos do usuario
 	refreshUserSchedules()
+
+	refreshSales()
 
 	// Preenchendo pets e dados do usuário:
 	refreshUserPets()

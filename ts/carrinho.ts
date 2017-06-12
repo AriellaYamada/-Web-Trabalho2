@@ -158,6 +158,9 @@ $(document).ready(function()
 
 	refreshProducts()
 
+	// Para salvar o estado do servidor mock ao sair da página:
+	$(window).on("unload", () => server.saveState())
+
 	$("#checkoutPayment").on("click", function (ev)
 {
 	let day = new Date().toISOString().split("T")[0]
