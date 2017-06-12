@@ -59,6 +59,10 @@ form input, label, button {
 .regButtons h4, button{
 	display: inline;
 }
+.checkoutButtons {
+	margin-top: 5px;
+	padding-left: 77%;
+}
 .CardFlag img{
 	height: 30px;
 	display: inline-block;
