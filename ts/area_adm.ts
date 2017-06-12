@@ -139,6 +139,11 @@ $(document).ready(function()
 	//Lista de Produtos
 	refreshProductData()
 
+	$("#logout").click(function(ev)
+	{
+		localStorage.removeItem("PetStopCurrentUser")
+	})
+
 	//Atualizacao do calendario, pets e servicos
 	$("#serviceRegForm").on("click", function ()
 	{

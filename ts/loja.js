@@ -20,8 +20,10 @@ function authenticate() {
             $("html, body").animate({ scrollTop: 0 }, "fast");
         }
     }
-    else
+    else {
+        $("#login_failed").show();
         $("#loginError").html("Usuários administradores não podem realizar pedidos.");
+    }
 }
 function changePage(page) {
     currentPage = page;
@@ -138,12 +140,16 @@ function sort(value) {
     }
 }
 $(document).ready(function () {
-    if (!currentUser == undefined)
-        $("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="index.html">Logout</a></li></ul>');
+    if (!(currentUser == undefined)) {
+        $("#login").html('<ul><li>Olá, ' + server.users[currentUser].userName + '</li><li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="loja.html" id="logout">Logout</a></li></ul>');
+    }
     $("#login_button").click(authenticate);
     $("#pass_user").keypress(function (e) {
         if (e.keyCode == 13)
             $("#login_button").click();
+    });
+    $("#logout").click(function (ev) {
+        localStorage.removeItem("PetStopCurrentUser");
     });
 });
 //# sourceMappingURL=loja.js.map

@@ -144,6 +144,11 @@ $(document).ready(function()
 	refreshUserPets()
 	refreshUserData()
 
+	$("#logout").click(function(ev)
+	{
+		localStorage.removeItem("PetStopCurrentUser")
+	})
+	
 	// Para quando o cliente altera sua foto:
 	$("#clientPicUploader").on("change", function()
 	{
