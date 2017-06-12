@@ -1,7 +1,7 @@
 ///<reference path="Server.ts"/>
 var server = new Server();
 var currentUser = localStorage.PetStopCurrentUser;
-var cartProducts = JSON.parse(sessionStorage.PetStopCartData);
+var cartProducts;
 // Pseudo login
 function authenticate() {
     let username = document.getElementById("login_user").value;
@@ -38,13 +38,28 @@ function refreshProducts() {
         '<th>Remover</th>' +
         '</tr>' +
         '</thead>');
-    console.log(cartProducts.length);
     for (i = 0; i < cartProducts.length; i++) {
-        let productId = server.products.indexOf(cartProducts[i]);
+        let productId = -1;
+        let j;
+        for (j in server.products) {
+            if (server.products[j].name == cartProducts[i].name) {
+                productId = j;
+                break;
+            }
+        }
         aux[productId] += 1;
     }
     for (i = 0; i < cartProducts.length; i++) {
-        let productId = server.products.indexOf(cartProducts[i]);
+        alert("teste");
+        let productId = -1;
+        let j;
+        for (j in server.products) {
+            if (server.products[j].name == cartProducts[i].name) {
+                alert(j);
+                productId = j;
+                break;
+            }
+        }
         if (aux[productId] >= 1 && flags[productId] == 0) {
             $("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
                 '<td class="invert">' + aux[productId] + '</td>' +
@@ -76,7 +91,13 @@ function removeProductFromCart(id, pos) {
     let n = 0;
     $("#cartProd" + pos).remove();
     for (i = 0; i < cartProducts.length; i++) {
-        let productId = server.products.indexOf(cartProducts[i]);
+        let j;
+        let productId = -1;
+        for (j in server.products) {
+            if (server.products[j] == cartProducts[i])
+                productId = j;
+            break;
+        }
         if (productId === id) {
             toRemove.push(cartProducts[i]);
         }
@@ -91,6 +112,7 @@ function removeProductFromCart(id, pos) {
     $("#total_price").html("R$" + sum.toFixed(2).replace(".", ","));
 }
 $(document).ready(function () {
+    cartProducts = JSON.parse(sessionStorage.PetStopCartData);
     if (currentUser == undefined) {
         $("#login_failed").show();
     }

@@ -216,6 +216,7 @@ class Server
 			this.schedules = [
 				{day: "2017-06-12", hour: "slot3", customer:"usuario1", pet: "0", service: "0", creditCard:"1234567891011121", csc: 123, expDate: "20-10", cardFlag: "visa"}
 			];
+			this.sales = [];
 		}
 	}
 

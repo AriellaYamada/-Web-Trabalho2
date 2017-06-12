@@ -138,6 +138,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="checkoutButtons">
 						<h2><button class="label label-default" id="checkout">Finalizar pedido</button></h2>
 					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="serviceReg" role="dialog" tabindex="-1">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 class="bars">Finalizar Pedido</h3>
+								</div>
+								<div class="modal-body">
+									<form id="checkoutSale" method="post">
+										<h4>Preço:</h4>
+										<span id="total"></span>
+										<h4>Número do Cartão de Crédito: </h4>
+										<div class="collapse alert alert-danger" id="creditCardError"></div>
+										<input id="creditCard" type='text'required></input>
+										<h4>Código de Segurança:</h4>
+										<div class="collapse alert alert-danger" id="cscError"></div>
+										<input id="csc" class='CSC' type='text' name='CSC' required></input>
+										<h4>Validade:</h4>
+										<div class="collapse alert alert-danger" id="expDateError"></div>
+										<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
+										<div class="CardFlag">
+											<h4>Bandeira:</h4>
+											<input type='radio' name="flag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
+											<input type='radio' name="flag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+											<input type='radio' name="flag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
+											<input type='radio' name="flag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<h3><button type="subtmit" class="label label-primary" value="Salvar"/>Agendar</button></h3>
+										<h3><button type="button" class="label label-danger" data-dismiss="modal">Fechar</button></h3>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- fim modal -->
 				</div>
 			</div>
 		</div>

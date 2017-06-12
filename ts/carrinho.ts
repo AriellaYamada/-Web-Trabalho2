@@ -1,11 +1,10 @@
 ///<reference path="Server.ts"/>
 
 // Script com a lógica específica da página area_usuario.html
-
 declare var $: any;
 var server: Server = new Server()
 var currentUser: string = localStorage.PetStopCurrentUser
-var cartProducts : Product[] = JSON.parse(sessionStorage.PetStopCartData)
+var cartProducts : Product[]
 
 // Pseudo login
 function authenticate() : void
@@ -53,14 +52,27 @@ function refreshProducts()
 	'</tr>' +
 	'</thead>')
 
-	console.log(cartProducts.length)
 	for (i = 0; i < cartProducts.length; i++){
-		let productId = server.products.indexOf(cartProducts[i])
+		let productId = -1
+		let j
+		for(j in server.products) {
+			if(server.products[j].name == cartProducts[i].name) {
+				productId = j
+				break
+			}
+		}
 		aux[productId] += 1;
 	}
 
 	for (i = 0; i < cartProducts.length; i++){
-		let productId = server.products.indexOf(cartProducts[i])
+		let productId = -1
+		let j
+		for(j in server.products) {
+			if(server.products[j].name == cartProducts[i].name) {
+				productId = j
+				break
+			}
+		}
 		if (aux[productId] >= 1 && flags[productId] == 0){
 			$("#products_table").append('<tr class="rem1" id="cartProd' + i + '">' +
 			'<td class="invert">' + aux[productId] + '</td>' +
@@ -98,7 +110,13 @@ function removeProductFromCart(id: number, pos: number)
 	$("#cartProd" + pos).remove();
 
 	for (i = 0; i < cartProducts.length; i++){
-		let productId = server.products.indexOf(cartProducts[i])
+		let j
+		let productId = -1
+		for(j in server.products) {
+			if(server.products[j] == cartProducts[i])
+			productId = j
+			break
+		}
 		if (productId === id){
 			toRemove.push(cartProducts[i]);
 		}
@@ -120,6 +138,7 @@ function removeProductFromCart(id: number, pos: number)
 
 $(document).ready(function()
 {
+	cartProducts = JSON.parse(sessionStorage.PetStopCartData)
 	if (currentUser == undefined) {
 		$("#login_failed").show()
 	} else {
