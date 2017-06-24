@@ -7,18 +7,73 @@ const session = require("express-session")
 
 const couch = new NodeCouchDb()
 
-
-/* Cria um novo usuário no banco de dados */
-function createUser(id, pass, is_admin)
+class Pet 
 {
-	couch.insert("users",
+    constructor(name, breed, age, pic)
 	{
-		_id: id,
-		pass: pass,
-		is_admin: is_admin
-	}).then(
-	({data, headers, status}) => {console.log("Usuário com id %s inserido com sucesso.", data.id)},
-	(err) => {console.log(err)})
+        this.name = name
+        this.breed = breed
+        this.age = age
+        this.pic = pic
+    }
+}
+class User
+{
+	constructor(id, pass, name, address, pic, tel, email, is_admin)
+	{
+        this._id = id
+        this.pass = pass
+
+        this.name = name
+        this.address = address
+        this.pic = pic
+        this.tel = tel
+        this.email = email
+        this.is_admin = is_admin
+
+        this.pets = {}
+    }
+}
+
+/* Cria um novo usuário no banco de dados.
+ Recebe uma instância da classe User que representa o usuário a ser criado */
+function createUser(user)
+{
+	couch.insert("users", user).then(
+	({data, headers, status}) => 
+	{
+		console.log("Usuário com id %s inserido com sucesso.", data.id);
+	},
+	(err) => console.log(err))
+}
+
+function createPet(owner_id, name, breed, age, pic)
+{
+	couch.get("users", owner_id).then(({data, headers, status}) =>
+	{
+		let user = data
+		if (user.pets[name])
+		{
+			console.log("Pet de nome %s do usuário %s já existe. Não foi alterado.", owner_id, name)
+			return
+		}
+
+		user.pets[name] = new Pet(name, breed, age, pic)
+		couch.update("users", user).then(({data, headers, status}) =>
+		{
+			console.log("Pet %s adicionado ao usuário %s com sucesso", name, owner_id)
+		},
+		err =>
+		{
+			console.log(err)
+			console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
+		})
+	},
+	err => 
+	{
+		console.log(err)
+		console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
+	})
 }
 
 /* Verifica se o par (id, pass) bate com algum usuário do banco.
@@ -58,8 +113,17 @@ couch.createDatabase("users").then(
 	function()
 	{
 		console.log("Database 'users' não encontrada. Será criada e inicializada.")
-		createUser("usuario1", "1234", false)
-		createUser("admin", "admin", true)
+        
+		let userExample1 = new User("usuario1", "1234", "Rodrigo Weigert", "Rua Tiradentes, 123", "images/profiles/profilepic.jpg", "(17) 1234-5678", "rodrigo.weigert@usp.br", false)
+		let userExample2 = new User("admin", "admin", "Administrador", null, "images/profiles/profileadmin.png", "(16) 8765-4321", "admin@petstop.com.br", true)
+		let petExample1 = new Pet("Kabosu", "Shiba Inu", 1, "images/pets/doge.jpg")
+		let petExample2 =  new Pet("Toby", "Bulldog", 2, "images/pets/borkdrive.jpg")
+
+		userExample1.pets[petExample1.name] = petExample1
+		userExample1.pets[petExample2.name] = petExample2
+
+        createUser(userExample1)
+		createUser(userExample2)
 	},
 	function(err)
 	{
@@ -110,6 +174,14 @@ app.post('/login', (req, res) =>
 	})
 })
 
+app.get('/logout', (req, res) =>
+{
+	req.session.destroy()
+	res.redirect('/')
+})
+
+// Páginas de usuário e admin.
+
 app.get('/area_usuario', (req, res) =>
 {
 	if (!req.session.user)
@@ -130,10 +202,11 @@ app.get('/area_adm', (req, res) =>
 		res.sendFile(__dirname + "/area_adm.html")
 })
 
-app.get('/logout', (req, res) =>
+// Para oferecimento de dados via AJAX (obtenção dos pets do usuário, por exemplo)
+
+app.get('/userdata', (req, res) => 
 {
-	req.session.destroy()
-	res.redirect('/')
+	res.send(req.session.user)	
 })
 
 

@@ -4,19 +4,55 @@
 
 declare var $: any;
 
-var server: Server = new Server()
-var currentUser: string = localStorage.PetStopCurrentUser
-
 function refreshUserData() : void
 {
-	$(".clientData").each(function()
+	$.ajax({url: "/userdata", success: function(user)
 	{
-		let field_name: string = $(this).attr("id")
-		$(this).html(server.users[currentUser][field_name])
-	})
-	$("#userPic").attr("src", server.users[currentUser].userPic)
-}
+		$("#greetName").html(user.name)
 
+		$(".clientData").each(function()
+		{
+			let field_name: string = $(this).attr("data-db")
+			$(this).html(user[field_name])
+		})
+		$("#userPic").attr("src", user.pic)
+
+		$("#petContainer").empty()
+		let nopets: boolean = true
+		let petId: string
+		for (petId in user.pets)
+		{
+			let pet: Pet = user.pets[petId]
+		
+			nopets = false
+
+			let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
+			let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>")
+			let d3 = $("<div class='new-collections-grid1-image'></div>")
+			let a = $("<a class='product-image'></a>")
+			let img = $("<img class='img-responsive' alt='" + pet.name + "' src='" + pet.pic + "'></img>")
+			let d4 = $("<div class='new-collections-grid1-image-pos'></div>")
+			let a2 = $("<a href='single.html'>Detalhes</a>")
+			let h4 = $("<h4><a href='single.html'>" + pet.name + "</a></h4>")
+			let p = $("<p>" + pet.breed + "</p>")
+
+			d1.append(d2)
+			d2.append(d3)
+			d3.append(a)
+			a.append(img)
+			d3.append(d4)
+			d4.append(a2)
+			d3.append(h4)
+			d3.append(p)
+
+			$("#petContainer").append(d1)
+		}
+		if (nopets)
+		$("#petContainer").html("Sem pets cadastrados.")
+
+	}})
+}
+/*
 function refreshUserSchedules () : void
 {
 	let s
@@ -81,50 +117,12 @@ function refreshSales() : void
 	}
 	$("#tableSales").append(lineSale)
 }
-
-function refreshUserPets() : void
-{
-	$("#petContainer").empty()
-	let nopets: boolean = true
-	let petId: string
-	for (petId in server.users[currentUser].pets)
-	{
-		let pet: Pet = server.users[currentUser].pets[petId]
-	
-		nopets = false
-
-		let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
-		let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>")
-		let d3 = $("<div class='new-collections-grid1-image'></div>")
-		let a = $("<a class='product-image'></a>")
-		let img = $("<img class='img-responsive' alt='" + pet.name + "' src='" + pet.pic + "'></img>")
-		let d4 = $("<div class='new-collections-grid1-image-pos'></div>")
-		let a2 = $("<a href='single.html'>Detalhes</a>")
-		let h4 = $("<h4><a href='single.html'>" + pet.name + "</a></h4>")
-		let p = $("<p>" + pet.breed + "</p>")
-
-		d1.append(d2)
-		d2.append(d3)
-		d3.append(a)
-		a.append(img)
-		d3.append(d4)
-		d4.append(a2)
-		d3.append(h4)
-		d3.append(p)
-
-		$("#petContainer").append(d1)
-	}
-	if (nopets)
-	$("#petContainer").html("Sem pets cadastrados.")
-}
-
+*/
 
 $(document).ready(function()
 {
-
-	// Nome de usuário na saudação:
-	$("#greetName").html(server.users[currentUser].userName)
-
+	refreshUserData()
+/*
 	//Preenchendo dados dos agendamentos do usuario
 	refreshUserSchedules()
 
@@ -132,15 +130,7 @@ $(document).ready(function()
 
 	// Preenchendo pets e dados do usuário:
 	refreshUserPets()
-	refreshUserData()
 
-	$("#logout").css("cursor", "pointer")
-	$("#logout").click(function(ev)
-	{
-		localStorage.removeItem("PetStopCurrentUser")
-		window.location.href = "index.html"
-	})
-	
 	// Para quando o cliente altera sua foto:
 	$("#clientPicUploader").on("change", function()
 	{
@@ -294,5 +284,5 @@ $(document).ready(function()
 		field.after(updateInputField)
 		updateInputField.focus()
 	})
-	
+	*/	
 })
