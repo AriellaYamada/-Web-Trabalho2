@@ -3,6 +3,7 @@
 // Script com a lógica específica da página area_usuario.html
 
 declare var $: any;
+
 var server: Server = new Server()
 var currentUser: string = localStorage.PetStopCurrentUser
 
@@ -89,19 +90,7 @@ function refreshUserPets() : void
 	for (petId in server.users[currentUser].pets)
 	{
 		let pet: Pet = server.users[currentUser].pets[petId]
-		/*
-		<div class="col-md-3 new-collections-grid">
-		<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
-		<div class="new-collections-grid1-image">
-		<a href="single.html" class="product-image"><img src="img/doge.jpg" alt=" " class="img-responsive" /></a>
-		<div class="new-collections-grid1-image-pos">
-		<a href="single.html">Detalhes</a>
-		</div>
-		</div>
-		<h4><a href="single.html">Kabosu</a></h4>
-		<p>Shiba Inu</p>
-		</div>
-		*/
+	
 		nopets = false
 
 		let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
@@ -132,6 +121,7 @@ function refreshUserPets() : void
 
 $(document).ready(function()
 {
+
 	// Nome de usuário na saudação:
 	$("#greetName").html(server.users[currentUser].userName)
 
@@ -304,4 +294,5 @@ $(document).ready(function()
 		field.after(updateInputField)
 		updateInputField.focus()
 	})
+	
 })
