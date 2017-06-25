@@ -4,21 +4,30 @@
 
 declare var $: any;
 
-function refreshAdminData() : void
+function refreshAdminData(user: any) : void
 {
-	$.ajax({url: "/userdata", success: function(user)
+	$("#greetName").html(user.name)
+
+	$(".clientData").each(function()
 	{
-		$("#greetName").html(user.name)
+		let field_name: string = $(this).attr("data-db")
+		$(this).html(user[field_name])
+	})
 
-		$(".clientData").each(function()
-		{
-			let field_name: string = $(this).attr("data-db")
-			$(this).html(user[field_name])
-		})
+	$("#userPic").attr("src", user.pic)
+}
 
-		$("#userPic").attr("src", user.pic)
+function updateAdmin(user)
+{
+	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received) 
+	{
+		if (received == "ok")
+			refreshAdminData(user)
+		else
+			alert("Houve um erro ao alterar os dados.")
 	}})
 }
+
 
 /*
 function refreshSchedules() : void
@@ -128,8 +137,7 @@ function refreshUserList() : void
 $(document).ready(function()
 {
 	// Preenchendo dados do usuário:
-	refreshAdminData()
-
+	$.ajax({url: "/userdata", success: refreshAdminData})
 	/*
 	// Lista de usuários
 	refreshUserList()
@@ -351,39 +359,43 @@ $("#newUserForm").on("submit", function (ev)
 	return true
 })
 
-// Para fazer alterações dos dados cadastrais do usuário:
-$(".editInfo").css("cursor", "pointer")						// cursor de link
-$(".editInfo").click(function()
-{
-	let editButton = $(this)
-	editButton.hide()
+*/
 
-	let field = editButton.prev()								// sibling anterior (contém o dado atual do usuário)
-	field.hide()
+	// Para fazer alterações dos dados cadastrais do usuário:
+	$(".editInfo").css("cursor", "pointer")						// cursor de link
+	$(".editInfo").click(function()
+	{
+		let editButton = $(this)
+		editButton.hide()
 
-	let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input
-	updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
-	updateInputField.blur(function()
-	{
-		server.users[currentUser][field.attr("id")] = $(this).val()			// o id de field tem o mesmo nome que o atributo correspondente no servidor
-		refreshUserData()
-		field.show()
-		$(this).remove()
-		editButton.show()
-	})
-	updateInputField.keydown(function(e)
-	{
-		if (e.keyCode == 13)	// enter
-		$(this).blur()
-		if (e.keyCode == 27)	// esc
+		$.ajax({url: "/userdata", success: function(user)
 		{
-			field.show()
-			$(this).remove()
-			editButton.show()
-		}
-	})
-	field.after(updateInputField)
-	updateInputField.focus()
-})
-	*/
+			let field = editButton.prev()								// sibling anterior (contém o dado atual do usuário)
+			field.hide()
+
+			let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input
+			updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
+			updateInputField.blur(function()
+			{
+				user[field.attr("data-db")] = $(this).val()				// o data-db do field tem o mesmo nome que o atributo correspondente no servidor
+				updateAdmin(user)
+				field.show()
+				$(this).remove()
+				editButton.show()
+			})
+			updateInputField.keydown(function(e)
+			{
+				if (e.keyCode == 13)	// enter
+					$(this).blur()
+				if (e.keyCode == 27)	// esc
+				{
+					field.show()
+					$(this).remove()
+					editButton.show()
+				}
+			})
+			field.after(updateInputField)
+			updateInputField.focus()
+		}})
+	})	
 })

@@ -4,52 +4,63 @@
 
 declare var $: any;
 
-function refreshUserData() : void
+/* Atualiza os dados do usuário apresentados na página
+ conforme os dados contidos na instância de usuário recebida por parâmetro.*/
+function refreshUserData(user: any) : void
 {
-	$.ajax({url: "/userdata", success: function(user)
+	$("#greetName").html(user.name)
+
+	$(".clientData").each(function()
 	{
-		$("#greetName").html(user.name)
+		let field_name: string = $(this).attr("data-db")
+		$(this).html(user[field_name])
+	})
+	$("#userPic").attr("src", user.pic)
 
-		$(".clientData").each(function()
-		{
-			let field_name: string = $(this).attr("data-db")
-			$(this).html(user[field_name])
-		})
-		$("#userPic").attr("src", user.pic)
+	$("#petContainer").empty()
+	let nopets: boolean = true
+	let petId: string
+	for (petId in user.pets)
+	{
+		let pet: Pet = user.pets[petId]
+	
+		nopets = false
 
-		$("#petContainer").empty()
-		let nopets: boolean = true
-		let petId: string
-		for (petId in user.pets)
-		{
-			let pet: Pet = user.pets[petId]
-		
-			nopets = false
+		let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
+		let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>")
+		let d3 = $("<div class='new-collections-grid1-image'></div>")
+		let a = $("<a class='product-image'></a>")
+		let img = $("<img class='img-responsive' alt='" + pet.name + "' src='" + pet.pic + "'></img>")
+		let d4 = $("<div class='new-collections-grid1-image-pos'></div>")
+		let a2 = $("<a href='single.html'>Detalhes</a>")
+		let h4 = $("<h4><a href='single.html'>" + pet.name + "</a></h4>")
+		let p = $("<p>" + pet.breed + "</p>")
 
-			let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
-			let d2 = $("<div class='new-collections-grid1 animated wow slideInUp' data-wow-delay='.5s'></div>")
-			let d3 = $("<div class='new-collections-grid1-image'></div>")
-			let a = $("<a class='product-image'></a>")
-			let img = $("<img class='img-responsive' alt='" + pet.name + "' src='" + pet.pic + "'></img>")
-			let d4 = $("<div class='new-collections-grid1-image-pos'></div>")
-			let a2 = $("<a href='single.html'>Detalhes</a>")
-			let h4 = $("<h4><a href='single.html'>" + pet.name + "</a></h4>")
-			let p = $("<p>" + pet.breed + "</p>")
+		d1.append(d2)
+		d2.append(d3)
+		d3.append(a)
+		a.append(img)
+		d3.append(d4)
+		d4.append(a2)
+		d3.append(h4)
+		d3.append(p)
 
-			d1.append(d2)
-			d2.append(d3)
-			d3.append(a)
-			a.append(img)
-			d3.append(d4)
-			d4.append(a2)
-			d3.append(h4)
-			d3.append(p)
+		$("#petContainer").append(d1)
+	}
+	if (nopets)
+	$("#petContainer").html("Sem pets cadastrados.")
+}
 
-			$("#petContainer").append(d1)
-		}
-		if (nopets)
-		$("#petContainer").html("Sem pets cadastrados.")
-
+// Faz com que os dados do usuário no servidor sejam igualados aos dados presentes no
+// parâmetro user. Em seguida, atualiza a página com os novos dados.
+function updateUser(user)
+{
+	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received) 
+	{
+		if (received == "ok")
+			refreshUserData(user)
+		else
+			alert("Houve um erro ao alterar os dados.")
 	}})
 }
 /*
@@ -121,7 +132,9 @@ function refreshSales() : void
 
 $(document).ready(function()
 {
-	refreshUserData()
+	// Obtem do servidor os dados do usuário, usa-os para preencher as informações da página
+	$.ajax({url: "/userdata", success: refreshUserData})
+
 /*
 	//Preenchendo dados dos agendamentos do usuario
 	refreshUserSchedules()
@@ -249,6 +262,7 @@ $(document).ready(function()
 		return true
 	})
 
+	*/
 
 	// Para fazer alterações dos dados cadastrais do usuário:
 	$(".editInfo").css("cursor", "pointer")						// cursor de link
@@ -257,32 +271,34 @@ $(document).ready(function()
 		let editButton = $(this)
 		editButton.hide()
 
-		let field = editButton.prev()								// sibling anterior (contém o dado atual do usuário)
-		field.hide()
+		$.ajax({url: "/userdata", success: function(user)
+		{
+			let field = editButton.prev()								// sibling anterior (contém o dado atual do usuário)
+			field.hide()
 
-		let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input
-		updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
-		updateInputField.blur(function()
-		{
-			server.users[currentUser][field.attr("id")] = $(this).val()			// o id de field tem o mesmo nome que o atributo correspondente no servidor
-			refreshUserData()
-			field.show()
-			$(this).remove()
-			editButton.show()
-		})
-		updateInputField.keydown(function(e)
-		{
-			if (e.keyCode == 13)	// enter
-				$(this).blur()
-			if (e.keyCode == 27)	// esc
+			let updateInputField = $("<input type=\"text\"></input>")	// cria novo elemento input
+			updateInputField.val(field.html())							// inicializa o valor do element input com o valor do dado atual
+			updateInputField.blur(function()
 			{
+				user[field.attr("data-db")] = $(this).val()				// o data-db do field tem o mesmo nome que o atributo correspondente no servidor
+				updateUser(user)
 				field.show()
 				$(this).remove()
 				editButton.show()
-			}
-		})
-		field.after(updateInputField)
-		updateInputField.focus()
+			})
+			updateInputField.keydown(function(e)
+			{
+				if (e.keyCode == 13)	// enter
+					$(this).blur()
+				if (e.keyCode == 27)	// esc
+				{
+					field.show()
+					$(this).remove()
+					editButton.show()
+				}
+			})
+			field.after(updateInputField)
+			updateInputField.focus()
+		}})
 	})
-	*/	
 })

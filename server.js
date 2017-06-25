@@ -139,8 +139,12 @@ const app = express()
 // Para o servidor servir tudo o que está no diretório "public" automaticamente.
 app.use(express.static("public"))
 
-// Para parsear dados enviados por POST
+// Para parsear dados enviados por POST com tipo "application/x-www-form-urlencoded"
+// Obs: esse tipo é usado por default quando o tipo não é especificado tanto na função abaixo quanto em requests AJAX do jQuery
 app.use(bodyParser.urlencoded({extended: true}))
+
+// Para parsear dados enviados por POST com tipo "application/json"
+app.use(bodyParser.json())
 
 // Para lidar com as sessões dos usuários
 app.use(session({secret: "q q eu to fazeno com a minha vida?", resave: false, saveUninitialized: false}))
@@ -186,7 +190,7 @@ app.get('/area_usuario', (req, res) =>
 {
 	if (!req.session.user)
 		res.redirect('/')
-	else if (req.session.user.is_admin)
+	else if (req.session.user.is_admin == true)
 		res.redirect('/area_adm')
 	else
 		res.sendFile(__dirname + "/area_usuario.html")
@@ -204,11 +208,29 @@ app.get('/area_adm', (req, res) =>
 
 // Para oferecimento de dados via AJAX (obtenção dos pets do usuário, por exemplo)
 
+
 app.get('/userdata', (req, res) => 
 {
 	res.send(req.session.user)	
 })
 
+app.post('/updateuserdata', (req, res) => 
+{
+	let user = req.body
+	couch.update("users", user).then(({data, headers, status}) =>
+	{
+		req.session.user = user				// atualiza todos os campos exceto _rev (o _rev recebido é o atual)
+		req.session.user._rev = data.rev	// atualiza _rev para o novo valor, recebido após o update
+		console.log("Usuário %s atualizado.", user._id)
+		res.send("ok")
+	},
+	err =>
+	{
+		console.log(err)
+		console.log("Erro ao tentar atualizar usuário %s.", user._id)
+		res.send("no")
+	})
+})
 
 /* Inicialização dos servidores https e http. */
 
@@ -226,4 +248,3 @@ const http_server = app.listen(8080, function()
 	let port = http_server.address().port
 	console.log("Servidor HTTP iniciado em http://%s:%s", host, port)
 })
-
