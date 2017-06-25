@@ -3,9 +3,24 @@
 // Script com a lógica específica da página area_usuario.html
 
 declare var $: any;
-var server: Server = new Server()
-var currentUser: string = localStorage.PetStopCurrentUser
 
+function refreshAdminData() : void
+{
+	$.ajax({url: "/userdata", success: function(user)
+	{
+		$("#greetName").html(user.name)
+
+		$(".clientData").each(function()
+		{
+			let field_name: string = $(this).attr("data-db")
+			$(this).html(user[field_name])
+		})
+
+		$("#userPic").attr("src", user.pic)
+	}})
+}
+
+/*
 function refreshSchedules() : void
 {
 	let s
@@ -84,15 +99,6 @@ function refreshProductData() : void
 
 }
 
-function refreshUserData() : void
-{
-	$(".clientData").each(function()
-	{
-		let field_name: string = $(this).attr("id")
-		$(this).html(server.users[currentUser][field_name])
-	})
-	$("#userPic").attr("src", server.users[currentUser].userPic)
-}
 
 function refreshUserList() : void
 {
@@ -113,20 +119,18 @@ function refreshUserList() : void
 		lineUser.append(line)
 	}
 	$("#tableUsers").append(lineUser)
-	/*$("#userList").empty()
-	for (let user in server.users)
-	$("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"))
-	*/
+	//$("#userList").empty()
+	//for (let user in server.users)
+	//$("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"))
 }
+*/
 
 $(document).ready(function()
 {
-	// Nome de usuário na saudação:
-	$("#greetName").html(server.users[currentUser].userName)
-
 	// Preenchendo dados do usuário:
-	refreshUserData()
+	refreshAdminData()
 
+	/*
 	// Lista de usuários
 	refreshUserList()
 
@@ -381,4 +385,5 @@ $(".editInfo").click(function()
 	field.after(updateInputField)
 	updateInputField.focus()
 })
+	*/
 })
