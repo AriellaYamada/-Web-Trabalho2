@@ -190,7 +190,7 @@ app.get('/area_usuario', (req, res) =>
 {
 	if (!req.session.user)
 		res.redirect('/')
-	else if (req.session.user.is_admin == true)
+	else if (req.session.user.is_admin)
 		res.redirect('/area_adm')
 	else
 		res.sendFile(__dirname + "/area_usuario.html")
@@ -207,20 +207,21 @@ app.get('/area_adm', (req, res) =>
 })
 
 // Para oferecimento de dados via AJAX (obtenção dos pets do usuário, por exemplo)
-
-
 app.get('/userdata', (req, res) => 
 {
 	res.send(req.session.user)	
 })
 
+
+// Para atualizar os dados do usuário quando ele altera seu cadastro. Os novos dados do usuário
+// são recebidos em um objeto JSON que representa o usuário.
 app.post('/updateuserdata', (req, res) => 
 {
 	let user = req.body
 	couch.update("users", user).then(({data, headers, status}) =>
 	{
 		req.session.user = user				// atualiza todos os campos exceto _rev (o _rev recebido é o atual)
-		req.session.user._rev = data.rev	// atualiza _rev para o novo valor, recebido após o update
+		req.session.user._rev = data.rev	// atualiza _rev para o novo valor, gerado após o update.
 		console.log("Usuário %s atualizado.", user._id)
 		res.send("ok")
 	},

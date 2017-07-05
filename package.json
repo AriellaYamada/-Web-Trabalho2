@@ -1,0 +1,26 @@
+{
+  "name": "-web-trabalho2",
+  "version": "1.0.0",
+  "description": "Alunos:\r Ariella Yamada Brambila\t\t\t\t8937034\r Arnaldo Lopes Stanzani\t\t\t\t8937510\r Guilherme Silva dos Anjos\t\t\t8936839\r Rodrigo de Andrade Santos Weigert\t8937503",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AriellaYamada/-Web-Trabalho2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AriellaYamada/-Web-Trabalho2/issues"
+  },
+  "homepage": "https://github.com/AriellaYamada/-Web-Trabalho2#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "node-couchdb": "^1.1.1"
+  }
+}
