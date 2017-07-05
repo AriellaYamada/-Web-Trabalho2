@@ -1,9 +1,14 @@
-const express = require("express")
+// Módulos nativos
 const fs = require("fs")
 const https = require("https")
+const mime = require("mime")
+
+// Módulos não nativos
+const express = require("express")
 const NodeCouchDb = require("node-couchdb")
 const bodyParser = require("body-parser")
 const session = require("express-session")
+const multer = require("multer")
 
 const couch = new NodeCouchDb()
 
@@ -130,7 +135,7 @@ couch.createDatabase("users").then(
 		if (err.code == "EDBEXISTS")
 			console.log("Database 'users' já existe, não será alterada.")
 		else
-			console.log(err.body)
+			console.log(err)
 	}
 )
 
@@ -232,6 +237,34 @@ app.post('/updateuserdata', (req, res) =>
 		res.send("no")
 	})
 })
+
+// Para receber o upload de imagens de perfil
+
+const profilePic_storage = multer.diskStorage(
+{
+	destination: "public/images/profiles",
+	filename: function(req, file, cb)
+	{
+		cb(null, Date.now() + "." + mime.extension(file.mimetype))
+	}
+})
+
+app.post('/upload', multer({storage: profilePic_storage}).single("clientPicFile"), function (req, res)
+{
+	//console.log(req.file)
+	req.session.user.pic = req.file.path.replace("public/", "")
+	couch.update("users", req.session.user).then(({data, headers, status}) =>
+	{
+		req.session.user._rev = data.rev
+		res.redirect('/area_usuario')
+	},
+	err => 
+	{
+		console.log("Erro ao tentar atualizar foto do usuário %s.", req.session.user._id)
+		res.redirect('/area_usuario')
+	})
+})
+
 
 /* Inicialização dos servidores https e http. */
 
