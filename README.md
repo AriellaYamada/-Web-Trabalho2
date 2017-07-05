@@ -3,6 +3,7 @@
 ## Instale e rode o CouchDB
 
 Download: http://couchdb.apache.org/#download
+
 Instalação: http://docs.couchdb.org/en/2.0.0/install/unix.html
 
 ## Garanta que sua versão do nodejs está atualizada
@@ -16,5 +17,6 @@ Como atualizar: https://askubuntu.com/questions/426750/how-can-i-update-my-nodej
 ## Instale as dependências e inicie o servidor
 
 `npm install`
+
 `npm start`
 
