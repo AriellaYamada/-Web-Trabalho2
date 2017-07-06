@@ -4,6 +4,19 @@
 
 declare var $: any;
 
+function randomPassword()
+{
+	let v:string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789"
+	let length:number = 6
+	let ret:string = ""
+	for (let i = 0; i < length; i++)
+	{
+		let idx:number = Math.floor(Math.random() * v.length)
+		ret += v.charAt(idx)
+	}
+	return ret
+}
+
 function refreshAdminData(user: any) : void
 {
 	$("#greetName").html(user.name)
@@ -138,6 +151,12 @@ $(document).ready(function()
 {
 	// Preenchendo dados do usuário:
 	$.ajax({url: "/userdata", success: refreshAdminData})
+
+	$("#genPassButton").on("click", function(event) 
+	{
+		event.preventDefault()
+		$("#newUserForm input[name=pass]").val(randomPassword())
+	})
 	/*
 	// Lista de usuários
 	refreshUserList()

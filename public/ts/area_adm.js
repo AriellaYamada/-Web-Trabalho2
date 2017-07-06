@@ -1,4 +1,14 @@
 ///<reference path="Server.ts"/>
+function randomPassword() {
+    let v = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+    let length = 6;
+    let ret = "";
+    for (let i = 0; i < length; i++) {
+        let idx = Math.floor(Math.random() * v.length);
+        ret += v.charAt(idx);
+    }
+    return ret;
+}
 function refreshAdminData(user) {
     $("#greetName").html(user.name);
     $(".clientData").each(function () {
@@ -122,6 +132,10 @@ function refreshUserList() : void
 $(document).ready(function () {
     // Preenchendo dados do usuário:
     $.ajax({ url: "/userdata", success: refreshAdminData });
+    $("#genPassButton").on("click", function (event) {
+        event.preventDefault();
+        $("#newUserForm input[name=pass]").val(randomPassword());
+    });
     /*
     // Lista de usuários
     refreshUserList()

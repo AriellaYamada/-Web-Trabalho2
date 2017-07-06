@@ -113,6 +113,7 @@ function refreshSales() : void
 }
 */
 $(document).ready(function () {
+    // Obtem do servidor os dados do usuário, usa-os para preencher as informações da página
     $.ajax({ url: "/userdata", success: refreshUserData });
     /*
         //Preenchendo dados dos agendamentos do usuario

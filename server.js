@@ -120,7 +120,7 @@ couch.createDatabase("users").then(
 		console.log("Database 'users' não encontrada. Será criada e inicializada.")
         
 		let userExample1 = new User("usuario1", "1234", "Rodrigo Weigert", "Rua Tiradentes, 123", "images/profiles/profilepic.jpg", "(17) 1234-5678", "rodrigo.weigert@usp.br", false)
-		let userExample2 = new User("admin", "admin", "Administrador", null, "images/profiles/profileadmin.png", "(16) 8765-4321", "admin@petstop.com.br", true)
+		let userExample2 = new User("admin", "admin", "Administrador", null, "images/profiles/default.png", "(16) 8765-4321", "admin@petstop.com.br", true)
 		let petExample1 = new Pet("Kabosu", "Shiba Inu", 1, "images/pets/doge.jpg")
 		let petExample2 =  new Pet("Toby", "Bulldog", 2, "images/pets/borkdrive.jpg")
 
@@ -263,6 +263,25 @@ app.post('/upload', multer({storage: profilePic_storage}).single("clientPicFile"
 		console.log("Erro ao tentar atualizar foto do usuário %s.", req.session.user._id)
 		res.redirect('/area_usuario')
 	})
+})
+
+
+// Para o admin criar novos usuários
+
+app.post('/newuser', function(req, res) 
+{
+	if (!req.session.user.is_admin)
+	{
+		res.status(403).send("Você não tem permissão para fazer isso.")
+		return
+	}
+
+	let is_admin = false
+	if (req.body.usertype == "admin")
+		is_admin = true
+
+	createUser(new User(req.body.id, req.body.pass, req.body.name, req.body.address, "images/profiles/default.png", req.body.telephone, req.body.email, is_admin))
+	res.redirect('/area_adm')
 })
 
 
