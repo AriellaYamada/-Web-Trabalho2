@@ -4,8 +4,6 @@
 
 declare var $: any;
 
-var cacheServices = {}
-
 /* Atualiza os dados do usuário apresentados na página
  conforme os dados contidos na instância de usuário recebida por parâmetro.*/
 function refreshUserData(user: any) : void
@@ -308,6 +306,8 @@ $(document).ready(function()
 	//Atualiza informações de agendamento
 	$("#serviceRegForm").click(function()
 	{
+		let today = new Date().toISOString().split("T")[0]
+		$("#calendar").prop("min", today)
 		$.ajax({url: "/userdata", success : function(user)
 		{
 			let petId : string
@@ -320,7 +320,6 @@ $(document).ready(function()
 		}})
 		$.ajax({url: "/getservices", type: "GET", success: function(services)
 		{
-			cacheServices = services
 			let opService = $("<select id='service'></select>")
 			for(let s in services) {
 				let service = services[s]
@@ -335,9 +334,13 @@ $(document).ready(function()
 	$("#calendar").on("change", function()
 	{
 		let date = $("#calendar").val()
-		$.ajax({url: "notavailablehours", type: "GET", data: {"date": date}, success: function(hours)
+		let s
+		let lineSchedule = $("<tbody></tbody>")
+		$.ajax({url: "notavailablehours", type: "GET", data: {"date": date}, success: function(schedules)
 		{
-			console.log(hours)
+			for(let i in schedules) {
+				$("#time option[value=" + schedules[i].hour + "]").hide()
+			}
 		}})
 	})
 
@@ -346,10 +349,52 @@ $(document).ready(function()
 	$("#selectService").on("click", function ()
 	{
 		let serviceId = $("#selectService option:selected").val()
-		$.ajax({url: "/getserviceprice", type: "GET", data: {"serviceid": serviceId}, sucess: function(service)
+		$.ajax({url: "/serviceprice", type: "GET", data: {"serviceid": serviceId}, success: function(service)
 		{
-			console.log(service.value.price)
-			//$("#servicePrice").html("<h5>R$" + price + "</h5>")
+			$("#servicePrice").html("<h5>R$" + service.price + "</h5>")
+		}})
+	})
+
+	//Agendamento de serviceRegForm
+	$("#newScheduleForm").on("submit", function (ev)
+	{
+
+		//Conteudo do formulario
+		let day: string = $("#calendar").val()
+		let time: string = $("#time option:selected").val()
+		let pet: string = $("#pet option:selected").val()
+		let service: string = $("#service option:selected").val()
+		let creditCard: string = $("#creditCard").val()
+		let csc: string = $("#csc").val()
+		let expDate: string = $("#expDate").val()
+		let cardFlag: string = $("input[name=flag]:checked").val()
+
+		//Validacao de campos
+		let regexp = /^\d{16}$/
+		if(!regexp.test(creditCard)) {
+			$("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut()
+			return false
+		}
+		regexp = /^\d{3}$/
+		if(!regexp.test(csc)) {
+			$("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut()
+			return false
+		}
+		/*regexp = /^[1-12]\/\d{2}$/
+		if(!regexp.test(expDate)) {
+			$("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut()
+			return false
+		}*/
+
+		$.ajax({url: "/addschedule", type: "POST", data: {"day": day, "time": time, "pet": pet, "service": service,
+		"creditcard": creditCard, "csc": csc, "expdate": expDate, "cardflag": cardFlag}, contentType: 'application/json', success: function(received)
+		{
+			if(received == "ok")
+				return true
+			else {
+				$("#newScheduleError").html("<strong>Erro:</strong> " + received).show().delay(5000).fadeOut()
+				return false
+			}
 		}})
 	})
 })

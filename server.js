@@ -104,7 +104,6 @@ function createUser(user)
 	},
 	(err) => console.log(err))
 }
-
 /*
 function createPet(owner_id, name, breed, age, pic)
 {
@@ -242,6 +241,58 @@ couch.createDatabase("services").then(
 	{
 		if (err.code == "EDBEXISTS")
 			console.log("Database 'service' já existe, não será alterada.")
+		else
+			console.log(err)
+	}
+)
+
+/* Inicialização da database products do CouchDB.
+Se a database já existir, nada é alterado.*/
+
+couch.createDatabase("products").then(
+	function()
+	{
+		console.log("Database 'products' não encontrada. Será criada e inicializada.")
+
+		let productExample1 = new Product("Ração Premier Golden Special Cães Adultos Frango e Carne", "/public/images/produto1.jpg", "Ração Premium especial para cães adultos de porte médio", 104.90, "racao", 10)
+		let productExample2 = new Product("Ração Premier Golden Formula Cães Adultos Frango e Arroz", "/public/images/produto2.jpg", "Ração Premium especial para cães adultos de porte peq.", 14.30, "racao", 10)
+		let productExample3 = new Product("Ração Premier Pet Formula Cães Adultos Raças Pequenas", "/public/images/produto3.jpg", "Indicada para cães adultos de raça pequena", 28.90, "racao", 10)
+
+		createProduct(productExample1)
+		createProduct(productExample2)
+		createProduct(productExample3)
+
+	},
+	function(err)
+	{
+		if (err.code == "EDBEXISTS")
+			console.log("Database 'products' já existe, não será alterada.")
+		else
+			console.log(err)
+	}
+)
+
+/* Inicialização da database schedules do CouchDB.
+Se a database já existir, nada é alterado.*/
+
+couch.createDatabase("schedules").then(
+	function()
+	{
+		console.log("Database 'schedules' não encontrada. Será criada e inicializada.")
+
+		let scheduleExample1 = new Schedule("2017-07-14", "slot3", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
+		let scheduleExample2 = new Schedule("2017-07-14", "slot4", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
+		let scheduleExample3 = new Schedule("2017-07-14", "slot5", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
+
+		createSchedule(scheduleExample1)
+		createSchedule(scheduleExample2)
+		createSchedule(scheduleExample3)
+
+	},
+	function(err)
+	{
+		if (err.code == "EDBEXISTS")
+			console.log("Database 'schedule' já existe, não será alterada.")
 		else
 			console.log(err)
 	}
@@ -395,7 +446,18 @@ app.post('/newuser', function(req, res)
 //Para o usuario agendar serviços busca horarios disponiveis
 app.get('/notavailablehours', (req, res) =>
 {
-	//couch.get("schedules", )
+	couch.get("schedules", "_all_docs?include_docs=true").then(({data, headers, status}) =>
+	{
+		let schedules = []
+		for(let i = 0; i < data.rows.length; i++){
+			if(data.rows[i].doc.day == req.query.date)
+				schedules.push(data.rows[i].doc)
+		}
+		res.send(schedules)
+	}, err =>
+	{
+		console.log(err)
+	})
 })
 
 app.get('/getservices', (req, res) =>
@@ -412,7 +474,7 @@ app.get('/getservices', (req, res) =>
 	})
 })
 
-app.get('/getserviceprice', (req, res) =>
+app.get('/serviceprice', (req, res) =>
 {
 	couch.get("services", req.query.serviceid).then(({data, headers, status}) =>
 	{
@@ -423,6 +485,13 @@ app.get('/getserviceprice', (req, res) =>
 	})
 })
 
+app.post('/addschedule', function(req, res)
+{
+	console.log(req.body)
+	let schedule = new Schedule(req.body.day, req.body.time, req.session.user, req.body.pet, req.body.service, req.body.creditcard, req.body.csc, req.body.expdate, req.body.cardflag)
+	createSchedule(schedule)
+	res.redirect('/area_usuario')
+})
 /* Inicialização dos servidores https e http. */
 
 const https_server = https.createServer({key: fs.readFileSync("ssl/key.pem"), cert: fs.readFileSync("ssl/cert.pem")}, app).listen(8081, function()

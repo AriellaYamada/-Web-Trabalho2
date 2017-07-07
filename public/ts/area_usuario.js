@@ -1,5 +1,4 @@
 ///<reference path="Server.ts"/>
-var cacheServices = {};
 /* Atualiza os dados do usuário apresentados na página
  conforme os dados contidos na instância de usuário recebida por parâmetro.*/
 function refreshUserData(user) {
@@ -276,6 +275,8 @@ $(document).ready(function () {
     });
     //Atualiza informações de agendamento
     $("#serviceRegForm").click(function () {
+        let today = new Date().toISOString().split("T")[0];
+        $("#calendar").prop("min", today);
         $.ajax({ url: "/userdata", success: function (user) {
                 let petId;
                 let opPet = $("<select id='pet'></select>");
@@ -286,7 +287,6 @@ $(document).ready(function () {
                 $("#selectPet").html(opPet);
             } });
         $.ajax({ url: "/getservices", type: "GET", success: function (services) {
-                cacheServices = services;
                 let opService = $("<select id='service'></select>");
                 for (let s in services) {
                     let service = services[s];
@@ -298,16 +298,56 @@ $(document).ready(function () {
     //Atualiza horarios disponiveis
     $("#calendar").on("change", function () {
         let date = $("#calendar").val();
-        $.ajax({ url: "notavailablehours", type: "GET", data: { "date": date }, success: function (hours) {
-                console.log(hours);
+        let s;
+        let lineSchedule = $("<tbody></tbody>");
+        $.ajax({ url: "notavailablehours", type: "GET", data: { "date": date }, success: function (schedules) {
+                for (let i in schedules) {
+                    $("#time option[value=" + schedules[i].hour + "]").hide();
+                }
             } });
     });
     //Atualiza preço do serviço selecionado
     $("#selectService").on("click", function () {
         let serviceId = $("#selectService option:selected").val();
-        $.ajax({ url: "/getserviceprice", type: "GET", data: { "serviceid": serviceId }, sucess: function (price) {
-                console.log(price);
-                $("#servicePrice").html("<h5>R$" + price + "</h5>");
+        $.ajax({ url: "/serviceprice", type: "GET", data: { "serviceid": serviceId }, success: function (service) {
+                $("#servicePrice").html("<h5>R$" + service.price + "</h5>");
+            } });
+    });
+    //Agendamento de serviceRegForm
+    $("#newScheduleForm").on("submit", function (ev) {
+        //Conteudo do formulario
+        let day = $("#calendar").val();
+        let time = $("#time option:selected").val();
+        let pet = $("#pet option:selected").val();
+        let service = $("#service option:selected").val();
+        let creditCard = $("#creditCard").val();
+        let csc = $("#csc").val();
+        let expDate = $("#expDate").val();
+        let cardFlag = $("input[name=flag]:checked").val();
+        //Validacao de campos
+        let regexp = /^\d{16}$/;
+        if (!regexp.test(creditCard)) {
+            $("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        regexp = /^\d{3}$/;
+        if (!regexp.test(csc)) {
+            $("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        /*regexp = /^[1-12]\/\d{2}$/
+        if(!regexp.test(expDate)) {
+            $("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut()
+            return false
+        }*/
+        $.ajax({ url: "/addschedule", type: "POST", data: { "day": day, "time": time, "pet": pet, "service": service,
+                "creditcard": creditCard, "csc": csc, "expdate": expDate, "cardflag": cardFlag }, contentType: 'application/json', success: function (received) {
+                if (received == "ok")
+                    return true;
+                else {
+                    $("#newScheduleError").html("<strong>Erro:</strong> " + received).show().delay(5000).fadeOut();
+                    return false;
+                }
             } });
     });
 });
