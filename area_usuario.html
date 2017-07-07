@@ -213,7 +213,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 							</div>
 							<div class="modal-body">
-								<form id="newPetForm" method="post">
+								<form id="newPetForm" action="/newpet" method="post" enctype="multipart/form-data">
 									<h4>Nome:</h4>
 									<input type="text" name="name" required></input>
 									<h4>ID:</h4>
@@ -221,7 +221,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<h4>Raça:</h4>
 									<input type="text" name="breed" required></input>
 									<h4>Foto:</h4>
-									<input type="file" name="pic" required></input>
+									<input type="file" name="pic" accept="image/*" required></input>
 									<h4>Idade:<br/></h4>
 									<input type="text" name="age" required></input></br>
 									<div class="modal-footer">

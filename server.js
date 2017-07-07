@@ -104,36 +104,43 @@ function createUser(user)
 	},
 	(err) => console.log(err))
 }
-/*
-function createPet(owner_id, name, breed, age, pic)
+
+/* Cria um novo pet de id pet_id para o usuário de id owner_id.
+Se tudo der certo, chama ok_callback passando o usuário atualizado (como ele ficou no banco, incluindo a _rev atualizada).
+Caso contrário chama err_callback passando um código identificador do erro ocorrido.
+*/
+function createPet(owner_id, pet_id, pet, ok_callback, err_callback)
 {
 	couch.get("users", owner_id).then(({data, headers, status}) =>
 	{
 		let user = data
-		if (user.pets[name])
+		if (user.pets[pet_id])
 		{
-			console.log("Pet de nome %s do usuário %s já existe. Não foi alterado.", owner_id, name)
+			console.log("Pet de id %s do usuário %s já existe. Não foi alterado.", pet_id, name)
 			return
 		}
 
-		user.pets[name] = new Pet(name, breed, age, pic)
+		user.pets[pet_id] = pet
 		couch.update("users", user).then(({data, headers, status}) =>
 		{
-			console.log("Pet %s adicionado ao usuário %s com sucesso", name, owner_id)
+			console.log("Pet %s adicionado ao usuário %s com sucesso", pet_id, owner_id)
+			user._rev = data.rev
+			if (ok_callback) ok_callback(user)
 		},
 		err =>
 		{
 			console.log(err)
 			console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
+			if (err_callback) err_callback(err.code)
 		})
 	},
 	err =>
 	{
 		console.log(err)
 		console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
-	})
+		if (err_callback) err_callback(err.code)
+	}).catch(() => err_callback("PETEXISTS"))
 }
-*/
 
 function createProduct(product)
 {
@@ -205,8 +212,8 @@ couch.createDatabase("users").then(
 		let petExample1 = new Pet("Kabosu", "Shiba Inu", 1, "images/pets/doge.jpg")
 		let petExample2 =  new Pet("Toby", "Bulldog", 2, "images/pets/borkdrive.jpg")
 
-		userExample1.pets[petExample1.name] = petExample1
-		userExample1.pets[petExample2.name] = petExample2
+		userExample1.pets["kabosu"] = petExample1
+		userExample1.pets["toby"] = petExample2
 
         createUser(userExample1)
 		createUser(userExample2)
@@ -316,7 +323,10 @@ app.use(session({secret: "q q eu to fazeno com a minha vida?", resave: false, sa
 // Página inicial.
 app.get('/', (req, res) =>
 {
-	res.sendFile(__dirname + "/index.html")
+	if (req.session.user)
+		res.redirect('/area_usuario')
+	else
+		res.sendFile(__dirname + "/index.html")
 })
 
 // Autenticação
@@ -369,6 +379,7 @@ app.get('/area_adm', (req, res) =>
 	else
 		res.sendFile(__dirname + "/area_adm.html")
 })
+
 
 // Para oferecimento de dados via AJAX (obtenção dos pets do usuário, por exemplo)
 app.get('/userdata', (req, res) =>
@@ -464,6 +475,7 @@ app.get('/getservices', (req, res) =>
 {
 	couch.get("services", "_all_docs?include_docs=true").then(({data, headers, status})=>
 	{
+
 		let services = []
 		for (let i = 0; i < data.rows.length; i++)
 			services.push(data.rows[i].doc)
@@ -492,6 +504,40 @@ app.post('/addschedule', function(req, res)
 	createSchedule(schedule)
 	res.redirect('/area_usuario')
 })
+
+// Para o usuário cadastrar novos pets
+
+const petPic_storage = multer.diskStorage(
+{
+	destination: "public/images/pets",
+	filename: function(req, file, cb)
+	{
+		cb(null, Date.now() + "." + mime.extension(file.mimetype))
+	}
+})
+
+app.post('/newpet', multer({storage: petPic_storage}).single("pic"), (req, res) =>
+{
+	//console.log(req.file)
+	//console.log(req.body)
+
+	createPet(req.session.user._id, req.body.id, new Pet(req.body.name, req.body.breed, req.body.age, req.file.path.replace("public/", "")),
+	function(user)
+	{
+		req.session.user = user;
+
+		// nesse caso o método abaixo precisa ser chamado para salvar as alterações na sessão
+		// em outros casos (tipo no upload de profile pic do usuário) isso não acontece
+		// não sei por que nesse caso é assim
+
+		req.session.save(err => res.redirect('/area_usuario'))
+	},
+	function(err)
+	{
+		res.redirect('/area_usuario')
+	})
+})
+
 /* Inicialização dos servidores https e http. */
 
 const https_server = https.createServer({key: fs.readFileSync("ssl/key.pem"), cert: fs.readFileSync("ssl/cert.pem")}, app).listen(8081, function()
