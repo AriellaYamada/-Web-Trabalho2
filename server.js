@@ -12,7 +12,7 @@ const multer = require("multer")
 
 const couch = new NodeCouchDb()
 
-class Pet 
+class Pet
 {
     constructor(name, breed, age, pic)
 	{
@@ -39,13 +39,66 @@ class User
         this.pets = {}
     }
 }
+class Product
+{
+	constructor(id, name, pic, description, price, type, qtt)
+	{
+		this._id = id
+		this.name = name
+		this.pic = pic
+		this.description = description
+		this.price = price
+		this.type = type
+		this.qtt = qtt
+	}
+}
+class Service
+{
+	constructor(id, name, description, price)
+	{
+		this._id = id
+		this.name = name
+		this.description = description
+		this.price = price
+	}
+}
+class Schedule
+{
+	constructor(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag)
+	{
+		this._id = day + hour
+    this.day = day
+    this.hour = hour
+		this.customer = customer
+    this.pet = pet
+    this.service = service
+    this.creditCard = creditCard
+    this.csc = csc
+    this.expDate = expDate
+    this.cardFlag = cardFlag
+  }
+}
+class Sale
+{
+	constructor (customer, products, day, creditCard, csc, expDate, total, status)
+
+	{
+		this.customer = customer
+		this.products = products
+		this.day = day
+		this.creditCard = creditCard
+		this.csc = csc
+		this.expDate = expDate
+		this.total = total
+		this.status = status
+	}
+}
 
 /* Cria um novo usuário no banco de dados.
  Recebe uma instância da classe User que representa o usuário a ser criado */
 function createUser(user)
 {
-	couch.insert("users", user).then(
-	({data, headers, status}) => 
+	couch.insert("users", user).then(({data, headers, status}) =>
 	{
 		console.log("Usuário com id %s inserido com sucesso.", data.id);
 	},
@@ -74,11 +127,38 @@ function createPet(owner_id, name, breed, age, pic)
 			console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
 		})
 	},
-	err => 
+	err =>
 	{
 		console.log(err)
 		console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
 	})
+}
+
+function createProduct(product)
+{
+	couch.insert("products", product).then(({data, headers, status}) =>
+	{
+		console.log("Produto com id %s inserido com sucesso.", data.id);
+	},
+	(err) => console.log(err))
+}
+
+function createService(service)
+{
+	couch.insert("services", service).then(({data, headers, status}) =>
+	{
+		console.log("Serviço com id %s inserido com sucesso.", data.id);
+	},
+	(err) => console.log(err))
+}
+
+function createSchedule(schedule)
+{
+	couch.insert("schedules", schedule).then(({data, headers, status}) =>
+	{
+		console.log("Agendamento com id %s inserido com sucesso.", data.id)
+	},
+	(err) => console.log(err))
 }
 
 /* Verifica se o par (id, pass) bate com algum usuário do banco.
@@ -100,7 +180,7 @@ function authenticateUser(id, pass, ok_callback, err_callback)
 		{
 			err_callback("WRONGPASS")		// Caso senha incorreta
 		}
-	}, 
+	},
 	function(err)
 	{
 		if (err.code == "EDOCMISSING")
@@ -108,17 +188,17 @@ function authenticateUser(id, pass, ok_callback, err_callback)
 		else
 			err_callback("UNKNOWN")			// Caso qualquer outro erro
 	})
-	
+
 }
 
 /* Inicialização da database users do CouchDB.
 Se a database já existir, nada é alterado.*/
- 
+
 couch.createDatabase("users").then(
 	function()
 	{
 		console.log("Database 'users' não encontrada. Será criada e inicializada.")
-        
+
 		let userExample1 = new User("usuario1", "1234", "Rodrigo Weigert", "Rua Tiradentes, 123", "images/profiles/profilepic.jpg", "(17) 1234-5678", "rodrigo.weigert@usp.br", false)
 		let userExample2 = new User("admin", "admin", "Administrador", null, "images/profiles/default.png", "(16) 8765-4321", "admin@petstop.com.br", true)
 		let petExample1 = new Pet("Kabosu", "Shiba Inu", 1, "images/pets/doge.jpg")
@@ -134,6 +214,32 @@ couch.createDatabase("users").then(
 	{
 		if (err.code == "EDBEXISTS")
 			console.log("Database 'users' já existe, não será alterada.")
+		else
+			console.log(err)
+	}
+)
+
+/* Inicialização da database services do CouchDB.
+Se a database já existir, nada é alterado.*/
+
+couch.createDatabase("services").then(
+	function()
+	{
+		console.log("Database 'services' não encontrada. Será criada e inicializada.")
+
+		let serviceExample1 = new Service("100", "Reforço V10", "Vacinação", 99.90)
+		let serviceExample2 = new Service("101", "Banho e Tosa", "Banho e tosa higiênica", 70.00)
+		let serviceExample3 = new Service("102", "Banho", "Banho", 50.00)
+
+		createService(serviceExample1)
+		createService(serviceExample2)
+		createService(serviceExample3)
+
+	},
+	function(err)
+	{
+		if (err.code == "EDBEXISTS")
+			console.log("Database 'service' já existe, não será alterada.")
 		else
 			console.log(err)
 	}
@@ -155,7 +261,7 @@ app.use(bodyParser.json())
 app.use(session({secret: "q q eu to fazeno com a minha vida?", resave: false, saveUninitialized: false}))
 
 // Página inicial.
-app.get('/', (req, res) => 
+app.get('/', (req, res) =>
 {
 	res.sendFile(__dirname + "/index.html")
 })
@@ -201,7 +307,7 @@ app.get('/area_usuario', (req, res) =>
 		res.sendFile(__dirname + "/area_usuario.html")
 })
 
-app.get('/area_adm', (req, res) => 
+app.get('/area_adm', (req, res) =>
 {
 	if (!req.session.user)
 		res.redirect('/')
@@ -212,15 +318,15 @@ app.get('/area_adm', (req, res) =>
 })
 
 // Para oferecimento de dados via AJAX (obtenção dos pets do usuário, por exemplo)
-app.get('/userdata', (req, res) => 
+app.get('/userdata', (req, res) =>
 {
-	res.send(req.session.user)	
+	res.send(req.session.user)
 })
 
 
 // Para atualizar os dados do usuário quando ele altera seu cadastro. Os novos dados do usuário
 // são recebidos em um objeto JSON que representa o usuário.
-app.post('/updateuserdata', (req, res) => 
+app.post('/updateuserdata', (req, res) =>
 {
 	let user = req.body
 	couch.update("users", user).then(({data, headers, status}) =>
@@ -258,7 +364,7 @@ app.post('/upload', multer({storage: profilePic_storage}).single("clientPicFile"
 		req.session.user._rev = data.rev
 		res.redirect('/area_usuario')
 	},
-	err => 
+	err =>
 	{
 		console.log("Erro ao tentar atualizar foto do usuário %s.", req.session.user._id)
 		res.redirect('/area_usuario')
@@ -268,7 +374,7 @@ app.post('/upload', multer({storage: profilePic_storage}).single("clientPicFile"
 
 // Para o admin criar novos usuários
 
-app.post('/newuser', function(req, res) 
+app.post('/newuser', function(req, res)
 {
 	if (!req.session.user.is_admin)
 	{
@@ -284,6 +390,36 @@ app.post('/newuser', function(req, res)
 	res.redirect('/area_adm')
 })
 
+//Para o usuario agendar serviços busca horarios disponiveis
+app.get('/availablehours', (req, res) =>
+{
+
+})
+
+app.get('/getservices', (req, res) =>
+{
+	couch.get("services", "_design/services/_view/AllServices").then(({data, headers, status})=>
+	{
+		res.send(data.rows)
+
+
+	}, err =>
+	{
+		console.log(err)
+	})
+})
+
+app.get('/getserviceprice', (req, res) =>
+{
+	console.log(req.data)
+	couch.get("services", req).then(({data, headers, status}) =>
+	{
+		res.send(data)
+	}, err =>
+	{
+		console.log(err)
+	})
+})
 
 /* Inicialização dos servidores https e http. */
 

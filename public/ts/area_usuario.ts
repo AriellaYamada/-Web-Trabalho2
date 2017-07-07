@@ -23,7 +23,7 @@ function refreshUserData(user: any) : void
 	for (petId in user.pets)
 	{
 		let pet: Pet = user.pets[petId]
-	
+
 		nopets = false
 
 		let d1 = $("<div class='col-md-3 new-collections-grid'></div>")
@@ -55,7 +55,7 @@ function refreshUserData(user: any) : void
 // parâmetro user. Em seguida, atualiza a página com os novos dados.
 function updateUser(user)
 {
-	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received) 
+	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received)
 	{
 		if (received == "ok")
 			refreshUserData(user)
@@ -63,6 +63,7 @@ function updateUser(user)
 			alert("Houve um erro ao alterar os dados.")
 	}})
 }
+
 /*
 function refreshUserSchedules () : void
 {
@@ -299,6 +300,40 @@ $(document).ready(function()
 			})
 			field.after(updateInputField)
 			updateInputField.focus()
+		}})
+	})
+
+	$("#serviceRegForm").click(function()
+	{
+		$.ajax({url: "/userdata", success : function(user)
+		{
+			let petId : string
+			let opPet = $("<select id='pet'></select>")
+			for (petId in user.pets) {
+				let pet: Pet = user.pets[petId]
+				opPet.append($("<option value=" + petId + ">" + pet.name + "</option>"))
+			}
+			$("#selectPet").html(opPet)
+		}})
+		$.ajax({url: "/getservices", type: "GET", success: function(services)
+		{
+			let opService = $("<select id='service'></select>")
+			for(let s in services) {
+				let service = services[s]
+				opService.append($("<option value=" + service.id + ">" + service.value.name + "</option>"))
+			}
+			$("#selectService").html(opService)
+		}})
+
+	})
+
+	$("#selectService").on("click", function ()
+	{
+		let serviceId = $("#selectService option:selected").val()
+		$.ajax({url: "/getserviceprice", type: "GET", data: serviceId, sucess: function(service)
+		{
+			let price = service.price
+			$("#servicePrice").html("<h5>R$" + price + "</h5>")
 		}})
 	})
 })
