@@ -499,7 +499,7 @@ app.get('/serviceprice', (req, res) =>
 
 app.post('/addschedule', function(req, res)
 {
-	console.log(req.body)
+	//console.log(req.body)
 	let schedule = new Schedule(req.body.day, req.body.time, req.session.user, req.body.pet, req.body.service, req.body.creditcard, req.body.csc, req.body.expdate, req.body.cardflag)
 	createSchedule(schedule)
 	res.redirect('/area_usuario')

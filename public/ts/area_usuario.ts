@@ -360,14 +360,8 @@ $(document).ready(function()
 	{
 
 		//Conteudo do formulario
-		let day: string = $("#calendar").val()
-		let time: string = $("#time option:selected").val()
-		let pet: string = $("#pet option:selected").val()
-		let service: string = $("#service option:selected").val()
 		let creditCard: string = $("#creditCard").val()
 		let csc: string = $("#csc").val()
-		let expDate: string = $("#expDate").val()
-		let cardFlag: string = $("input[name=flag]:checked").val()
 
 		//Validacao de campos
 		let regexp = /^\d{16}$/
@@ -380,21 +374,6 @@ $(document).ready(function()
 			$("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut()
 			return false
 		}
-		/*regexp = /^[1-12]\/\d{2}$/
-		if(!regexp.test(expDate)) {
-			$("#expDateError").html("<strong>Erro:</strong> Data inválida.").show().delay(5000).fadeOut()
-			return false
-		}*/
-
-		$.ajax({url: "/addschedule", type: "POST", data: {"day": day, "time": time, "pet": pet, "service": service,
-		"creditcard": creditCard, "csc": csc, "expdate": expDate, "cardflag": cardFlag}, contentType: 'application/json', success: function(received)
-		{
-			if(received == "ok")
-				return true
-			else {
-				$("#newScheduleError").html("<strong>Erro:</strong> " + received).show().delay(5000).fadeOut()
-				return false
-			}
-		}})
+		return true
 	})
 })

@@ -115,9 +115,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="modal-body">
 										<form id="newScheduleForm" method="post" action="/addschedule">
 											<h4>Dia:</h4>
-											<input id="calendar" type="date" required></input>
+											<input name="day" type="date" required></input>
 											<h4>Horário</h4>
-											<select id="time" required>
+											<select name="time" required>
 												<option value="slot1">8h00</option>
 												<option value="slot2">9h00</option>
 												<option value="slot3">10h00</option>
@@ -138,19 +138,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<span id="servicePrice"></span>
 											<h4>Número do Cartão de Crédito: </h4>
 											<div class="collapse alert alert-danger" id="creditCardError"></div>
-											<input id="creditCard" type='text'required></input>
+											<input id="creditCard" name="creditcard" type='text'required></input>
 											<h4>Código de Segurança:</h4>
 											<div class="collapse alert alert-danger" id="cscError"></div>
-											<input id="csc" class='CSC' type='text' name='CSC' required></input>
+											<input id="csc" name="csc" class='CSC' type='text' required></input>
 											<h4>Validade:</h4>
 											<div class="collapse alert alert-danger" id="expDateError"></div>
-											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
+											<input name="expdate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
-												<input type='radio' name="flag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
-												<input type='radio' name="flag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
-												<input type='radio' name="flag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
-												<input type='radio' name="flag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
+												<input type='radio' name="cardflag" value="visa" required></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name="cardflag" value="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name="cardflag" value="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name="cardflag" value="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
 										</div>
 										<div class="modal-footer">
