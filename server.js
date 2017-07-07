@@ -67,21 +67,21 @@ class Schedule
 	constructor(day, hour, customer, pet, service, creditCard, csc, expDate, cardFlag)
 	{
 		this._id = day + hour
-    this.day = day
-    this.hour = hour
+		this.day = day
+		this.hour = hour
 		this.customer = customer
-    this.pet = pet
-    this.service = service
-    this.creditCard = creditCard
-    this.csc = csc
-    this.expDate = expDate
-    this.cardFlag = cardFlag
-  }
+		this.pet = pet
+		this.service = service
+		this.creditCard = creditCard
+		this.csc = csc
+		this.expDate = expDate
+		this.cardFlag = cardFlag
+	}
 }
+
 class Sale
 {
 	constructor (customer, products, day, creditCard, csc, expDate, total, status)
-
 	{
 		this.customer = customer
 		this.products = products
@@ -105,6 +105,7 @@ function createUser(user)
 	(err) => console.log(err))
 }
 
+/*
 function createPet(owner_id, name, breed, age, pic)
 {
 	couch.get("users", owner_id).then(({data, headers, status}) =>
@@ -133,6 +134,7 @@ function createPet(owner_id, name, breed, age, pic)
 		console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
 	})
 }
+*/
 
 function createProduct(product)
 {
@@ -398,11 +400,12 @@ app.get('/availablehours', (req, res) =>
 
 app.get('/getservices', (req, res) =>
 {
-	couch.get("services", "_design/services/_view/AllServices").then(({data, headers, status})=>
+	couch.get("services", "_all_docs?include_docs=true").then(({data, headers, status})=>
 	{
-		res.send(data.rows)
-
-
+		let services = []
+		for (let i = 0; i < data.rows.length; i++)
+			services.push(data.rows[i].doc)
+		res.send(services)
 	}, err =>
 	{
 		console.log(err)

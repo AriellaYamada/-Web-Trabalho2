@@ -320,7 +320,7 @@ $(document).ready(function()
 			let opService = $("<select id='service'></select>")
 			for(let s in services) {
 				let service = services[s]
-				opService.append($("<option value=" + service.id + ">" + service.value.name + "</option>"))
+				opService.append($("<option value=" + service._id + ">" + service.name + "</option>"))
 			}
 			$("#selectService").html(opService)
 		}})
