@@ -391,9 +391,9 @@ app.post('/newuser', function(req, res)
 })
 
 //Para o usuario agendar serviços busca horarios disponiveis
-app.get('/availablehours', (req, res) =>
+app.get('/notavailablehours', (req, res) =>
 {
-
+	//couch.get("schedules", )
 })
 
 app.get('/getservices', (req, res) =>
@@ -411,8 +411,7 @@ app.get('/getservices', (req, res) =>
 
 app.get('/getserviceprice', (req, res) =>
 {
-	console.log(req.data)
-	couch.get("services", req).then(({data, headers, status}) =>
+	couch.get("services", req.query.serviceid).then(({data, headers, status}) =>
 	{
 		res.send(data)
 	}, err =>

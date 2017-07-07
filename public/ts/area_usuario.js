@@ -1,4 +1,5 @@
 ///<reference path="Server.ts"/>
+var cacheServices = {};
 /* Atualiza os dados do usuário apresentados na página
  conforme os dados contidos na instância de usuário recebida por parâmetro.*/
 function refreshUserData(user) {
@@ -273,6 +274,7 @@ $(document).ready(function () {
                 updateInputField.focus();
             } });
     });
+    //Atualiza informações de agendamento
     $("#serviceRegForm").click(function () {
         $.ajax({ url: "/userdata", success: function (user) {
                 let petId;
@@ -284,6 +286,7 @@ $(document).ready(function () {
                 $("#selectPet").html(opPet);
             } });
         $.ajax({ url: "/getservices", type: "GET", success: function (services) {
+                cacheServices = services;
                 let opService = $("<select id='service'></select>");
                 for (let s in services) {
                     let service = services[s];
@@ -292,10 +295,18 @@ $(document).ready(function () {
                 $("#selectService").html(opService);
             } });
     });
+    //Atualiza horarios disponiveis
+    $("#calendar").on("change", function () {
+        let date = $("#calendar").val();
+        $.ajax({ url: "notavailablehours", type: "GET", data: { "date": date }, success: function (hours) {
+                console.log(hours);
+            } });
+    });
+    //Atualiza preço do serviço selecionado
     $("#selectService").on("click", function () {
         let serviceId = $("#selectService option:selected").val();
-        $.ajax({ url: "/getserviceprice", type: "GET", data: serviceId, sucess: function (service) {
-                let price = service.price;
+        $.ajax({ url: "/getserviceprice", type: "GET", data: { "serviceid": serviceId }, sucess: function (price) {
+                console.log(price);
                 $("#servicePrice").html("<h5>R$" + price + "</h5>");
             } });
     });

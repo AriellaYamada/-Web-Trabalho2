@@ -4,6 +4,8 @@
 
 declare var $: any;
 
+var cacheServices = {}
+
 /* Atualiza os dados do usuário apresentados na página
  conforme os dados contidos na instância de usuário recebida por parâmetro.*/
 function refreshUserData(user: any) : void
@@ -303,6 +305,7 @@ $(document).ready(function()
 		}})
 	})
 
+	//Atualiza informações de agendamento
 	$("#serviceRegForm").click(function()
 	{
 		$.ajax({url: "/userdata", success : function(user)
@@ -317,6 +320,7 @@ $(document).ready(function()
 		}})
 		$.ajax({url: "/getservices", type: "GET", success: function(services)
 		{
+			cacheServices = services
 			let opService = $("<select id='service'></select>")
 			for(let s in services) {
 				let service = services[s]
@@ -327,13 +331,25 @@ $(document).ready(function()
 
 	})
 
+	//Atualiza horarios disponiveis
+	$("#calendar").on("change", function()
+	{
+		let date = $("#calendar").val()
+		$.ajax({url: "notavailablehours", type: "GET", data: {"date": date}, success: function(hours)
+		{
+			console.log(hours)
+		}})
+	})
+
+
+	//Atualiza preço do serviço selecionado
 	$("#selectService").on("click", function ()
 	{
 		let serviceId = $("#selectService option:selected").val()
-		$.ajax({url: "/getserviceprice", type: "GET", data: serviceId, sucess: function(service)
+		$.ajax({url: "/getserviceprice", type: "GET", data: {"serviceid": serviceId}, sucess: function(service)
 		{
-			let price = service.price
-			$("#servicePrice").html("<h5>R$" + price + "</h5>")
+			console.log(service.value.price)
+			//$("#servicePrice").html("<h5>R$" + price + "</h5>")
 		}})
 	})
 })
