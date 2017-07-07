@@ -117,7 +117,6 @@ function createPet(owner_id, pet_id, pet, ok_callback, err_callback)
 		if (user.pets[pet_id])
 		{
 			console.log("Pet de id %s do usuário %s já existe. Não foi alterado.", pet_id, name)
-			if (err_callback) err_callback("PETEXISTS")
 			return
 		}
 
@@ -140,7 +139,7 @@ function createPet(owner_id, pet_id, pet, ok_callback, err_callback)
 		console.log(err)
 		console.log("Erro ao tentar adicionar pet ao usuário %s.", owner_id)
 		if (err_callback) err_callback(err.code)
-	})
+	}).catch(() => err_callback("PETEXISTS"))
 }
 
 function createProduct(product)
