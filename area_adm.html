@@ -215,13 +215,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<h3 class="bars">Cadastro de Serviços</h3>
 									</div>
 									<div class="modal-body">
-										<form id="newServiceForm">
+										<form id="newServiceForm" method="post" action="/addservice">
+											<h4>ID:</h4>
+											<input type="text" id="sid" name="id">
 											<h4>Nome:</h4>
-											<input type='text' id='sname' required></input>
+											<input type='text' id='sname' name="name" required></input>
 											<h4>Descrição:</h4>
-											<input type="text" id='sdescription' required></input>
+											<input type="text" id='sdescription' name="description" required></input>
 											<h4>Preço:<br/></h4>
-											<input type='text' id='sprice' placeholder="R$" required></input></br>
+											<input type='text' id='sprice' placeholder="R$" name="price" required></input></br>
 										</div>
 										<div class="modal-footer">
 											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
@@ -244,9 +246,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="typo-grids">
 					<div class="bs-docs-example animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
 						<h3 class="bars">Produtos</h3>
-						<div class="regButtons">
-							<h4><button class="label label-success" data-toggle="modal" data-target="#newProductForm">Criar Novo Produto</button></h4>
-						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="newProductForm" role="dialog" tabindex="-1">
 							<div class="modal-dialog">
@@ -257,19 +256,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<h3 class="bars">Cadastro de Produto</h3>
 									</div>
 									<div class="modal-body">
-										<form id="newProductForm">
+										<form id="newProductForm" method="post" action="/addproduct">
+											<h4>ID: </h4>
+											<input type="text" id="pid" name="id" required></input>
 											<h4>Nome:</h4>
-											<input type='text' id='pname' required></input>
+											<input type='text' id='pname' name="name" required></input>
 											<h4>Foto:</h4>
-											<input type="file" name="ppic" required></input>
+											<input type="file" name="pic" required></input>
 											<h4>Descrição:</h4>
-											<input type="text" id='pdescription' required></input>
+											<input type="text" id='pdescription' name="description" required></input>
 											<h4>Preço:<br/></h4>
-											<input type='text' id='pprice' placeholder="R$" required></input></br>
+											<input type='text' id='pprice' name="price" placeholder="R$" required></input></br>
 											<h4>Tipo</h4>
-											<input type="text"></input>
+											<input type="text" id="ptype" name="type" required></input>
 											<h4>Quantidade</h4>
-											<input type="number"></input>
+											<input type="number" id="pqtt" name="quantity" required></input>
 										</div>
 										<div class="modal-footer">
 											<h3><button type='submit' class="label label-primary" value='Salvar'/>Cadastrar</button></h3>
@@ -294,6 +295,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</tr>
 							</thead>
 						</table>
+						<div class="regButtons">
+							<h4><button class="label label-success" data-toggle="modal" data-target="#newProductForm">Criar Novo Produto</button></h4>
+						</div>
 					</div>
 				</div>
 			</div>

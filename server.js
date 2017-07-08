@@ -101,8 +101,13 @@ function createUser(user)
 	couch.insert("users", user).then(({data, headers, status}) =>
 	{
 		console.log("Usuário com id %s inserido com sucesso.", data.id);
+		return("success")
 	},
-	(err) => console.log(err))
+	(err) =>
+	{
+		console.log(err))
+		return(err)
+	}
 }
 
 /* Cria um novo pet de id pet_id para o usuário de id owner_id.
@@ -147,8 +152,13 @@ function createProduct(product)
 	couch.insert("products", product).then(({data, headers, status}) =>
 	{
 		console.log("Produto com id %s inserido com sucesso.", data.id);
+		return("success")
 	},
-	(err) => console.log(err))
+	(err) =>
+	{
+		return(err)
+		console.log(err))
+	}
 }
 
 function createService(service)
@@ -156,8 +166,13 @@ function createService(service)
 	couch.insert("services", service).then(({data, headers, status}) =>
 	{
 		console.log("Serviço com id %s inserido com sucesso.", data.id);
+		return("success")
 	},
-	(err) => console.log(err))
+	(err) =>
+	{
+		return(err)
+		console.log(err))
+	}
 }
 
 function createSchedule(schedule)
@@ -494,6 +509,22 @@ app.get('/serviceprice', (req, res) =>
 	{
 		console.log(err)
 	})
+})
+
+//Adiciona um serviço ao banco
+app.post('/addservice', function(req, res)
+{
+	let service = new Service(req.body.id, req.body.name, req.body.description, req.body.price)
+	createService(service)
+	res.redirect('/area_adm')
+})
+
+//Adiciona produtos ao banco
+app.post('/addproduct', function(req, res)
+{
+	let product = new Product(req.body.id, req.body.name, req.body.pic, req.body.description, req.body.price, req.body.type, req.body.quantity)
+	createProduct(product)
+	res.redirect('/area_adm')
 })
 
 //Adiciona o agendamento no banco
