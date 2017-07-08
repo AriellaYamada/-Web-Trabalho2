@@ -105,9 +105,9 @@ function createUser(user)
 	},
 	(err) =>
 	{
-		console.log(err))
+		console.log(err)
 		return(err)
-	}
+	})
 }
 
 /* Cria um novo pet de id pet_id para o usuário de id owner_id.
@@ -157,8 +157,8 @@ function createProduct(product)
 	(err) =>
 	{
 		return(err)
-		console.log(err))
-	}
+		console.log(err)
+	})
 }
 
 function createService(service)
@@ -171,8 +171,8 @@ function createService(service)
 	(err) =>
 	{
 		return(err)
-		console.log(err))
-	}
+		console.log(err)
+	})
 }
 
 function createSchedule(schedule)
