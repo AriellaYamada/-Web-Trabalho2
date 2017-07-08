@@ -156,8 +156,8 @@ function createProduct(product)
 	},
 	(err) =>
 	{
-		return(err)
 		console.log(err)
+		return(err)
 	})
 }
 
@@ -170,8 +170,8 @@ function createService(service)
 	},
 	(err) =>
 	{
-		return(err)
 		console.log(err)
+		return(err)
 	})
 }
 
