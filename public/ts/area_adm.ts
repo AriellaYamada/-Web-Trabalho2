@@ -32,7 +32,7 @@ function refreshAdminData(user: any) : void
 
 function updateAdmin(user)
 {
-	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received) 
+	$.ajax({url: "/updateuserdata", type: "POST", contentType: "application/json", data: JSON.stringify(user), success: function(received)
 	{
 		if (received == "ok")
 			refreshAdminData(user)
@@ -41,85 +41,102 @@ function updateAdmin(user)
 	}})
 }
 
-
-/*
 function refreshSchedules() : void
 {
-	let s
-	let lineSchedule = $("<tbody></tbody>")
-	for(s in server.schedules) {
-		let line = $("<tr></tr>")
-		let schedule: Schedule = server.schedules[s]
-		line.append($("<td>" + s + "</td>"))
-		line.append($("<td>" + server.services[schedule.service].name + "</td>"))
-		let time = schedule.hour
-		if(time == "slot1")
-		line.append($("<td>" + schedule.day + " 8h00 </td>"))
-		else if(time == "slot2")
-		line.append($("<td>" + schedule.day + " 9h00 </td>"))
-		else if(time == "slot3")
-		line.append($("<td>" + schedule.day + " 10h00 </td>"))
-		else if(time == "slot4")
-		line.append($("<td>" + schedule.day + " 11h00 </td>"))
-		else if(time == "slot5")
-		line.append($("<td>" + schedule.day + " 12h00 </td>"))
-		else if(time == "slot6")
-		line.append($("<td>" + schedule.day + " 13h00 </td>"))
-		else if(time == "slot7")
-		line.append($("<td>" + schedule.day + " 14h00 </td>"))
-		else if(time == "slot8")
-		line.append($("<td>" + schedule.day + " 15h00 </td>"))
-		else if(time == "slot9")
-		line.append($("<td>" + schedule.day + " 16h00 </td>"))
-		else if(time == "slot10")
-		line.append($("<td>" + schedule.day + " 17h00 </td>"))
-		else if(time == "slot11")
-		line.append($("<td>" + schedule.day + " 18h00 </td>"))
+	let listservices = []
+	$.ajax({url: "/getservices", type: "GET", success: function(services)
+	{
+		for(let s in services) {
+			listservices.push(services[s])
+		}
+	}})
+	$.ajax({url: "/getallschedules", type: "GET", success: function(schedules)
+	{
+		let lineSchedule = $("<tbody></tbody>")
+		for(let s in schedules) {
+			let line = $("<tr></tr>")
+			let schedule: Schedule = schedules[s]
+			line.append($("<td>" + s + "</td>"))
+			for(let ls in listservices) {
+				let service = listservices[ls]
+				if(service._id == schedule.service)
+						line.append($("<td>" + service.name + "</td>"))
+			}
+			let time = schedule.hour
+			if(time == "slot1")
+			line.append($("<td>" + schedule.day + " 8h00 </td>"))
+			else if(time == "slot2")
+			line.append($("<td>" + schedule.day + " 9h00 </td>"))
+			else if(time == "slot3")
+			line.append($("<td>" + schedule.day + " 10h00 </td>"))
+			else if(time == "slot4")
+			line.append($("<td>" + schedule.day + " 11h00 </td>"))
+			else if(time == "slot5")
+			line.append($("<td>" + schedule.day + " 12h00 </td>"))
+			else if(time == "slot6")
+			line.append($("<td>" + schedule.day + " 13h00 </td>"))
+			else if(time == "slot7")
+			line.append($("<td>" + schedule.day + " 14h00 </td>"))
+			else if(time == "slot8")
+			line.append($("<td>" + schedule.day + " 15h00 </td>"))
+			else if(time == "slot9")
+			line.append($("<td>" + schedule.day + " 16h00 </td>"))
+			else if(time == "slot10")
+			line.append($("<td>" + schedule.day + " 17h00 </td>"))
+			else if(time == "slot11")
+			line.append($("<td>" + schedule.day + " 18h00 </td>"))
 
-		let user : User = server.users[schedule.customer]
-		line.append($("<td>" + user.pets[schedule.pet].name + "</td>"))
-		line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11,15)+ "</td>"))
-		lineSchedule.append(line)
-	}
-	$("#tableSchedules").append(lineSchedule)
+			line.append($("<td>" + schedule.pet + "</td>"))
+			line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11,15)+ "</td>"))
+			lineSchedule.append(line)
+		}
+		$("#tableSchedules").append(lineSchedule)
+	}})
 }
 
 function refreshServiceData() : void
 {
-	let s
-	let lineService = $("<tbody id='lineService'></tbody>")
-	for (s in server.services) {
-			let line = $("<tr></tr>")
-			let service : Service = server.services[s]
-			line.append($("<td>" + s + "</td>"))
-			line.append($("<td>" + service.name + "</td>"))
-			line.append($("<td>" + service.description + "</td>"))
-			line.append($("<td> R$" + service.price + "</td>"))
-			//lineService.append($("<td><a href="">Detalhes<a></td>"))
-			lineService.append(line)
-	}
-	$("#tableServices").append(lineService)
+	$.ajax({url: "/getservices", type: "GET", success: function(services)
+	{
+		let lineService = $("<tbody id='lineService'></tbody>")
+		for (let s in services) {
+				let line = $("<tr></tr>")
+				let service = services[s]
+				line.append($("<td>" + service._id + "</td>"))
+				line.append($("<td>" + service.name + "</td>"))
+				line.append($("<td>" + service.description + "</td>"))
+				line.append($("<td> R$" + service.price + "</td>"))
+				//lineService.append($("<td><a href="">Detalhes<a></td>"))
+				lineService.append(line)
+		}
+		$("#tableServices").append(lineService)
+	}})
 }
 
 function refreshProductData() : void
 {
-	let p
-	let lineService = $("<tbody id='lineService'></tbody>")
-	for (p in server.products) {
-			let line = $("<tr></tr>")
-			let product : Product = server.products[p]
-			line.append($("<td>" + p + "</td>"))
-			line.append($("<td>" + product.name + "</td>"))
-			line.append($("<td><img src='" + product.pic + "' alt class='img-responsive' /></td>"))
-			line.append($("<td>" + product.description + "</td>"))
-			line.append($("<td> R$" + product.price + "</td>"))
-			line.append($("<td>" + product.type + "</td>"))
-			line.append($("<td>" + product.qtt + "</td>"))
-			lineService.append(line)
-	}
-	$("#tableProducts").append(lineService)
-
+	$.ajax({url: "/getproducts", type: "GET", success: function(products)
+	{
+		let lineService = $("<tbody id='lineService'></tbody>")
+		for (let p in products) {
+				let line = $("<tr></tr>")
+				let product = products[p]
+				line.append($("<td>" + product._id + "</td>"))
+				line.append($("<td>" + product.name + "</td>"))
+				line.append($("<td><img src='" + product.pic + "' alt class='img-responsive' /></td>"))
+				line.append($("<td>" + product.description + "</td>"))
+				line.append($("<td> R$" + product.price + "</td>"))
+				line.append($("<td>" + product.type + "</td>"))
+				line.append($("<td>" + product.qtt + "</td>"))
+				lineService.append(line)
+		}
+		$("#tableProducts").append(lineService)
+	}})
 }
+
+/*
+
+
 
 
 function refreshUserList() : void
@@ -152,11 +169,15 @@ $(document).ready(function()
 	// Preenchendo dados do usuário:
 	$.ajax({url: "/userdata", success: refreshAdminData})
 
-	$("#genPassButton").on("click", function(event) 
+	$("#genPassButton").on("click", function(event)
 	{
 		event.preventDefault()
 		$("#newUserForm input[name=pass]").val(randomPassword())
 	})
+
+	refreshSchedules()
+	refreshServiceData()
+	refreshProductData()
 	/*
 	// Lista de usuários
 	refreshUserList()
@@ -416,5 +437,5 @@ $("#newUserForm").on("submit", function (ev)
 			field.after(updateInputField)
 			updateInputField.focus()
 		}})
-	})	
+	})
 })
