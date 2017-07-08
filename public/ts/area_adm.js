@@ -109,7 +109,6 @@ function refreshProductData() {
 }
 function refreshUserList() {
     $.ajax({ url: "/getallusers", type: "GET", success: function (users) {
-            console.log(users);
             let i = 0;
             let lineUser = $("<tbody></tbody>");
             for (let u in users) {
@@ -139,6 +138,7 @@ $(document).ready(function () {
     refreshServiceData();
     refreshProductData();
     refreshUserList();
+    let userslist = [];
     /*
     // Lista de usuários
     refreshUserList()
@@ -390,6 +390,79 @@ $("#newUserForm").on("submit", function (ev)
                 field.after(updateInputField);
                 updateInputField.focus();
             } });
+    });
+    //Atualiza informações de agendamento
+    $("#serviceRegForm").click(function () {
+        let today = new Date().toISOString().split("T")[0];
+        $("#calendar").prop("min", today);
+        $.ajax({ url: "/userdata", success: function (user) {
+                let petId;
+                for (petId in user.pets) {
+                    let pet = user.pets[petId];
+                    $("#selectPet").append($("<option value=" + petId + ">" + pet.name + "</option>"));
+                }
+            } });
+        $.ajax({ url: "/getservices", type: "GET", success: function (services) {
+                for (let s in services) {
+                    let service = services[s];
+                    $("#selectService").append($("<option value=" + service._id + ">" + service.name + "</option>"));
+                }
+            } });
+        $.ajax({ url: "/getallusers", type: "GET", success: function (users) {
+                for (let u in users) {
+                    let user = users[u];
+                    if (!user.is_admin) {
+                        $("#selectCustomer").append($("<option value=" + user._id + ">" + user.name + "</option>"));
+                        userslist.push(user);
+                    }
+                }
+            } });
+    });
+    //Atualiza a lista de pets de acordo com o cliente escolhido
+    $("#selectCustomer").on("click", function () {
+        let customer = $("#selectCustomer option:selected").val();
+        console.log(userslist);
+        for (let u in userslist) {
+            if (userslist[u]._id == customer) {
+                for (let pet in userslist[u].pets) {
+                    $("#selectPet").append($("<option value=" + pet + ">" + userslist[u].pets[pet].name + "</option>"));
+                }
+            }
+        }
+    });
+    //Atualiza horarios disponiveis
+    $("#calendar").on("change", function () {
+        let date = $("#calendar").val();
+        $.ajax({ url: "/notavailablehours", type: "GET", data: { "date": date }, success: function (schedules) {
+                for (let i in schedules) {
+                    $("#time option[value=" + schedules[i].hour + "]").hide();
+                }
+            } });
+    });
+    //Atualiza preço do serviço selecionado
+    $("#selectService").on("click", function () {
+        let serviceId = $("#selectService option:selected").val();
+        $.ajax({ url: "/serviceprice", type: "GET", data: { "serviceid": serviceId }, success: function (service) {
+                $("#servicePrice").html("<h5>R$" + service.price + "</h5>");
+            } });
+    });
+    //Agendamento de serviceRegForm
+    $("#newScheduleForm").on("submit", function (ev) {
+        //Conteudo do formulario
+        let creditCard = $("#creditCard").val();
+        let csc = $("#csc").val();
+        //Validacao de campos
+        let regexp = /^\d{16}$/;
+        if (!regexp.test(creditCard)) {
+            $("#creditCardError").html("<strong>Erro:</strong> Cartão inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        regexp = /^\d{3}$/;
+        if (!regexp.test(csc)) {
+            $("#cscError").html("<strong>Erro:</strong> Código de segurança inválido.").show().delay(5000).fadeOut();
+            return false;
+        }
+        return true;
     });
 });
 //# sourceMappingURL=area_adm.js.map

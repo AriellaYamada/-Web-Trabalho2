@@ -507,6 +507,14 @@ app.post('/addschedule', function(req, res)
 	res.redirect('/area_usuario')
 })
 
+//Adiciona o agendamento no banco feito pelo admin
+app.post('/adminaddschedule', function(req, res)
+{
+	let schedule = new Schedule(req.body.day, req.body.time, req.body.customer, req.body.pet, req.body.service, req.body.creditcard, req.body.csc, req.body.expdate, req.body.cardflag)
+	createSchedule(schedule)
+	res.redirect('/area_usuario')
+})
+
 //Busca todos os agendamentos do usuario
 app.get('/getuserschedules', (req, res) =>
 {
@@ -524,6 +532,22 @@ app.get('/getuserschedules', (req, res) =>
 	})
 })
 
+//Busca todos os agendamentos do usuario
+app.get('/getuserschedules', (req, res) =>
+{
+	couch.get("schedules", "_all_docs?include_docs=true").then(({data, headers, status}) =>
+	{
+		let schedules = []
+		for(let i = 0; i < data.rows.length; i++) {
+			if(data.rows[i].doc.customer == req.session.user._id)
+				schedules.push(data.rows[i].doc)
+		}
+		res.send(schedules)
+	}, err =>
+	{
+		console.log(err)
+	})
+})
 //Busca todos os agendamentos do banco
 app.get('/getallschedules', (req, res) =>
 {

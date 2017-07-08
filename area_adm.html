@@ -116,11 +116,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<h3 class="bars">Agendamento de Serviço</h3>
 									</div>
 									<div class="modal-body">
-										<form id="newScheduleForm" method="post">
+										<form id="newScheduleForm" method="post" action="/adminaddschedule">
 											<h4>Dia:</h4>
-											<input id="calendar" type="date" required></input>
+											<input id="calendar" name="day" type="date" required></input>
 											<h4>Horário</h4>
-											<select id="time" required>
+											<select id="time" name="time" required>
 												<option value="slot1">8h00</option>
 												<option value="slot2">9h00</option>
 												<option value="slot3">10h00</option>
@@ -134,28 +134,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<option value="slot11">18h00</option>
 											</select>
 											<h4>Cliente:</h4>
-											<span id="selectCustomer"></span>
+											<select id="selectCustomer" name="customer"></select>
 											<h4>Pet:</h4>
-											<span id="selectPet"></span>
+											<select id="selectPet" name="pet"></select>
 											<h4>Serviço:</h4>
-											<span id="selectService"></span>
+											<select id="selectService" name="service"></select>
 											<h4>Preço:</h4>
 											<span id="servicePrice"></span>
 											<h4>Número do Cartão de Crédito: </h4>
 											<div class="collapse alert alert-danger" id="creditCardError"></div>
-											<input id="creditCard" type='text'required></input>
+											<input id="creditCard" name="creditcard" type='text'required></input>
 											<h4>Código de Segurança:</h4>
 											<div class="collapse alert alert-danger" id="cscError"></div>
-											<input id="csc" class='CSC' type='text' name='CSC' required></input>
+											<input id="csc" class='CSC' type='text' name='csc' required></input>
 											<h4>Validade:</h4>
 											<div class="collapse alert alert-danger" id="expDateError"></div>
-											<input id="expDate" class='expdate' type='text' placeholder='mm/aa' required></input>
+											<input id="expDate" name="expdate" class='expdate' type='text' placeholder='mm/aa' required></input>
 											<div class="CardFlag">
 												<h4>Bandeira:</h4>
-												<input type='radio' name="flag" name="visa" required=""></input> <img src='img/visa.png' alt='Visa'></img>
-												<input type='radio' name="flag" name="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
-												<input type='radio' name="flag" name="amex"></input><img src='img/amex.png' alt='American Express'></img>
-												<input type='radio' name="flag" name="elo"></input><img src='img/elo.png' alt='Elo'></img>
+												<input type='radio' name="cardflag" name="visa" required=""></input> <img src='img/visa.png' alt='Visa'></img>
+												<input type='radio' name="cardflag" name="master"></input><img src='img/mastercard.png' alt='MasterCard'></img>
+												<input type='radio' name="cardflag" name="amex"></input><img src='img/amex.png' alt='American Express'></img>
+												<input type='radio' name="cardflag" name="elo"></input><img src='img/elo.png' alt='Elo'></img>
 											</div>
 										</div>
 										<div class="modal-footer">
