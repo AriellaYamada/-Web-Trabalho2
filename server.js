@@ -287,9 +287,9 @@ couch.createDatabase("schedules").then(
 	{
 		console.log("Database 'schedules' não encontrada. Será criada e inicializada.")
 
-		let scheduleExample1 = new Schedule("2017-07-14", "slot3", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
-		let scheduleExample2 = new Schedule("2017-07-14", "slot4", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
-		let scheduleExample3 = new Schedule("2017-07-14", "slot5", "usuario1", "0", "0", "1234567891011121", 123, "20-10", "visa")
+		let scheduleExample1 = new Schedule("2017-07-14", "slot3", "usuario1" , "kabosu", "102", "1234567891011121", 123, "20-10", "visa")
+		let scheduleExample2 = new Schedule("2017-07-14", "slot4", "usuario1", "toby", "101", "1234567891011121", 123, "20-10", "visa")
+		let scheduleExample3 = new Schedule("2017-07-14", "slot5", "usuario1", "kabosu", "100", "1234567891011121", 123, "20-10", "visa")
 
 		createSchedule(scheduleExample1)
 		createSchedule(scheduleExample2)
@@ -497,12 +497,29 @@ app.get('/serviceprice', (req, res) =>
 	})
 })
 
+//Adiciona o agendamento no banco
 app.post('/addschedule', function(req, res)
 {
-	//console.log(req.body)
-	let schedule = new Schedule(req.body.day, req.body.time, req.session.user, req.body.pet, req.body.service, req.body.creditcard, req.body.csc, req.body.expdate, req.body.cardflag)
+	let schedule = new Schedule(req.body.day, req.body.time, req.session.user._id, req.body.pet, req.body.service, req.body.creditcard, req.body.csc, req.body.expdate, req.body.cardflag)
 	createSchedule(schedule)
 	res.redirect('/area_usuario')
+})
+
+//Busca todos os agendamentos do usuario
+app.get('/getuserschedules', (req, res) =>
+{
+	couch.get("schedules", "_all_docs?include_docs=true").then(({data, headers, status}) =>
+	{
+		let schedules = []
+		for(let i = 0; i < data.rows.length; i++) {
+			if(data.rows[i].doc.customer == req.session.user._id)
+				schedules.push(data.rows[i].doc)
+		}
+		res.send(schedules)
+	}, err =>
+	{
+		console.log(err)
+	})
 })
 
 // Para o usuário cadastrar novos pets

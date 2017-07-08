@@ -115,9 +115,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<div class="modal-body">
 										<form id="newScheduleForm" method="post" action="/addschedule">
 											<h4>Dia:</h4>
-											<input name="day" type="date" required></input>
+											<input id="calendar" name="day" type="date" required></input>
 											<h4>Horário</h4>
-											<select name="time" required>
+											<select id="time" name="time" required>
 												<option value="slot1">8h00</option>
 												<option value="slot2">9h00</option>
 												<option value="slot3">10h00</option>
@@ -131,9 +131,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												<option value="slot11">18h00</option>
 											</select>
 											<h4>Pet:</h4>
-											<span id="selectPet"></span>
+											<select id="selectPet" name="pet"></select>
 											<h4>Serviço:</h4>
-											<span id="selectService"></span>
+											<select id="selectService" name="service"></select>
 											<h4>Preço:</h4>
 											<span id="servicePrice"></span>
 											<h4>Número do Cartão de Crédito: </h4>

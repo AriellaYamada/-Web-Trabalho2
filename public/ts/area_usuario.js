@@ -46,47 +46,55 @@ function updateUser(user) {
                 alert("Houve um erro ao alterar os dados.");
         } });
 }
-/*
-function refreshUserSchedules () : void
-{
-    let s
-    let lineSchedule = $("<tbody></tbody>")
-    for(s in server.schedules) {
-        let line = $("<tr></tr>")
-        let schedule: Schedule = server.schedules[s]
-        line.append($("<td>" + s + "</td>"))
-        line.append($("<td>" + server.services[schedule.service].name + "</td>"))
-        let time = schedule.hour
-        if(time == "slot1")
-        line.append($("<td>" + schedule.day + " 8h00 </td>"))
-        else if(time == "slot2")
-        line.append($("<td>" + schedule.day + " 9h00 </td>"))
-        else if(time == "slot3")
-        line.append($("<td>" + schedule.day + " 10h00 </td>"))
-        else if(time == "slot4")
-        line.append($("<td>" + schedule.day + " 11h00 </td>"))
-        else if(time == "slot5")
-        line.append($("<td>" + schedule.day + " 12h00 </td>"))
-        else if(time == "slot6")
-        line.append($("<td>" + schedule.day + " 13h00 </td>"))
-        else if(time == "slot7")
-        line.append($("<td>" + schedule.day + " 14h00 </td>"))
-        else if(time == "slot8")
-        line.append($("<td>" + schedule.day + " 15h00 </td>"))
-        else if(time == "slot9")
-        line.append($("<td>" + schedule.day + " 16h00 </td>"))
-        else if(time == "slot10")
-        line.append($("<td>" + schedule.day + " 17h00 </td>"))
-        else if(time == "slot11")
-        line.append($("<td>" + schedule.day + " 18h00 </td>"))
-
-        let user : User = server.users[currentUser]
-        line.append($("<td>" + user.pets[schedule.pet].name + "</td>"))
-        line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11,15)+ "</td>"))
-        lineSchedule.append(line)
-    }
-    $("#tableSchedules").append(lineSchedule)
+function refreshUserSchedules() {
+    let listservices = [];
+    $.ajax({ url: "/getservices", type: "GET", success: function (services) {
+            for (let s in services) {
+                listservices.push(services[s]);
+            }
+        } });
+    $.ajax({ url: "/getuserschedules", type: "GET", success: function (schedules) {
+            let lineSchedule = $("<tbody></tbody>");
+            for (let s in schedules) {
+                let line = $("<tr></tr>");
+                let schedule = schedules[s];
+                line.append($("<td>" + s + "</td>"));
+                for (let ls in listservices) {
+                    let service = listservices[ls];
+                    if (service._id == schedule.service)
+                        line.append($("<td>" + service.name + "</td>"));
+                }
+                let time = schedule.hour;
+                if (time == "slot1")
+                    line.append($("<td>" + schedule.day + " 8h00 </td>"));
+                else if (time == "slot2")
+                    line.append($("<td>" + schedule.day + " 9h00 </td>"));
+                else if (time == "slot3")
+                    line.append($("<td>" + schedule.day + " 10h00 </td>"));
+                else if (time == "slot4")
+                    line.append($("<td>" + schedule.day + " 11h00 </td>"));
+                else if (time == "slot5")
+                    line.append($("<td>" + schedule.day + " 12h00 </td>"));
+                else if (time == "slot6")
+                    line.append($("<td>" + schedule.day + " 13h00 </td>"));
+                else if (time == "slot7")
+                    line.append($("<td>" + schedule.day + " 14h00 </td>"));
+                else if (time == "slot8")
+                    line.append($("<td>" + schedule.day + " 15h00 </td>"));
+                else if (time == "slot9")
+                    line.append($("<td>" + schedule.day + " 16h00 </td>"));
+                else if (time == "slot10")
+                    line.append($("<td>" + schedule.day + " 17h00 </td>"));
+                else if (time == "slot11")
+                    line.append($("<td>" + schedule.day + " 18h00 </td>"));
+                line.append($("<td>" + schedule.pet + "</td>"));
+                line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
+                lineSchedule.append(line);
+            }
+            $("#tableSchedules").append(lineSchedule);
+        } });
 }
+/*
 function refreshSales() : void
 {
     let s
@@ -243,6 +251,7 @@ $(document).ready(function () {
         })
     
         */
+    refreshUserSchedules();
     // Para fazer alterações dos dados cadastrais do usuário:
     $(".editInfo").css("cursor", "pointer"); // cursor de link
     $(".editInfo").click(function () {
@@ -279,28 +288,22 @@ $(document).ready(function () {
         $("#calendar").prop("min", today);
         $.ajax({ url: "/userdata", success: function (user) {
                 let petId;
-                let opPet = $("<select id='pet'></select>");
                 for (petId in user.pets) {
                     let pet = user.pets[petId];
-                    opPet.append($("<option value=" + petId + ">" + pet.name + "</option>"));
+                    $("#selectPet").append($("<option value=" + petId + ">" + pet.name + "</option>"));
                 }
-                $("#selectPet").html(opPet);
             } });
         $.ajax({ url: "/getservices", type: "GET", success: function (services) {
-                let opService = $("<select id='service'></select>");
                 for (let s in services) {
                     let service = services[s];
-                    opService.append($("<option value=" + service._id + ">" + service.name + "</option>"));
+                    $("#selectService").append($("<option value=" + service._id + ">" + service.name + "</option>"));
                 }
-                $("#selectService").html(opService);
             } });
     });
     //Atualiza horarios disponiveis
     $("#calendar").on("change", function () {
         let date = $("#calendar").val();
-        let s;
-        let lineSchedule = $("<tbody></tbody>");
-        $.ajax({ url: "notavailablehours", type: "GET", data: { "date": date }, success: function (schedules) {
+        $.ajax({ url: "/notavailablehours", type: "GET", data: { "date": date }, success: function (schedules) {
                 for (let i in schedules) {
                     $("#time option[value=" + schedules[i].hour + "]").hide();
                 }
