@@ -347,6 +347,7 @@ $("#serviceRegForm").click(function()
 		let date = $("#calendar").val()
 		$.ajax({url: "/notavailablehours", type: "GET", data: {"date": date}, success: function(schedules)
 		{
+			$(".slot").show()
 			for(let i in schedules) {
 				$("#time option[value=" + schedules[i].hour + "]").hide()
 			}
@@ -360,7 +361,7 @@ $("#serviceRegForm").click(function()
 		let serviceId = $("#selectService option:selected").val()
 		$.ajax({url: "/serviceprice", type: "GET", data: {"serviceid": serviceId}, success: function(service)
 		{
-			$("#servicePrice").html("<h5>R$" + service.price + "</h5>")
+			$("#servicePrice").html("<h5>R$" + service.price.toFixed(2) + "</h5>")
 		}})
 	})
 
