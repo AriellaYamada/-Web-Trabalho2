@@ -88,7 +88,7 @@ function refreshUserSchedules() {
                 else if (time == "slot11")
                     line.append($("<td>" + schedule.day + " 18h00 </td>"));
                 line.append($("<td>" + schedule.pet + "</td>"));
-                line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
+                line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(12, 16) + "</td>"));
                 lineSchedule.append(line);
             }
             $("#tableSchedules").append(lineSchedule);

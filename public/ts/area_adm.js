@@ -67,7 +67,7 @@ function refreshSchedules() {
                 else if (time == "slot11")
                     line.append($("<td>" + schedule.day + " 18h00 </td>"));
                 line.append($("<td>" + schedule.pet + "</td>"));
-                line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(11, 15) + "</td>"));
+                line.append($("<td>" + schedule.cardFlag + " - Terminado em: " + schedule.creditCard.substring(12, 16) + "</td>"));
                 lineSchedule.append(line);
             }
             $("#tableSchedules").append(lineSchedule);
@@ -82,7 +82,7 @@ function refreshServiceData() {
                 line.append($("<td>" + service._id + "</td>"));
                 line.append($("<td>" + service.name + "</td>"));
                 line.append($("<td>" + service.description + "</td>"));
-                line.append($("<td> R$" + service.price + "</td>"));
+                line.append($("<td> R$" + service.price.toFixed(2) + "</td>"));
                 //lineService.append($("<td><a href="">Detalhes<a></td>"))
                 lineService.append(line);
             }
@@ -99,7 +99,7 @@ function refreshProductData() {
                 line.append($("<td>" + product.name + "</td>"));
                 line.append($("<td><img src='" + product.pic + "' alt class='img-responsive' /></td>"));
                 line.append($("<td>" + product.description + "</td>"));
-                line.append($("<td> R$" + product.price + "</td>"));
+                line.append($("<td> R$" + product.price.toFixed(2) + "</td>"));
                 line.append($("<td>" + product.type + "</td>"));
                 line.append($("<td>" + product.qtt + "</td>"));
                 lineService.append(line);
