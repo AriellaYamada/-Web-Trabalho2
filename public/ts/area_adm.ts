@@ -134,35 +134,28 @@ function refreshProductData() : void
 	}})
 }
 
-/*
-
-
-
-
 function refreshUserList() : void
 {
-	let u
-	let i : number = 0
-	let lineUser = $("<tbody></tbody>")
-	for (u in server.users) {
-		let line = $("<tr></tr>")
-		let user : User = server.users[u]
-		line.append("<td>" + i + "</td>")
-		line.append("<td>" + u + "</td>")
-		line.append("<td>" + user.userName + "</td>")
-		if (server.isAdmin(u))
-			line.append("<td> Sim </td>")
-		 else
-			line.append("<td> Não </td>")
-		i++
-		lineUser.append(line)
-	}
-	$("#tableUsers").append(lineUser)
-	//$("#userList").empty()
-	//for (let user in server.users)
-	//$("#userList").append($("<tr><td>" + server.users[user].userId + "</td><td>" + server.users[user].userName + "</td><td><a href=\"\">Detalhes</a></td></tr>"))
+	$.ajax({url: "/getallusers", type: "GET", success: function(users)
+	{
+		let i : number = 0
+		let lineUser = $("<tbody></tbody>")
+		for (let u in users) {
+			let line = $("<tr></tr>")
+			let user = users[u]
+			line.append("<td>" + i + "</td>")
+			line.append("<td>" + user._id + "</td>")
+			line.append("<td>" + user.name + "</td>")
+			if (user.is_admin)
+				line.append("<td> Sim </td>")
+			 else
+				line.append("<td> Não </td>")
+			i++
+			lineUser.append(line)
+		}
+		$("#tableUsers").append(lineUser)
+	}})
 }
-*/
 
 $(document).ready(function()
 {
@@ -178,6 +171,7 @@ $(document).ready(function()
 	refreshSchedules()
 	refreshServiceData()
 	refreshProductData()
+	refreshUserList()
 	/*
 	// Lista de usuários
 	refreshUserList()

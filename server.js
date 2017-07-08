@@ -261,9 +261,9 @@ couch.createDatabase("products").then(
 	{
 		console.log("Database 'products' não encontrada. Será criada e inicializada.")
 
-		let productExample1 = new Product("200", "Ração Premier Golden Special Cães Adultos Frango e Carne", "/public/images/produto1.jpg", "Ração Premium especial para cães adultos de porte médio", 104.90, "racao", 10)
-		let productExample2 = new Product("201", "Ração Premier Golden Formula Cães Adultos Frango e Arroz", "/public/images/produto2.jpg", "Ração Premium especial para cães adultos de porte peq.", 14.30, "racao", 10)
-		let productExample3 = new Product("203", "Ração Premier Pet Formula Cães Adultos Raças Pequenas", "/public/images/produto3.jpg", "Indicada para cães adultos de raça pequena", 28.90, "racao", 10)
+		let productExample1 = new Product("200", "Ração Premier Golden Special Cães Adultos Frango e Carne", "images/produto1.jpg", "Ração Premium especial para cães adultos de porte médio", 104.90, "racao", 10)
+		let productExample2 = new Product("201", "Ração Premier Golden Formula Cães Adultos Frango e Arroz", "images/produto2.jpg", "Ração Premium especial para cães adultos de porte peq.", 14.30, "racao", 10)
+		let productExample3 = new Product("203", "Ração Premier Pet Formula Cães Adultos Raças Pequenas", "images/produto3.jpg", "Indicada para cães adultos de raça pequena", 28.90, "racao", 10)
 
 		createProduct(productExample1)
 		createProduct(productExample2)
@@ -280,7 +280,8 @@ couch.createDatabase("products").then(
 )
 
 /* Inicialização da database schedules do CouchDB.
-Se a database já existir, nada é alterado.*/
+Se a database já existir, nada é alterado.*/	// Lista de usuários
+
 
 couch.createDatabase("schedules").then(
 	function()
@@ -303,7 +304,8 @@ couch.createDatabase("schedules").then(
 		else
 			console.log(err)
 	}
-)
+)	// Lista de usuários
+
 
 const app = express()
 
@@ -553,6 +555,20 @@ app.get('/getproducts', (req, res) =>
 	})
 })
 
+app.get('/getallusers', (req, res) =>
+{
+	couch.get("users", "_all_docs?include_docs=true").then(({data, headers, status}) =>
+	{
+		let users = []
+		for (let i = 0; i < data.rows.length; i++) {
+			users.push(data.rows[i].doc)
+		}
+		res.send(users)
+	}, err =>
+	{
+		console.log(err)
+	})
+})
 
 // Para o usuário cadastrar novos pets
 
